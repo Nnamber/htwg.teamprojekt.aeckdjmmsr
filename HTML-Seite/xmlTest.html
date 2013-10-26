@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>jQuery.parseXML demo</title>
+		<script src="../jquery-2.0.3.js"></script>
+	</head>
+	<body>
+		<p id="someElement">
+			<div id="anotherElement"></div>
+		</p>
+		<script>
+			function parse(document) {
+				$(document).find("course").find("lesson").each(function() {
+
+					$("#someElement").append('<p>Name: ' + $(this).attr('name') + '<br />' + $(this).attr('body') + '<br /></p>');
+					$(this).find("question").each(function(index) {
+						var typeTest = $(this).attr('type').toString();
+						if (typeTest=='MultipleChoice') {
+							$("#someElement").append('<p>Name: ');
+							$("#someElement").append('<p>' + $(this).attr('body') + '<br /></p>');
+							$(this).find("answer").each(function(index) {
+								var meh = $(this).attr('body');
+							  	$("#someElement").append(meh + '<input type="checkbox" name=' + meh +' /> <br/>');
+							});
+						}
+					});
+				});
+			}
+
+
+			$.ajax({
+				url : 'Mindmailer.xml', // name of file you want to parse
+				dataType : "xml",
+				success : parse,
+				error : function() {
+					alert("Error: Something went wrong");
+				}
+			});
+			//var xml = loadXMLDoc("Mindmailer.xml");
+			//var xml = "<lesson name='Innere Klassen' sort='0' max_wrong_answers='0'>hihi</lesson>";
+			var xml = "<rss version='2.0'><channel><title name='meh'>RSS Title</title></channel></rss>";
+			var xmlDoc = $.parseXML(xml), $xml = $(xmlDoc), $title = $xml.find('title').attr('name');
+			alert($title.text());
+			// Append "RSS Title" to #someElement
+			$("#someElement").append($title.text());
+			// Change the title to "XML Title"
+			$title.text("XML Title");
+			// Append "XML Title" to #anotherElement
+			$("#anotherElement").append($title.text());
+		</script>
+	</body>
+</html>
