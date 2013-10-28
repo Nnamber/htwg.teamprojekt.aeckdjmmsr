@@ -6,6 +6,10 @@
         <title>New Web Project</title>
     </head>
     <body>
-        <h1>New Web Project PageÄÄÄÄ</h1>
+<<<<<<< HEAD
+        <h1>New Web Projecsdfsdfsdft Page</h1>
+=======
+        <h1>New Web Project PageÖÖÖÖ</h1>
+>>>>>>> f5c08f4f58ee82d7d1c196f240bc31cf1296f090
     </body>
 </html>
