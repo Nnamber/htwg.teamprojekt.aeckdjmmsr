@@ -2,45 +2,105 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-
-		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
-		Remove this if you use the .htaccess -->
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-		<title>index</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
-		<meta name="author" content="michael">
+		<meta name="author" content="">
 
-		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+		<title>Offline Mindmailer</title>
 
-		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-		<link rel="shortcut icon" href="/favicon.ico">
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+		<!-- Bootstrap core CSS -->
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<script src="js/jquery-2.0.3.js"></script>
+		<script src="js/bootstrap.min.js"></script>
 	</head>
 
 	<body>
-		<div>
-			<header>
-				<h1>index</h1>
-			</header>
-			<nav>
-				<p>
-					<a href="/">Home</a>
-				</p>
-				<p>
-					<a href="/contact">Contact</a>
-				</p>
-			</nav>
 
-			<div>
-
-			</div>
-
-			<footer>
-				<p>
-					&copy; Copyright  by michael
-				</p>
-			</footer>
+		<div class="navbar navbar-inverse">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<span class="navbar-brand">Offline Mindmailer</span>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="#">Generieren</a>
+						</li>
+						<li>
+							<a href="#">XML</a>
+						</li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div><!-- /.container -->
 		</div>
+
+		<div class="container">
+
+			<div class="page-header">
+				<h1>Fragenkatalog</h1>
+				<p class="lead">
+					Use this document as a way to quickly start any new project.
+				</p>
+			</div>
+			<div>
+				<table class="table table-bordered table-striped table-hover"> 
+						<tr>
+							<td>
+							<input type="checkbox" />
+							</td>
+							<td>Thema 1: <span class="omm_lesson-title">Innere Klassen</span></td>
+						</tr>
+						<tr>
+							<td>
+							<input type="checkbox" />
+							</td>
+							<td>Frage 1: <span class="omm_question-title">Welche Modifier sind zugelassen für innere Klassen?</span></td>
+						</tr>
+						<tr>
+							<td>
+							<input type="checkbox" />
+							</td>
+							<td>Frage 2: <span class="omm_question-title">In welcher Zeile tritt ein Kompilierfehler auf?</span></td>
+						</tr>
+						<tr>
+							<td>
+							<input type="checkbox" />
+							</td>
+							<td>Frage 3: <span class="omm_question-title">Variablenzugriff</span></td>
+						</tr>
+						<tr>
+							<td>
+							<input type="checkbox" />
+							</td>
+							<td>Frage 4: <span class="omm_question-title">Typen von inneren Klassen</span></td>
+						</tr>
+						<tr>
+							<td>
+							<input type="checkbox" />
+							</td>
+							<td>Thema 2: <span class="omm_lesson-title">Verschiedenes</span></td>
+						</tr>
+						<tr>
+							<td>
+							<input type="checkbox" />
+							</td>
+							<td>Thema 3: <span class="omm_lesson-title">Vererbung und Casting</span></td>
+						</tr>
+						<tr>
+							<td>
+							<input type="checkbox" />
+							</td>
+							<td>Thema 4: <span class="omm_lesson-title">Abstrakte Klassen und Interfaces</span></td>
+						</tr>
+				</table>
+			</div>
+		</div><!-- /.container -->
 	</body>
 </html>
