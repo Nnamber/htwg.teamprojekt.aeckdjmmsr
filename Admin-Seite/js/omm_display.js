@@ -11,7 +11,7 @@ function display() {
 
 	//private
 	function initCheckThemaEventHandler() {
-		var themaCheckboxes = jQuery(themaTable).find(omm_cssSelector_themaRow + " :checkbox");
+		var themaCheckboxes = jQuery(themaTable).find(omm_cssSelector_themaRow + " .panel-heading :checkbox");
 		jQuery(themaCheckboxes).change(function(eventObject) {
 			var checkboxes = jQuery(this).parents(omm_cssSelector_themaRow).find(":checkbox");
 			
