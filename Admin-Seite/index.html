@@ -14,6 +14,7 @@
 		<link href="css/omm_style.css" rel="stylesheet">
 		<!-- Bootstrap core JavaScript -->
 		<script src="js/jquery-2.0.3.js"></script>
+		<script src="js/xmlReader.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<!-- OMM JavaScript-->
 		<script src="js/omm_display.js"></script>
@@ -46,12 +47,10 @@
 		</div>
 
 		<div class="container">
-
+			<div id="omm_notice-panel"></div>
 			<div class="page-header">
 				<h1>Fragenkatalog</h1>
-				<p class="lead">
-					Use this document as a way to quickly start any new project.
-				</p>
+				<p class="notice"></p>
 			</div>
 			<div class="panel-group" id="omm_thema-table">
 				<div class="panel panel-default omm_thema-row">
@@ -63,7 +62,7 @@
 					</div>
 					<div id="collapse1" class="panel-collapse collapse">
 						<div class="omm_panel-body">
-							<table class=" table table-striped table-hover">
+							<table class="table table-striped table-hover">
 								<tr >
 									<td>
 									<input type="checkbox" class="pull-right"/>

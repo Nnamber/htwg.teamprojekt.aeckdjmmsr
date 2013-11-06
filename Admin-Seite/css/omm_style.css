@@ -1,0 +1,25 @@
+/*#omm_notice-panel {
+	/*font-size: 2em;
+	font-weight: bold;
+	border-radius: 4px;
+	margin-bottom: 0px;
+	overflow: hidden;
+	padding: 10px 15px;
+	/*display:none;
+}
+
+/*
+ * using alert-danger instead
+ 
+#omm_notice-panel.omm_notice-panel-error {
+	display: block;
+	background-color: red;
+}*/
+
+/*
+ * using alert-success instead
+#omm_notice-panel.omm_notice-panel-success {
+	display: block;
+	background-color: green;
+}
+ */
