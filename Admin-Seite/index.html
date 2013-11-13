@@ -75,9 +75,9 @@
 					</div>
 					<div class="modal-body">
 						<form>
-							<input type="file"  accept="application/xml" />
+							<input type="file"  accept="application/xml" onchange="omm_parser.validateXml(this)"/>
 							<!-- accept="application/xml,text/xml"/> -->
-							<input type="button" value="Übernehmen" disabled="disabled" onclick="omm_parser.validateXml(this)" />
+							<input type="button" value="Übernehmen" id="uebernehmen" disabled="disabled" />
 						</form>
 					</div>
 					<div class="modal-footer">

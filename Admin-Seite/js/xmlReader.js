@@ -1,5 +1,6 @@
 function omm_xmlParser() {
 	var omm_DefaultPath = "./js/Mindmailer.xml";
+	var that = this;
 
 	function parse(document) {
 		var topicCounter = 1;
@@ -41,7 +42,8 @@ function omm_xmlParser() {
 
 
 	this.readXml = function(omm_specificPath) {
-		path = omm_specificPath != null ? omm_specificPath : omm_DefaultPath;
+		alert(omm_specificPath);
+		var path = omm_specificPath != null ? omm_specificPath : omm_DefaultPath;
 		$.ajax({
 			//Pfad ueberarbeiten, z.b. mit relativem Pfad, evt Johner fragen
 			url : path, // name of file you want to parse
@@ -56,16 +58,13 @@ function omm_xmlParser() {
 	};
 
 	this.validateXml = function(input) {
-		
-		var val = input.val;
+		var val = input.value;
 		var res = val.substr(val.lastIndexOf('.')) == '.xml';
 		if (!res) {
-			alert("wrong file");
-			input.val = 'wrong file';
-			return res;
+			alert("wrong file"); //TODO: HINTERGRUND ROT FÄRBEN
+		}else{
+			$("#uebernehmen").removeAttr("disabled");
+			that.readXML("read");
 		}
-		
 	};
-	
-	function 
 }
