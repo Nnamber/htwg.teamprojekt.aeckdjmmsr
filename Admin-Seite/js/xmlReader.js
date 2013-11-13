@@ -7,13 +7,11 @@ function omm_xmlParser() {
 	function parse(document) {
 		var topicCounter = 1;
 		$("#omm_thema-table").html("");
-		console.log("deine mutter " + document);
 		$(document).find("course").find("lesson").each(function() {
 			$("#omm_thema-table").append(htmlLesson(topicCounter, $(this).attr("name")) + questionDivHtml($(this), topicCounter) + '</div>');
 			topicCounter++;
 		});
 		omm_display.init();
-
 	}
 
 	function questionDivHtml(xmlLessonObject, topicCounter) {
@@ -21,20 +19,15 @@ function omm_xmlParser() {
 		x += '<div class="omm_panel-body">';
 		x += '<table class="table table-striped table-hover">';
 		var questionCounter = 1;
-
 		$(xmlLessonObject).find("question").each(function() {
-			// alert($(this).attr("name"));
-
 			x += htmlQuestion(questionCounter, $(this).attr("name"));
 			questionCounter++;
 		});
-
 		x += '</table></div></div>';
 		return x;
 	}
 
 	function htmlLesson(lessonCounter, lessonTitle) {
-
 		var lessonHtml = '<div class="panel panel-default omm_thema-row"><div class="panel-heading"><div class="panel-title"><input type="checkbox"/><a data-toggle="collapse" data-parent="#omm_thema-table" href="#collapse' + lessonCounter + '"> Thema ' + lessonCounter + ': <span class="omm_lesson-title">' + lessonTitle + '</span></a></div></div>';
 		return lessonHtml;
 	}
@@ -45,43 +38,33 @@ function omm_xmlParser() {
 	}
 
 
-	this.readXml = function(omm_specificPath) {
-		//var path = omm_specificPath != null ? omm_specificPath : omm_DefaultPath;
-		if (omm_specificPath != null) {
-			parse(omm_specificPath);
-		} else {
-			$.ajax({
-				//Pfad ueberarbeiten, z.b. mit relativem Pfad, evt Johner fragen
-				url : omm_DefaultPath, // name of file you want to parse
-				dataType : "xml",
-				success : parse,
-				error : function() {
-					// $("#omm_notice-panel").addClass("omm_notice-panel-error");
-					$("#omm_notice-panel").addClass("alert alert-danger");
-					$("#omm_notice-panel").append('<p>Es wurde keine XML-Datei unter dem Default-Pfad gefunden</p>');
-				}
-			});
-		}
-
+	this.readXml = function() {
+		$.ajax({
+			//Pfad ueberarbeiten, z.b. mit relativem Pfad, evt Johner fragen
+			url : omm_DefaultPath, // name of file you want to parse
+			dataType : "xml",
+			success : parse,
+			error : function() {
+				$("#omm_notice-panel").addClass("alert alert-danger");
+				$("#omm_notice-panel").append('<p>Es wurde keine XML-Datei unter dem Default-Pfad gefunden</p>');
+			}
+		});
 	};
 
 	this.validateXml = function(input) {
-
 		var val = input.target.files[0];
-
 		var res = val.name.substr(val.name.lastIndexOf('.')) == '.xml';
 		console.log("validateXML");
 		if (!res) {
-			alert("wrong file");
+			alert("wrong type");
 			//TODO: HINTERGRUND ROT FÄRBEN
 		} else {
-
 			$("#omm_xml-dialog-uebernehmen").removeAttr("disabled");
-			//that.readXML("read");
 			xmlFile = val;
 		}
 	};
 
+	//Liest XML aus uns speichert das Ergbenis zunächst als String, dann parsen auf XML-String
 	this.parseXMLToVariable = function() {
 		var r = new FileReader();
 		r.onload = function(e) {
@@ -90,7 +73,7 @@ function omm_xmlParser() {
 			xmlString = contents;
 			//console.log(xmlString);
 			xmlString = $.parseXML(xmlString);
-			that.readXml(xmlString);
+			parse(xmlString);
 		};
 
 		r.readAsText(xmlFile);

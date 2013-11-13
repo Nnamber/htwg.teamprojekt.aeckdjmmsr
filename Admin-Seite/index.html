@@ -40,7 +40,7 @@
 							<a href="#">HTML generieren</a>
 						</li>
 						<li>
-							<a href="#" data-toggle="modal" data-target="#omm_xml-dialog">XML einbinden</a>
+							<a href="#" data-toggle="modal" data-target="#omm_xml-dialog">XML einlesen</a>
 						</li>
 					</ul>
 				</div><!--/.nav-collapse -->
@@ -71,19 +71,17 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 							&times;
 						</button>
-						<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+						<h4 class="modal-title" id="myModalLabel">XML einlesen</h4>
 					</div>
 					<div class="modal-body">
-						
-							<input type="file"  accept="application/xml" onchange="omm_parser.validateXml()" id='fileinput'/>
+							<input type="file"  accept="application/xml" id='omm_fileinput'/>
 							<!-- accept="application/xml,text/xml"/> -->
-
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">
 							Abbrechen
 						</button>
-						<button type="button" class="btn btn-default" id="omm_xml-dialog-uebernehmen" disabled="disabled" onclick="omm_parser.parseXMLToVariable()">Übernehmen</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="omm_xml-dialog-uebernehmen" disabled="disabled" onclick="omm_parser.parseXMLToVariable()">Übernehmen</button>
 					</div>
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
