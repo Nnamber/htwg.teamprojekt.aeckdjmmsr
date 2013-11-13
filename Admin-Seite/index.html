@@ -74,16 +74,16 @@
 						<h4 class="modal-title" id="myModalLabel">Modal title</h4>
 					</div>
 					<div class="modal-body">
-						<form>
-							<input type="file"  accept="application/xml" onchange="omm_parser.validateXml(this)"/>
+						
+							<input type="file"  accept="application/xml" onchange="omm_parser.validateXml()" id='fileinput'/>
 							<!-- accept="application/xml,text/xml"/> -->
-						</form>
+
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">
 							Abbrechen
 						</button>
-						<button type="button" class="btn btn-default" id="omm_xml-dialog-uebernehmen" disabled="disabled">Übernehmen</button>
+						<button type="button" class="btn btn-default" id="omm_xml-dialog-uebernehmen" disabled="disabled" onclick="omm_parser.parseXMLToVariable()">Übernehmen</button>
 					</div>
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->

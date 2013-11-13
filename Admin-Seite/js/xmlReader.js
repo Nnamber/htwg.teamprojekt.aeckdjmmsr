@@ -1,9 +1,13 @@
 function omm_xmlParser() {
 	var omm_DefaultPath = "./js/Mindmailer.xml";
 	var that = this;
+	var xmlFile;
+	var xmlString;
 
 	function parse(document) {
 		var topicCounter = 1;
+		$("#omm_thema-table").html("");
+		console.log("deine mutter " + document);
 		$(document).find("course").find("lesson").each(function() {
 			$("#omm_thema-table").append(htmlLesson(topicCounter, $(this).attr("name")) + questionDivHtml($(this), topicCounter) + '</div>');
 			topicCounter++;
@@ -42,29 +46,53 @@ function omm_xmlParser() {
 
 
 	this.readXml = function(omm_specificPath) {
-		alert(omm_specificPath);
-		var path = omm_specificPath != null ? omm_specificPath : omm_DefaultPath;
-		$.ajax({
-			//Pfad ueberarbeiten, z.b. mit relativem Pfad, evt Johner fragen
-			url : path, // name of file you want to parse
-			dataType : "xml",
-			success : parse,
-			error : function() {
-				// $("#omm_notice-panel").addClass("omm_notice-panel-error");
-				$("#omm_notice-panel").addClass("alert alert-danger");
-				$("#omm_notice-panel").append('<p>Es wurde keine XML-Datei unter dem Default-Pfad gefunden</p>');
-			}
-		});
+		//var path = omm_specificPath != null ? omm_specificPath : omm_DefaultPath;
+		if (omm_specificPath != null) {
+			parse(omm_specificPath);
+		} else {
+			$.ajax({
+				//Pfad ueberarbeiten, z.b. mit relativem Pfad, evt Johner fragen
+				url : omm_DefaultPath, // name of file you want to parse
+				dataType : "xml",
+				success : parse,
+				error : function() {
+					// $("#omm_notice-panel").addClass("omm_notice-panel-error");
+					$("#omm_notice-panel").addClass("alert alert-danger");
+					$("#omm_notice-panel").append('<p>Es wurde keine XML-Datei unter dem Default-Pfad gefunden</p>');
+				}
+			});
+		}
+
 	};
 
 	this.validateXml = function(input) {
-		var val = input.value;
-		var res = val.substr(val.lastIndexOf('.')) == '.xml';
+
+		var val = input.target.files[0];
+
+		var res = val.name.substr(val.name.lastIndexOf('.')) == '.xml';
+		console.log("validateXML");
 		if (!res) {
-			alert("wrong file"); //TODO: HINTERGRUND ROT FÄRBEN
-		}else{
-			$("#uebernehmen").removeAttr("disabled");
-			that.readXML("read");
+			alert("wrong file");
+			//TODO: HINTERGRUND ROT FÄRBEN
+		} else {
+
+			$("#omm_xml-dialog-uebernehmen").removeAttr("disabled");
+			//that.readXML("read");
+			xmlFile = val;
 		}
+	};
+
+	this.parseXMLToVariable = function() {
+		var r = new FileReader();
+		r.onload = function(e) {
+			var xmlString;
+			var contents = e.target.result;
+			xmlString = contents;
+			//console.log(xmlString);
+			xmlString = $.parseXML(xmlString);
+			that.readXml(xmlString);
+		};
+
+		r.readAsText(xmlFile);
 	};
 }

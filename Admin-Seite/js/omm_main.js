@@ -6,7 +6,7 @@ var omm_cssSelector_themaTable = "#omm_thema-table";
 var omm_cssSelector_selectAll = "#omm_select-all";
 
 jQuery(document).ready(function(){
-	
+	document.getElementById('fileinput').addEventListener('change', omm_parser.validateXml, false);
 	omm_parser.readXml();
 	// omm_display.showMessage("Bier", true);
 	// omm_display.showMessage("mehr Bier", false);
