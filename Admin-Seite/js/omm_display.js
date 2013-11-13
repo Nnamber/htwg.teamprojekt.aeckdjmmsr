@@ -8,8 +8,8 @@ function display() {
 		themaTable = jQuery(omm_cssSelector_themaTable);
 		noticePanel = jQuery(omm_cssSelector_noticePanel);
 
-		initCheckThemaEventHandler();
 		initCheckAllEventHandler();
+		initCheckThemaEventHandler();
 	};
 	this.showMessage = function(message, isError) {
 		//Ersetzt

@@ -1,5 +1,5 @@
 function omm_xmlParser(){
-	var omm_DefaultPath = "Mindmailer.xml";
+	var omm_DefaultPath = "./js/Mindmailer.xml";
 
 	function parse(document) {
 		var topicCounter = 1;
@@ -7,6 +7,8 @@ function omm_xmlParser(){
 			$("#omm_thema-table").append(htmlLesson(topicCounter, $(this).attr("name")) + questionDivHtml($(this), topicCounter)+ '</div>');
 			topicCounter++;
 		});
+			omm_display.init();
+
 	}
 
 	function questionDivHtml(xmlLessonObject, topicCounter) {
@@ -37,19 +39,18 @@ function omm_xmlParser(){
 		return questionHtml;
 	}
 
-	this.readXml = function() {
+	this.readXml = function(omm_specificPath) {
+		path = omm_specificPath != null ? omm_specificPath : omm_DefaultPath;
 		$.ajax({
 			//Pfad ueberarbeiten, z.b. mit relativem Pfad, evt Johner fragen
-			url : './js/Mindmailer.xml', // name of file you want to parse
+			url : path, // name of file you want to parse
 			dataType : "xml",
 			success : parse,
 			error : function() {
 				// $("#omm_notice-panel").addClass("omm_notice-panel-error");
 				$("#omm_notice-panel").addClass("alert alert-danger");
 				$("#omm_notice-panel").append('<p>Es wurde keine XML-Datei unter dem Default-Pfad gefunden</p>');
-
 			}
 		});
 	};
-
 }

@@ -8,7 +8,6 @@ var omm_cssSelector_selectAll = "#omm_select-all";
 jQuery(document).ready(function(){
 	
 	omm_parser.readXml();
-	omm_display.init();
 	// omm_display.showMessage("Bier", true);
 	// omm_display.showMessage("mehr Bier", false);
 	
