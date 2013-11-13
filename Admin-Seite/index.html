@@ -39,7 +39,7 @@
 							<a href="#">HTML-Datei generieren</a>
 						</li>
 						<li>
-							<a href="#" id="omm_importXML">XML hochladen</a>
+							<a href="#" data-toggle="modal" data-target="#omm_xml-dialog">XML einbinden</a>
 						</li>
 					</ul>
 				</div><!--/.nav-collapse -->
@@ -61,6 +61,31 @@
 			<form>
 				<div class="panel-group" id="omm_thema-table"></div>
 			</form>
+
 		</div><!-- /.container -->
+		<div class="modal fade" id="omm_xml-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<input type="file"  accept="application/xml" />
+							<!-- accept="application/xml,text/xml"/> -->
+							<input type="button" value="Übernehmen" disabled="disabled" onclick="omm_parser.validateXml(this)" />
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							Close
+						</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 	</body>
 </html>

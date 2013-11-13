@@ -1,13 +1,13 @@
-function omm_xmlParser(){
+function omm_xmlParser() {
 	var omm_DefaultPath = "./js/Mindmailer.xml";
 
 	function parse(document) {
 		var topicCounter = 1;
 		$(document).find("course").find("lesson").each(function() {
-			$("#omm_thema-table").append(htmlLesson(topicCounter, $(this).attr("name")) + questionDivHtml($(this), topicCounter)+ '</div>');
+			$("#omm_thema-table").append(htmlLesson(topicCounter, $(this).attr("name")) + questionDivHtml($(this), topicCounter) + '</div>');
 			topicCounter++;
 		});
-			omm_display.init();
+		omm_display.init();
 
 	}
 
@@ -30,7 +30,7 @@ function omm_xmlParser(){
 
 	function htmlLesson(lessonCounter, lessonTitle) {
 
-		var lessonHtml = '<div class="panel panel-default omm_thema-row"><div class="panel-heading"><div class="panel-title"><input type="checkbox"/><a data-toggle="collapse" data-parent="#omm_thema-table" href="#collapse'+ lessonCounter + '"> Thema ' + lessonCounter + ': <span class="omm_lesson-title">' + lessonTitle + '</span></a></div></div>';
+		var lessonHtml = '<div class="panel panel-default omm_thema-row"><div class="panel-heading"><div class="panel-title"><input type="checkbox"/><a data-toggle="collapse" data-parent="#omm_thema-table" href="#collapse' + lessonCounter + '"> Thema ' + lessonCounter + ': <span class="omm_lesson-title">' + lessonTitle + '</span></a></div></div>';
 		return lessonHtml;
 	}
 
@@ -38,6 +38,7 @@ function omm_xmlParser(){
 		var questionHtml = '<tr ><td><input type="checkbox" class="pull-right"/></td><td>Frage ' + questionCounter + ': <span class="omm_question-title">' + questionTitle + '</span></td></tr>';
 		return questionHtml;
 	}
+
 
 	this.readXml = function(omm_specificPath) {
 		path = omm_specificPath != null ? omm_specificPath : omm_DefaultPath;
@@ -53,4 +54,18 @@ function omm_xmlParser(){
 			}
 		});
 	};
+
+	this.validateXml = function(input) {
+		
+		var val = input.val;
+		var res = val.substr(val.lastIndexOf('.')) == '.xml';
+		if (!res) {
+			alert("wrong file");
+			input.val = 'wrong file';
+			return res;
+		}
+		
+	};
+	
+	function 
 }
