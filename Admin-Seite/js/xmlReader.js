@@ -1,6 +1,5 @@
-$(document).ready(function() {
+function omm_xmlParser(){
 	var omm_DefaultPath = "Mindmailer.xml";
-	readXml();
 
 	function parse(document) {
 		var topicCounter = 1;
@@ -29,7 +28,7 @@ $(document).ready(function() {
 
 	function htmlLesson(lessonCounter, lessonTitle) {
 
-		var lessonHtml = '<div class="panel panel-default omm_thema-row"><div class="panel-heading"><div class="panel-title"><input type="checkbox"/><a data-toggle="collapse" data-parent="#omm_thema-table" href="#collapse' + lessonCounter + '"> Thema ' + lessonCounter + ': <span class="omm_lesson-title">' + lessonTitle + '</span></a></div></div>';
+		var lessonHtml = '<div class="panel panel-default omm_thema-row"><div class="panel-heading"><div class="panel-title"><input type="checkbox"/><a data-toggle="collapse" data-parent="#omm_thema-table" href="#collapse'+ lessonCounter + '"> Thema ' + lessonCounter + ': <span class="omm_lesson-title">' + lessonTitle + '</span></a></div></div>';
 		return lessonHtml;
 	}
 
@@ -38,7 +37,7 @@ $(document).ready(function() {
 		return questionHtml;
 	}
 
-	function readXml() {
+	this.readXml = function() {
 		$.ajax({
 			//Pfad ueberarbeiten, z.b. mit relativem Pfad, evt Johner fragen
 			url : './js/Mindmailer.xml', // name of file you want to parse
@@ -51,6 +50,6 @@ $(document).ready(function() {
 
 			}
 		});
-	}
+	};
 
-});
+}
