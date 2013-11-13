@@ -77,13 +77,13 @@
 						<form>
 							<input type="file"  accept="application/xml" onchange="omm_parser.validateXml(this)"/>
 							<!-- accept="application/xml,text/xml"/> -->
-							<input type="button" value="Übernehmen" id="uebernehmen" disabled="disabled" />
 						</form>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">
-							Close
+							Abbrechen
 						</button>
+						<button type="button" class="btn btn-default" id="omm_xml-dialog-uebernehmen" disabled="disabled">Übernehmen</button>
 					</div>
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
