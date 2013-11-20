@@ -10,6 +10,7 @@ var omm_cssSelector_saveHTML = "#omm_save-html";
 
 jQuery(document).ready(function() {
 	initPopovers();
+	omm_display.init();
 	$(omm_cssSelector_fileInput).change(omm_parser.validateXml);
 	omm_parser.readXml();
 	$(omm_cssSelector_saveHTML).click(omm_save.saveHtm);
@@ -19,6 +20,6 @@ function initPopovers() {
 	jQuery("body").popover({
 		selector : '[rel=popover]',
 		trigger : 'hover',
-		placement : 'left',
+		placement : 'left'
 	});
 }
