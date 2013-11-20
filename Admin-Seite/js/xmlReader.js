@@ -1,4 +1,4 @@
-omm_xmlParser() {
+function omm_xmlParser() {
 	var omm_DefaultPath = "./js/Mindmailer.xml";
 	var that = this;
 	var xmlFile;
@@ -26,8 +26,8 @@ omm_xmlParser() {
 			if ($(this).attr("type") != 'ClozeText') {
 				x += htmlQuestionBody($(this).attr('body'));
 			} else {
-				bodyMap = arminFunktion($(this).attr('body'));
-				x += htmlQuestionBody(bodyMap[body]);				
+				// bodyMap = arminFunktion($(this).attr('body'));
+				// x += htmlQuestionBody(bodyMap[body]);
 			}
 			x += '</tr>';
 			questionCounter++;
@@ -50,7 +50,6 @@ omm_xmlParser() {
 		var questionBodyHtml = '<td><div class="hidden omm_question_body_html">' + questionBody + '</div></td>';
 		return questionBodyHtml;
 	}
-
 
 	this.readXml = function() {
 		$.ajax({

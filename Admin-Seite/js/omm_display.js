@@ -3,7 +3,7 @@ function omm_display() {
 	var themaTable;
 	var noticePanel;
 
-	//pulbic
+	//public
 	this.init = function() {
 		themaTable = jQuery(omm_cssSelector_themaTable);
 		noticePanel = jQuery(omm_cssSelector_noticePanel);
