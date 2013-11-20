@@ -14,20 +14,44 @@ function omm_xmlParser() {
 		omm_display.initEventHanlder();
 	}
 
+	//schreibt die Fragen mit benoetigten Antworten, Hinweisen, etc. in ein div Element welches durch die CSS-Klasse "hidden" versteckt wird
 	function questionDivHtml(xmlLessonObject, topicCounter) {
 		var x = '<div id="collapse' + topicCounter + '" class="panel-collapse collapse">';
 		x += '<div class="omm_panel-body">';
 		x += '<table class="table table-striped table-hover">';
 		var questionCounter = 1;
+
+		//fuer jede Frage im XML-Dokument
 		$(xmlLessonObject).find("question").each(function() {
 			x += '<tr>';
+			//Geruest fuer Frage bereitstellen, so wie Fragennummer, Titel, Tabelle und Checkbox
 			x += htmlQuestion(questionCounter, $(this).attr("name"));
+
+			//DIV-Element fuer Details der Frage
+			x += '<td><div class="hidden omm_question">';
 
 			if ($(this).attr("type") != 'ClozeText') {
 				x += htmlQuestionBody($(this).attr('body'));
+				//div fuer Antworten erzeugen
+				x += '<div class="omm_question-answers-html">';
+				$(this).find('answer').each(function() {
+					x += htmlQuestionAnswers($(this));
+				});
+
+				//div fuer Antworten schließen
+				x += '</div>';
 			} else {
 				x += htmlQuestionBodyClozeText($(this).attr('body'));
 			}
+
+			x += htmlQuestionNoticeOnWrong($(this).attr('notice_on_wrong'));
+			x += htmlQuestionType($(this).attr('type'));
+			x += htmlQuestionNoticeOnCorrect($(this).attr('notice_on_correct'));
+			x += htmlQuestionPattern($(this).attr('pattern'));
+
+			//div fuer Fragendetails schließen
+			x += '</div></td>';
+
 			x += htmlQuestionInfoContent();
 			x += '</tr>';
 			questionCounter++;
@@ -42,14 +66,15 @@ function omm_xmlParser() {
 		var patternBracket = /(\[|])/g;
 
 		var answers = clozeString.match(patternG);
-		var body = "";
+		var body = '<div class="omm_question-body-html">';
 		for (answer in answers) {
 			var a = answers[answer].replace(patternBracket, "");
 			// eckige Klammern zur besseren Kennzeichnung eingefügt. Optional. Allerdings mehrere Antworten möglich [[xxx | yyy]]. Take care!
 			body += clozeString.replace(patternF, "<div class='omm_cloze-text-input'><div class='omm-cloze-text-hidden-answer'>[[" + a + "]]</div><input type='text' value='STUPID TEXTFIELD, TODO'/></div>");
-			// console.log(a);
+			console.log(body);
 		}
-
+		body += '</div>';
+			
 		return body;
 	}
 
@@ -63,15 +88,60 @@ function omm_xmlParser() {
 		return questionHtml;
 	}
 
-	function htmlQuestionBody(questionBody, questionCounter) {
-		var questionBodyHtml = '<td><div class="hidden omm_question_body_html">' + questionBody + '</div></td>';
+	function htmlQuestionBody(questionBody) {
+		var questionBodyHtml = '<div class="omm_question-body-html">' + questionBody + '</div>';
 		return questionBodyHtml;
+	}
+
+	function htmlQuestionAnswers(questionAnswers) {
+		var questionAnswerHtml = "";
+
+		$(questionAnswers).each(function() {
+			questionAnswerHtml += '<div class="omm_answer-body-html">';
+			questionAnswerHtml += $(this).attr('body');
+			questionAnswerHtml += '<div class="omm_answer-correct-html">';
+			questionAnswerHtml += $(this).attr('correct');
+			questionAnswerHtml += '</div></div>';
+		});
+
+		return questionAnswerHtml;
+
+	}
+
+	function htmlQuestionNoticeOnWrong(questionNoticeOnWrong) {
+		var questionNoticeOnWrongHtml = "";
+		questionNoticeOnWrongHtml = '<div class="omm_question-notice-on-wrong-html">' + questionNoticeOnWrong + '</div>';
+
+		return questionNoticeOnWrongHtml;
+	}
+
+	function htmlQuestionType(questionType) {
+		var questionTypeHtml = "";
+		questionTypeHtml = '<div class="omm_question-type-html">' + questionType + '</div>';
+
+		return questionTypeHtml;
+	}
+
+	function htmlQuestionNoticeOnCorrect(questionNoticeOnCorrect) {
+		var questionNoticeOnCorrectHtml = "";
+
+		questionNoticeOnCorrectHtml = '<div class="omm_question-notice-on-correct-html">' + questionNoticeOnCorrect + '</div>';
+		return questionNoticeOnCorrectHtml;
+	}
+
+	function htmlQuestionPattern(questionPattern) {
+		var questionPatternHtml = "";
+		questionPatternHtml = '<div class="omm_question-pattern-html">' + questionPattern + '</div>';
+
+		return questionPatternHtml;
 	}
 
 	function htmlQuestionInfoContent() {
 		var questionInfoContent = '<td><span class="omm_question-info" rel="popover" data-content="This button was added dynamically by JavaScript"><i class="fa fa-info fa-lg"></i></span></td>';
+
 		return questionInfoContent;
 	}
+
 
 	this.readXml = function() {
 		$.ajax({
