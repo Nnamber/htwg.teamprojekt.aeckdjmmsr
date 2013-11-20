@@ -42,7 +42,9 @@ function omm_xmlParser() {
 	}
 
 	function htmlQuestion(questionCounter, questionTitle) {
-		var questionHtml = '<td><input type="checkbox" class="pull-right"/></td><td>Frage ' + questionCounter + ': <span class="omm_question-title">' + questionTitle + '</span></td>';
+		var questionHtml = '<td><input type="checkbox" class="pull-right"/></td><td>Frage ' + 
+		questionCounter + ': <span class="omm_question-title">' + 
+		questionTitle + '</span></td><td><span class="omm_question-info" rel="popover" data-content="This was added dynamically by JavaScript">i</span></td>';
 		return questionHtml;
 	}
 
