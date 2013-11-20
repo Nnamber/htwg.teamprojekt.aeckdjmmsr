@@ -1,4 +1,4 @@
-omm_xmlParser() {
+function omm_xmlParser() {
 	var omm_DefaultPath = "./js/Mindmailer.xml";
 	var that = this;
 	var xmlFile;
@@ -14,21 +14,46 @@ omm_xmlParser() {
 		omm_display.init();
 	}
 
+	//schreibt die Fragen mit benoetigten Antworten, Hinweisen, etc. in ein div Element welches durch die CSS-Klasse "hidden" versteckt wird
 	function questionDivHtml(xmlLessonObject, topicCounter) {
 		var x = '<div id="collapse' + topicCounter + '" class="panel-collapse collapse">';
 		x += '<div class="omm_panel-body">';
 		x += '<table class="table table-striped table-hover">';
 		var questionCounter = 1;
+		//fuer jede Frage im XML-Dokument
 		$(xmlLessonObject).find("question").each(function() {
 			x += '<tr>';
+
+			//Geruest fuer Frage bereitstellen, so wie Fragennummer, Titel, Tabelle und Checkbox
 			x += htmlQuestion(questionCounter, $(this).attr("name"));
+
+			//DIV-Element fuer Details der Frage
+			x += '<td><div class="hidden omm_question">';
 
 			if ($(this).attr("type") != 'ClozeText') {
 				x += htmlQuestionBody($(this).attr('body'));
 			} else {
-				bodyMap = arminFunktion($(this).attr('body'));
-				x += htmlQuestionBody(bodyMap[body]);				
+				// bodyMap = arminFunktion($(this).attr('body'));
+				// x += htmlQuestionBody(bodyMap[body]);
 			}
+
+			//div fuer Antworten erzeugen
+			x += '<div class="omm_question-answers-html">';
+			$(this).find('answer').each(function() {
+				x += htmlQuestionAnswers($(this));
+			});
+			//div fuer Antworten schließen
+			x += '</div>';
+
+			x += htmlQuestionNoticeOnWrong($(this).attr('notice_on_wrong'));
+			x += htmlQuestionType($(this).attr('type'));
+			x += htmlQuestionNoticeOnCorrect($(this).attr('notice_on_correct'));
+			x += htmlQuestionPattern($(this).attr('pattern'));
+
+
+			//div fuer Fragendetails schließen
+			x += '</div></td>';
+
 			x += '</tr>';
 			questionCounter++;
 		});
@@ -42,13 +67,51 @@ omm_xmlParser() {
 	}
 
 	function htmlQuestion(questionCounter, questionTitle) {
-		var questionHtml = '<td><input type="checkbox" class="pull-right"/></td><td>Frage ' + questionCounter + ': <span class="omm_question-title">' + questionTitle + '</span></td>';
+		var questionHtml = '<td><input type="checkbox" class="pull-right"/></td><td>Frage ' + 
+		questionCounter + ': <span class="omm_question-title">' + 
+		questionTitle + '</span></td><td><span class="omm_question-info" rel="popover" data-content="This was added dynamically by JavaScript">i</span></td>';
 		return questionHtml;
 	}
 
-	function htmlQuestionBody(questionBody, questionCounter) {
-		var questionBodyHtml = '<td><div class="hidden omm_question_body_html">' + questionBody + '</div></td>';
+	function htmlQuestionBody(questionBody) {
+		var questionBodyHtml = '<div class="omm_question-body-html">' + questionBody + '</div>';
 		return questionBodyHtml;
+	}
+
+	function htmlQuestionAnswers(questionAnswers) {
+		var questionAnswerHtml = "";
+		$(questionAnswers).each(function() {
+			questionAnswerHtml += '<div class="omm_answer-body-html">';
+			questionAnswerHtml += $(this).attr('body');
+			questionAnswerHtml += '<div class="omm_answer-correct-html">';
+			questionAnswerHtml += $(this).attr('correct');
+			questionAnswerHtml += '</div></div>';
+		});
+		return questionAnswerHtml;
+	}
+
+	function htmlQuestionNoticeOnWrong(questionNoticeOnWrong) {
+		var questionNoticeOnWrongHtml = "";
+		questionNoticeOnWrongHtml = '<div class="omm_question-notice-on-wrong-html">' + questionNoticeOnWrong + '</div>';
+		return questionNoticeOnWrongHtml;
+	}
+
+	function htmlQuestionType(questionType) {
+		var questionTypeHtml = "";
+		questionTypeHtml = '<div class="omm_question-type-html">' + questionType + '</div>';
+		return questionTypeHtml;
+	}
+
+	function htmlQuestionNoticeOnCorrect(questionNoticeOnCorrect) {
+		var questionNoticeOnCorrectHtml = "";
+		questionNoticeOnCorrectHtml = '<div class="omm_question-notice-on-correct-html">' + questionNoticeOnCorrect + '</div>';
+		return questionNoticeOnCorrectHtml;
+	}
+
+	function htmlQuestionPattern(questionPattern) {
+		var questionPatternHtml = "";
+		questionPatternHtml = '<div class="omm_question-pattern-html">' + questionPattern + '</div>';
+		return questionPatternHtml;
 	}
 
 
@@ -70,8 +133,8 @@ omm_xmlParser() {
 		var res = val.name.substr(val.name.lastIndexOf('.')) == '.xml';
 		console.log("validateXML");
 		if (!res) {
-			alert("wrong type");
-			//TODO: HINTERGRUND ROT FÄRBEN
+			//ToDO: Fehlernachricht überarbeiten
+			omm_display.showMessage("Wrong Type", true);
 		} else {
 			$("#omm_xml-dialog-uebernehmen").removeAttr("disabled");
 			xmlFile = val;
