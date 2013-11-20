@@ -1,4 +1,4 @@
-function omm_xmlParser() {
+omm_xmlParser() {
 	var omm_DefaultPath = "./js/Mindmailer.xml";
 	var that = this;
 	var xmlFile;
@@ -20,7 +20,16 @@ function omm_xmlParser() {
 		x += '<table class="table table-striped table-hover">';
 		var questionCounter = 1;
 		$(xmlLessonObject).find("question").each(function() {
+			x += '<tr>';
 			x += htmlQuestion(questionCounter, $(this).attr("name"));
+
+			if ($(this).attr("type") != 'ClozeText') {
+				x += htmlQuestionBody($(this).attr('body'));
+			} else {
+				bodyMap = arminFunktion($(this).attr('body'));
+				x += htmlQuestionBody(bodyMap[body]);				
+			}
+			x += '</tr>';
 			questionCounter++;
 		});
 		x += '</table></div></div>';
@@ -33,8 +42,13 @@ function omm_xmlParser() {
 	}
 
 	function htmlQuestion(questionCounter, questionTitle) {
-		var questionHtml = '<tr ><td><input type="checkbox" class="pull-right"/></td><td>Frage ' + questionCounter + ': <span class="omm_question-title">' + questionTitle + '</span></td></tr>';
+		var questionHtml = '<td><input type="checkbox" class="pull-right"/></td><td>Frage ' + questionCounter + ': <span class="omm_question-title">' + questionTitle + '</span></td>';
 		return questionHtml;
+	}
+
+	function htmlQuestionBody(questionBody, questionCounter) {
+		var questionBodyHtml = '<td><div class="hidden omm_question_body_html">' + questionBody + '</div></td>';
+		return questionBodyHtml;
 	}
 
 
