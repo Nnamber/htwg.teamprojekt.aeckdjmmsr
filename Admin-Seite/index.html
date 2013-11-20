@@ -15,6 +15,7 @@
 		<!-- Bootstrap core JavaScript -->
 		<script src="js/jquery-2.0.3.js"></script>
 		<script src="js/xmlReader.js"></script>
+		<script src="js/htmlWriter.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<!-- OMM JavaScript-->
 		<script src="js/omm_display.js"></script>
@@ -37,10 +38,10 @@
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav navbar-right omm_navbar-buttons">
 						<li>
-							<a href="#">HTML generieren</a>
+							<a href="#" id="omm_save-html">HTML generieren</a>
 						</li>
 						<li>
-							<a href="#" data-toggle="modal" data-target="#omm_xml-dialog">XML einlesen</a>
+							<a href="#" data-toggle="modal" data-target="#omm_xml-read-dialog">XML einlesen</a>
 						</li>
 					</ul>
 				</div><!--/.nav-collapse -->
@@ -64,7 +65,7 @@
 			</form>
 
 		</div><!-- /.container -->
-		<div class="modal fade" id="omm_xml-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="omm_xml-read-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -74,14 +75,16 @@
 						<h4 class="modal-title" id="myModalLabel">XML einlesen</h4>
 					</div>
 					<div class="modal-body">
-							<input type="file"  accept="application/xml" id='omm_fileinput'/>
-							<!-- accept="application/xml,text/xml"/> -->
+						<input type="file"  accept="application/xml" id='omm_fileinput'/>
+						<!-- accept="application/xml,text/xml"/> -->
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">
 							Abbrechen
 						</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal" id="omm_xml-dialog-uebernehmen" disabled="disabled" onclick="omm_parser.parseXMLToVariable()">Übernehmen</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="omm_xml-dialog-uebernehmen" disabled="disabled" onclick="omm_parser.parseXMLToVariable()">
+							Übernehmen
+						</button>
 					</div>
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
