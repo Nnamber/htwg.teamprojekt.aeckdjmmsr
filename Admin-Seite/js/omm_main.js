@@ -19,7 +19,6 @@ function initPopovers() {
 	jQuery("body").popover({
 		selector : '[rel=popover]',
 		trigger : 'hover',
-		placement : 'auto left',
-		title : 'titel auch noch?'
+		placement : 'left',
 	});
 }
