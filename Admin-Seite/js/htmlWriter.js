@@ -1,10 +1,10 @@
 function omm_saveHtml() {
-	this.saveHtm = function() {
-
-		
+	
+	this.saveHtml = function() {
+		var fileName = $(omm_cssSelector_htmlFileName).val();
 		var blob = new Blob(["Hello, world!"], {
 		type : "text/plain;charset=utf-8"
 		});
-		saveAs(blob, "hello world.html");
+		saveAs(blob, fileName+".html");
 	};
 }

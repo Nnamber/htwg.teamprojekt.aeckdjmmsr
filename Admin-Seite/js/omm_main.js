@@ -1,6 +1,7 @@
 var omm_parser = new omm_xmlParser();
 var omm_display = new omm_display();
 var omm_save = new omm_saveHtml();
+var omm_cssSelector_htmlFileName = "#omm_file-name";
 var omm_cssSelector_themaRow = ".omm_thema-row";
 var omm_cssSelector_noticePanel = "#omm_notice-panel";
 var omm_cssSelector_themaTable = "#omm_thema-table";
@@ -12,7 +13,7 @@ jQuery(document).ready(function() {
 	initPopovers();
 	$(omm_cssSelector_fileInput).change(omm_parser.validateXml);
 	omm_parser.readXml();
-	$(omm_cssSelector_saveHTML).click(omm_save.saveHtm);
+	$(omm_cssSelector_saveHTML).click(omm_save.saveHtml);
 });
 
 function initPopovers() {
