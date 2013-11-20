@@ -30,7 +30,9 @@ function omm_xmlParser() {
 			//DIV-Element fuer Details der Frage
 			x += '<td><div class="hidden omm_question">';
 
+			var questionBody;
 			if ($(this).attr("type") != 'ClozeText') {
+				questionBody = $(this).attr('body');
 				x += htmlQuestionBody($(this).attr('body'));
 				//div fuer Antworten erzeugen
 				x += '<div class="omm_question-answers-html">';
@@ -41,6 +43,7 @@ function omm_xmlParser() {
 				//div fuer Antworten schließen
 				x += '</div>';
 			} else {
+				questionBody = $(this).attr('body');
 				x += htmlQuestionBodyClozeText($(this).attr('body'));
 			}
 
@@ -52,7 +55,7 @@ function omm_xmlParser() {
 			//div fuer Fragendetails schließen
 			x += '</div></td>';
 
-			x += htmlQuestionInfoContent();
+			x += htmlQuestionInfoContent(questionBody);
 			x += '</tr>';
 			questionCounter++;
 		});
@@ -74,7 +77,7 @@ function omm_xmlParser() {
 			console.log(body);
 		}
 		body += '</div>';
-			
+
 		return body;
 	}
 
@@ -136,9 +139,9 @@ function omm_xmlParser() {
 		return questionPatternHtml;
 	}
 
-	function htmlQuestionInfoContent() {
-		var questionInfoContent = '<td><span class="omm_question-info" rel="popover" data-content="This button was added dynamically by JavaScript"><i class="fa fa-info fa-lg"></i></span></td>';
-
+	function htmlQuestionInfoContent(questionBody, questionAnswers) {
+		var questionInfoContent = '<td><span class="omm_question-info" rel="popover" data-content=\'' + questionBody;
+		questionInfoContent += '\'><i class="fa fa-info fa-lg"></i></span></td>';
 		return questionInfoContent;
 	}
 

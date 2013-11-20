@@ -21,3 +21,7 @@ body {
 	border-right-color: rgb(75, 75, 75);
 }
 
+.popover{
+	max-width: 500px;
+}
+
