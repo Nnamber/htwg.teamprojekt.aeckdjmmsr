@@ -1,4 +1,4 @@
-function display() {
+function omm_display() {
 	//private variables
 	var themaTable;
 	var noticePanel;
