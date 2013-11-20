@@ -26,14 +26,30 @@ function omm_xmlParser() {
 			if ($(this).attr("type") != 'ClozeText') {
 				x += htmlQuestionBody($(this).attr('body'));
 			} else {
-				// bodyMap = arminFunktion($(this).attr('body'));
-				// x += htmlQuestionBody(bodyMap[body]);
+				x += htmlQuestionBodyClozeText($(this).attr('body'));
 			}
 			x += '</tr>';
 			questionCounter++;
 		});
 		x += '</table></div></div>';
 		return x;
+	}
+
+	function htmlQuestionBodyClozeText(clozeString) {
+		var patternG = /\[\[.+?]]*?/g;
+		var patternF = /\[\[.+?]]*?/;
+		var patternBracket = /(\[|])/g;
+
+		var answers = clozeString.match(patternG);
+		var body = "";
+		for (answer in answers) {
+			var a = answers[answer].replace(patternBracket, "");
+			// eckige Klammern zur besseren Kennzeichnung eingefügt. Optional. Allerdings mehrere Antworten möglich [[xxx | yyy]]. Take care!
+			body += clozeString.replace(patternF, "<div class='omm_cloze-text-input'><div class='omm-cloze-text-hidden-answer'>[[" + a + "]]</div><input type='text' value='STUPID TEXTFIELD, TODO'/></div>");
+			// console.log(a);
+		}
+
+		return body;
 	}
 
 	function htmlLesson(lessonCounter, lessonTitle) {
@@ -50,6 +66,7 @@ function omm_xmlParser() {
 		var questionBodyHtml = '<td><div class="hidden omm_question_body_html">' + questionBody + '</div></td>';
 		return questionBodyHtml;
 	}
+
 
 	this.readXml = function() {
 		$.ajax({
