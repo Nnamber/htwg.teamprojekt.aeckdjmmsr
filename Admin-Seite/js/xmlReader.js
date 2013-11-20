@@ -6,12 +6,12 @@ function omm_xmlParser() {
 
 	function parse(document) {
 		var topicCounter = 1;
-		$("#omm_thema-table").html("");
+		$(omm_cssSelector_themaTable).html("");
 		$(document).find("course").find("lesson").each(function() {
-			$("#omm_thema-table").append(htmlLesson(topicCounter, $(this).attr("name")) + questionDivHtml($(this), topicCounter) + '</div>');
+			$(omm_cssSelector_themaTable).append(htmlLesson(topicCounter, $(this).attr("name")) + questionDivHtml($(this), topicCounter) + '</div>');
 			topicCounter++;
 		});
-		omm_display.init();
+		omm_display.initEventHanlder();
 	}
 
 	function questionDivHtml(xmlLessonObject, topicCounter) {
@@ -28,6 +28,7 @@ function omm_xmlParser() {
 			} else {
 				x += htmlQuestionBodyClozeText($(this).attr('body'));
 			}
+			x += htmlQuestionInfoContent();
 			x += '</tr>';
 			questionCounter++;
 		});
@@ -67,6 +68,10 @@ function omm_xmlParser() {
 		return questionBodyHtml;
 	}
 
+	function htmlQuestionInfoContent() {
+		var questionInfoContent = '<td><span class="omm_question-info" rel="popover" data-content="This button was added dynamically by JavaScript"><i class="fa fa-info fa-lg"></i></span></td>';
+		return questionInfoContent;
+	}
 
 	this.readXml = function() {
 		$.ajax({
@@ -75,8 +80,7 @@ function omm_xmlParser() {
 			dataType : "xml",
 			success : parse,
 			error : function() {
-				$("#omm_notice-panel").addClass("alert alert-danger");
-				$("#omm_notice-panel").append('<p>Es wurde keine XML-Datei unter dem Default-Pfad gefunden</p>');
+				omm_display.showMessage("Es wurde keine XML-Datei unter dem Default-Pfad gefunden", true);
 			}
 		});
 	};
@@ -86,8 +90,8 @@ function omm_xmlParser() {
 		var res = val.name.substr(val.name.lastIndexOf('.')) == '.xml';
 		console.log("validateXML");
 		if (!res) {
-			alert("wrong type");
-			//TODO: HINTERGRUND ROT FÄRBEN
+			//ToDO: Fehlernachricht überarbeiten
+			omm_display.showMessage("Wrong Type", true);
 		} else {
 			$("#omm_xml-dialog-uebernehmen").removeAttr("disabled");
 			xmlFile = val;
