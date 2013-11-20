@@ -27,7 +27,7 @@ function omm_xmlParser() {
 				x += htmlQuestionBody($(this).attr('body'));
 			} else {
 				// bodyMap = arminFunktion($(this).attr('body'));
-				// x += htmlQuestionBody(bodyMap[body]);				
+				// x += htmlQuestionBody(bodyMap[body]);
 			}
 			x += '</tr>';
 			questionCounter++;
@@ -50,7 +50,6 @@ function omm_xmlParser() {
 		var questionBodyHtml = '<td><div class="hidden omm_question_body_html">' + questionBody + '</div></td>';
 		return questionBodyHtml;
 	}
-
 
 	this.readXml = function() {
 		$.ajax({
