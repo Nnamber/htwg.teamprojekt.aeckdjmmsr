@@ -7,18 +7,19 @@ function omm_display() {
 	this.init = function() {
 		themaTable = jQuery(omm_cssSelector_themaTable);
 		noticePanel = jQuery(omm_cssSelector_noticePanel);
-
+	};
+	this.initEventHanlder = function() {
 		initCheckAllEventHandler();
 		initCheckThemaEventHandler();
 	};
+
 	this.showMessage = function(message, isError) {
-		//Ersetzt
-		jQuery(noticePanel).html("<div>" + message + "</div>");
-		var alertBox = jQuery(noticePanel).find("div");
+		//Ersetzt Inhalt des noticePanels
+		jQuery(noticePanel).html(message);
 		if (isError) {
-			alertBox.addClass("alert alert-danger");
+			noticePanel.addClass("alert alert-danger");
 		} else {
-			alertBox.addClass("alert alert-success");
+			noticePanel.addClass("alert alert-success");
 		}
 
 	};
@@ -49,4 +50,4 @@ function omm_display() {
 
 	}
 
-};
+};;
