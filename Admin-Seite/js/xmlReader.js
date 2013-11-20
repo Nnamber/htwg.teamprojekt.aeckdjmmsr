@@ -51,6 +51,7 @@ function omm_xmlParser() {
 		return questionBodyHtml;
 	}
 
+
 	this.readXml = function() {
 		$.ajax({
 			//Pfad ueberarbeiten, z.b. mit relativem Pfad, evt Johner fragen
@@ -69,8 +70,8 @@ function omm_xmlParser() {
 		var res = val.name.substr(val.name.lastIndexOf('.')) == '.xml';
 		console.log("validateXML");
 		if (!res) {
-			alert("wrong type");
-			//TODO: HINTERGRUND ROT FÄRBEN
+			//ToDO: Fehlernachricht überarbeiten
+			omm_display.showMessage("Wrong Type", true);
 		} else {
 			$("#omm_xml-dialog-uebernehmen").removeAttr("disabled");
 			xmlFile = val;
