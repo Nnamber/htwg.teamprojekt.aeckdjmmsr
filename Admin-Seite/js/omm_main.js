@@ -21,7 +21,7 @@ jQuery(document).ready(function() {
 function initPopovers() {
 	jQuery("body").popover({
 		selector : '[rel=popover]',
-		// trigger : 'hover',
+		trigger : 'hover',
 		placement : getPlacementFunction('left', 500, 500),
 		html : true
 	});
