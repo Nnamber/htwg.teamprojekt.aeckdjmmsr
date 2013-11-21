@@ -1,8 +1,8 @@
 function omm_xmlParser() {
-	var omm_DefaultPath = "./js/Mindmailer.xml";
 	var that = this;
 	var xmlFile;
 	var xmlString;
+	var styler = new omm_styler();
 
 	function parse(document) {
 		var topicCounter = 1;
@@ -30,20 +30,22 @@ function omm_xmlParser() {
 			//DIV-Element fuer Details der Frage
 			x += '<td><div class="hidden omm_question">';
 
-			var questionBody;
+			var wellFormedQuestionBody;
+			var questionAnswers = new Array();
 			if ($(this).attr("type") != 'ClozeText') {
-				questionBody = $(this).attr('body');
+				wellFormedQuestionBody = styler.getWellFormedQuestionBody($(this));
 				x += htmlQuestionBody($(this).attr('body'));
 				//div fuer Antworten erzeugen
 				x += '<div class="omm_question-answers-html">';
 				$(this).find('answer').each(function() {
+					questionAnswers.push($(this));
 					x += htmlQuestionAnswers($(this));
 				});
 
 				//div fuer Antworten schließen
 				x += '</div>';
 			} else {
-				questionBody = $(this).attr('body');
+				wellFormedQuestionBody = styler.getWellFormedQuestionBody($(this));
 				x += htmlQuestionBodyClozeText($(this).attr('body'));
 			}
 
@@ -55,7 +57,7 @@ function omm_xmlParser() {
 			//div fuer Fragendetails schließen
 			x += '</div></td>';
 
-			x += htmlQuestionInfoContent(questionBody);
+			x += htmlQuestionInfoContent(wellFormedQuestionBody, questionAnswers);
 			x += '</tr>';
 			questionCounter++;
 		});
@@ -141,14 +143,20 @@ function omm_xmlParser() {
 
 	function htmlQuestionInfoContent(questionBody, questionAnswers) {
 		var questionInfoContent = '<td><span class="omm_question-info" rel="popover" data-content=\'' + questionBody;
-		questionInfoContent += '\'><i class="fa fa-info fa-lg"></i></span></td>';
+		questionInfoContent += '<div class="omm_question-info-answer">';
+		jQuery(questionAnswers).each(function(index) {
+			questionInfoContent += '<p>';
+			questionInfoContent += $(questionAnswers[index]).attr('body');
+			questionInfoContent += '</p>';
+		});
+		questionInfoContent += '</div>\'><i class="fa fa-info-circle fa-lg"></i></span></td>';
 		return questionInfoContent;
 	}
 
 
 	this.readXml = function() {
 		$.ajax({
-			//Pfad ueberarbeiten, z.b. mit relativem Pfad, evt Johner fragen
+			//ToDo: Pfad ueberarbeiten, z.b. mit relativem Pfad, evt Johner fragen
 			url : omm_DefaultPath, // name of file you want to parse
 			dataType : "xml",
 			success : parse,
