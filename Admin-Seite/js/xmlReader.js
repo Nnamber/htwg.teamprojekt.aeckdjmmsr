@@ -143,13 +143,13 @@ function omm_xmlParser() {
 
 	function htmlQuestionInfoContent(questionBody, questionAnswers) {
 		var questionInfoContent = '<td><span class="omm_question-info" rel="popover" data-content=\'' + questionBody;
-		questionInfoContent += '<div class="omm_question-info-answer">';
+		questionInfoContent += '<div class="omm_question-info-answer"><ol>';
 		jQuery(questionAnswers).each(function(index) {
-			questionInfoContent += '<p>';
+			questionInfoContent += '<li>';
 			questionInfoContent += $(questionAnswers[index]).attr('body');
-			questionInfoContent += '</p>';
+			questionInfoContent += '</li>';
 		});
-		questionInfoContent += '</div>\'><i class="fa fa-info-circle fa-lg"></i></span></td>';
+		questionInfoContent += '</ol></div>\'><i class="fa fa-info-circle fa-lg"></i></span></td>';
 		return questionInfoContent;
 	}
 
