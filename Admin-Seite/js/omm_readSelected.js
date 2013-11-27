@@ -3,7 +3,7 @@ function omm_readSelected() {
     var htmlPageContent;
 
     this.readSelectedQuestions = function() {
-        generateHtmlPageSkeleton();
+        generateHtmlPageScaffold();
 
 
 
@@ -13,7 +13,7 @@ function omm_readSelected() {
         return htmlPageContentString;
     };
 
-    function generateHtmlPageSkeleton() {
+    function generateHtmlPageScaffold() {
         htmlPageContent = document.createElement("html");
         jQuery(htmlPageContent).html("<head></head><body></body>");
     }
