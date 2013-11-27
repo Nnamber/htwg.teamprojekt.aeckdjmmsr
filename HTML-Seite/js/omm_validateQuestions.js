@@ -9,6 +9,7 @@ function omm_validateQuestions() {
 					validateSingleChoice(this);
 					break;
 				case "omm_question-type-MultipleChoice":
+					validateMultipleChoice(this);
 					//alert("MultipleChoice");
 					break;
 				case "omm_question-type-OpenQuestion":
@@ -24,12 +25,31 @@ function omm_validateQuestions() {
 		});
 	};
 
-	function validateMultipleChoice() {
+	function validateMultipleChoice(currentquestion) {
+		var iscorrect = true;
+		$(currentquestion).find('input:checkbox').each(function(index, element) {
+			if ($(element).is(":checked")) {
+				if ($(element).attr("value") == "true") {
+					// do nothing
+				} else {
+					iscorrect = false;
+				}
+			} else {
+				if ($(element).attr("value") == "true") {
+					iscorrect = false;
+				} else {
+					// do nothing
+				}
+			}
+		});
+		if (iscorrect) {
+			$(currentquestion).html("richtig");
+		}
 	}
 
 	function validateSingleChoice(currentquestion) {
-		var rightAnswer = $(currentquestion).find('input[type=radio][value=true]:checked');	
-		if(rightAnswer.length > 0){
+		var rightAnswer = $(currentquestion).find('input[type=radio][value=true]:checked');
+		if (rightAnswer.length > 0) {
 			$(currentquestion).html("richtig");
 		}
 	}
