@@ -6,19 +6,19 @@ function omm_validateQuestions() {
 			var currentQuestionType = this.className.split(" ")[0];
 			switch (currentQuestionType) {
 				case "omm_question-type-SingleChoice":
-					alert("SingleChoice");
+					validateSingleChoice(this);
 					break;
 				case "omm_question-type-MultipleChoice":
-					alert("MultipleChoice");
+					//alert("MultipleChoice");
 					break;
 				case "omm_question-type-OpenQuestion":
-					alert("OpenQuestion");
+					//alert("OpenQuestion");
 					break;
 				case "omm_question-type-MatchTask":
-					alert("Matschtask");
+					//alert("Matschtask");
 					break;
 				case "omm_question-type-ClozeText":
-					alert("ClozeText");
+					//alert("ClozeText");
 					break;
 			}
 		});
@@ -27,7 +27,11 @@ function omm_validateQuestions() {
 	function validateMultipleChoice() {
 	}
 
-	function validateSingleChoice() {
+	function validateSingleChoice(currentquestion) {
+		var rightAnswer = $(currentquestion).find('input[type=radio][value=true]:checked');	
+		if(rightAnswer.length > 0){
+			$(currentquestion).html("richtig");
+		}
 	}
 
 	function validateClozeText() {
