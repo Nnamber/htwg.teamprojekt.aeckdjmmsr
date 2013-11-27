@@ -21,7 +21,12 @@ function omm_display() {
 		} else {
 			noticePanel.addClass("alert alert-success");
 		}
-
+	};
+	
+	this.removeMessage = function() {
+		//Alert löschen
+		jQuery(noticePanel).html(" ");
+		noticePanel.removeClass();
 	};
 
 	//private

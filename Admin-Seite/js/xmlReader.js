@@ -7,11 +7,16 @@ function omm_xmlParser() {
 	function parse(document) {
 		var topicCounter = 1;
 		$(omm_cssSelector_themaTable).html("");
+		
+		//wenn versteckt, dann wiederherstellen des "Alles auswählen" Button
+		$("#omm_select-all").removeClass('hidden');
+
 		$(document).find("course").find("lesson").each(function() {
 			$(omm_cssSelector_themaTable).append(htmlLesson(topicCounter, $(this).attr("name")) + questionDivHtml($(this), topicCounter) + '</div>');
 			topicCounter++;
 		});
 		omm_display.initEventHanlder();
+		omm_display.removeMessage();
 	}
 
 	//schreibt die Fragen mit benoetigten Antworten, Hinweisen, etc. in ein div Element welches durch die CSS-Klasse "hidden" versteckt wird
@@ -161,6 +166,8 @@ function omm_xmlParser() {
 			dataType : "xml",
 			success : parse,
 			error : function() {
+				//"Alles auswählen" Button ausblenden
+				$("#omm_select-all").addClass('hidden');
 				omm_display.showMessage("Es wurde keine XML-Datei unter dem Default-Pfad gefunden", true);
 			}
 		});
