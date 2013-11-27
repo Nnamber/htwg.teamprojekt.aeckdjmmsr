@@ -4,7 +4,7 @@
 
 		<meta charset='utf-8'>
 		<script src='./js/slides.js'></script>
-		<script src="jquery-2.0.3.js"></script>
+		<script src="./js/jquery-2.0.3.js"></script>
 		<script>
 			function allowDrop(ev) {
 				ev.preventDefault();
@@ -19,7 +19,6 @@
 
 				var data = ev.dataTransfer.getData("Text");
 				ev.target.appendChild(document.getElementById(data));
-				getPosition();
 			}
 		</script>
 		<script src='js/omm_validateQuestions.js'></script>
