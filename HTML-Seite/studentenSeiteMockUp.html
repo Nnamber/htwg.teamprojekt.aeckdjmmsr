@@ -11,14 +11,29 @@
 			}
 
 			function drag(ev) {
-				ev.dataTransfer.setData("Text", ev.target.id);
+				ev.dataTransfer.setData("dragId", ev.target.id);
 			}
 
 			function drop(ev) {
 				ev.preventDefault();
 
-				var data = ev.dataTransfer.getData("Text");
-				ev.target.appendChild(document.getElementById(data));
+				//ziel darf nicht die Klasse "dragable" haben, also kein drag und drop objekt (Antwort) sein
+				//ziel darf keine Kinder haben oder muss das große Antwortfeld sein
+				var data = ev.dataTransfer.getData("dragId");
+				if (!$(ev.target).hasClass("dragable") && ($(ev.target).children().length == 0 || $(ev.target).attr('id') == 'answerField')) {
+					ev.target.appendChild(document.getElementById(data));
+				} else {
+					if ($(ev.target).hasClass("dragable")) {
+						//get parent und caste es zu DOM objekt
+						var parent = $(ev.target).parent().get(0);
+						$("#answerField").append(ev.target);
+						parent.appendChild(document.getElementById(data));
+
+					} else {
+
+					}
+				}
+
 			}
 		</script>
 		<script src='js/omm_validateQuestions.js'></script>
@@ -80,13 +95,6 @@
 
 
 
-
-
-
-
-
-
-
 				<p>
 					Was wird auf der Konsole ausgegeben?
 				</p>
@@ -113,6 +121,13 @@
 				&#13;&#10;				          System.out.print(input.substring(m.start(), m.end()) + &quot;-&quot;);
 				&#13;&#10;				       }</pre>
 				&#13;&#10;
+
+
+
+
+
+
+
 
 
 
@@ -168,40 +183,44 @@
 					<div id="" style="border: 1px solid black; width: 200px; height: 50px;">
 						Konstruktoren
 					</div>
-					<div id="" style="border: 1px solid black; width: 200px; height: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+					<div id="1" style="border: 1px solid black; width: 200px; height: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
 					<div id="" style="border: 1px solid black; width: 200px; height: 50px;">
 						Attribute
 					</div>
-					<div id="" style="border: 1px solid black; width: 200px; height: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+					<div id="2" style="border: 1px solid black; width: 200px; height: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
 					<div id="" style="border: 1px solid black; width: 200px; height: 50px;">
 						Methoden
 					</div>
-					<div id="" style="border: 1px solid black; width: 200px; height: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+					<div id="3" style="border: 1px solid black; width: 200px; height: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
 					<div id="" style="border: 1px solid black; width: 200px; height: 50px;">
 						Klassen
 					</div>
-					<div id="" style="border: 1px solid black; width: 200px; height: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+					<div id="4" style="border: 1px solid black; width: 200px; height: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
 				</div>
 
 				<br/>
 				<br/>
-				<div ondrop="drop(event)" id="" ondragover="allowDrop(event)" style="border: 1px solid black; width: 500px; height: 150px;">
-					<div style="border:1px solid black:" id="CONSTRUCTOR" draggable="true" ondragstart="drag(event)" width="336" height="69" name="Konstruktoren">
+				<div ondrop="drop(event)" id="answerField" ondragover="allowDrop(event)" style="border: 1px solid black; width: 500px; height: 150px;">
+					<div class="dragable" style="border:1px solid black:" id="CONSTRUCTOR" draggable="true" ondragstart="drag(event)" ondrop="" width="336" height="69" name="Konstruktoren">
 						CONSTRUCTOR
 					</div>
-					<div style="border:1px solid black:" id="FIELD" draggable="true" ondragstart="drag(event)" width="336" height="69" name="Konstruktoren">
+					<div  class="dragable" style="border:1px solid black:" id="FIELD" draggable="true" ondragstart="drag(event)" width="336" height="69" name="Konstruktoren">
 						FIELD
 					</div>
-					<div style="border:1px solid black:" id="METHOD" draggable="true" ondragstart="drag(event)" width="336" height="69" name="Konstruktoren">
+					<div  class="dragable" style="border:1px solid black:" id="METHOD" draggable="true" ondragstart="drag(event)" width="336" height="69" name="Konstruktoren">
 						METHOD
 					</div>
-					<div style="border:1px solid black:" id="TYPE" draggable="true" ondragstart="drag(event)" width="336" height="69" name="Konstruktoren">
+					<div  class="dragable" style="border:1px solid black:" id="TYPE" draggable="true" ondragstart="drag(event)" width="336" height="69" name="Konstruktoren">
 						TYPE
 					</div>
 				</div>
 			</article>
-		
-			<article><button id="checkAnswer" class="button">Shit auswerten</button> </article>
+
+			<article>
+				<button id="checkAnswer" class="button">
+					Shit auswerten
+				</button>
+			</article>
 		</section>
 
 	</body>

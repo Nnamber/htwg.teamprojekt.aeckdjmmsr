@@ -6,28 +6,52 @@ function omm_validateQuestions() {
 			var currentQuestionType = this.className.split(" ")[0];
 			switch (currentQuestionType) {
 				case "omm_question-type-SingleChoice":
-					alert("SingleChoice");
+					validateSingleChoice(this);
 					break;
 				case "omm_question-type-MultipleChoice":
-					alert("MultipleChoice");
+					validateMultipleChoice(this);
+					//alert("MultipleChoice");
 					break;
 				case "omm_question-type-OpenQuestion":
-					alert("OpenQuestion");
+					//alert("OpenQuestion");
 					break;
 				case "omm_question-type-MatchTask":
-					alert("Matschtask");
+					//alert("Matschtask");
 					break;
 				case "omm_question-type-ClozeText":
-					alert("ClozeText");
+					//alert("ClozeText");
 					break;
 			}
 		});
 	};
 
-	function validateMultipleChoice() {
+	function validateMultipleChoice(currentquestion) {
+		var iscorrect = true;
+		$(currentquestion).find('input:checkbox').each(function(index, element) {
+			if ($(element).is(":checked")) {
+				if ($(element).attr("value") == "true") {
+					// do nothing
+				} else {
+					iscorrect = false;
+				}
+			} else {
+				if ($(element).attr("value") == "true") {
+					iscorrect = false;
+				} else {
+					// do nothing
+				}
+			}
+		});
+		if (iscorrect) {
+			$(currentquestion).html("richtig");
+		}
 	}
 
-	function validateSingleChoice() {
+	function validateSingleChoice(currentquestion) {
+		var rightAnswer = $(currentquestion).find('input[type=radio][value=true]:checked');
+		if (rightAnswer.length > 0) {
+			$(currentquestion).html("richtig");
+		}
 	}
 
 	function validateClozeText() {
