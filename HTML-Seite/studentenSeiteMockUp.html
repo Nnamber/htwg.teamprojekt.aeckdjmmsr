@@ -4,7 +4,7 @@
 
 		<meta charset='utf-8'>
 		<script
-		src='http://html5slides.googlecode.com/svn/trunk/slides.js'></script>
+		src='./js/slides.js'></script>
 	</head>
 
 	<style>
@@ -14,13 +14,12 @@
 	</style>
 
 	<body style='display: none'>
-
 		<section class='slides layout-regular'>
 
 			<!-- Your slides (<article>s) go here. Delete or comment out the
 			slides below. -->
 
-			<article>
+			<article class="omm_question-type-MultipleChoice">
 				<p>
 					In welcher Zeile tritt ein Kompilierfehler auf? (Jede richtige Antwort ist zu setzen)
 					<br />
@@ -32,10 +31,7 @@
 							        String c;             // Zeile3
 						      static int d;         // Zeile4
 								   }
-							}</pre>								
-				
-
-
+							}</pre>
 				<p>
 					Bitte markieren Sie alle korrekten Antworten.
 				</p>
@@ -56,12 +52,13 @@
 				Zeile 2
 				<br/>
 			</article>
-			<article>
+			<article class="omm_question-type-SingleChoice">
 				<p>
 					Gegeben sei der folgende Programmcode:
 				</p>
 				&#13;&#10; 				<pre>String eins = &quot;HTWG&quot;;<br />String zwei = &quot;HTWG&quot;;<br />System.out.println(eins.equals(zwei));<br /></pre>
 				&#13;&#10;
+
 
 				<p>
 					Was wird auf der Konsole ausgegeben?
@@ -78,7 +75,55 @@
 				<br/>
 
 			</article>
+			<article class="omm_question-type-ClozeText">
+				<p>
+					Geben sei der folgende Source-Code
+				</p>
+				&#13;&#10; 				<pre>        String input = &quot;Max Mustermann, Rheingustrasse 32, 78462 Konstanz&quot;;
+				&#13;&#10;				       Pattern p = Pattern.compile(&quot;[0-9]+&quot;);
+				&#13;&#10;				      Matcher m = p.matcher(input);
+				&#13;&#10;				        while (m.find()) {
+				&#13;&#10;				          System.out.print(input.substring(m.start(), m.end()) + &quot;-&quot;);
+				&#13;&#10;				       }</pre>
+				&#13;&#10;
 
+
+				<p>
+					 
+				</p>
+				&#13;&#10;
+				<p>
+					Was wird auf der Console ausgegeben?
+				</p>
+				<br/>
+				<input type="text" pattern="32-78462-"/>
+			</article>
+			<article>
+				<p>
+					Gegeben sei die folgende Klasse:
+				</p>
+				<pre style="font-size: 10">    package annotations;
+				 				    public class Name {
+				 				        private String vorname;
+				 				        private String nachname;
+				 				        public Name(String vorname, String nachname) {
+				 				            this.vorname = vorname;
+				 				            this.nachname = nachname;
+				 				        }
+				 				        public String getNachname() {return nachname;}
+				 				        public void setNachname(String nachname) {this.nachname = nachname;}
+				 				        public String getVorname() {return vorname;}
+				 				        public void setVorname(String vorname) {this.vorname = vorname;}
+				 				    }</pre>
+				<p style="font-size: 10">
+					Bitte ergänzen Sie den Code, mit dem diese Klasse mit den Werten &quot;Anton&quot; und &quot;Schmid&quot; instanziert werden kann. Bitte nutzen Sie <strong>keine </strong>Leerzeichen.
+				</p>
+				<pre style="font-size: 10">Class klasse = Class.forName(&quot;<input type="text" pattern="annotations.Name"/>&quot;);
+				 				Class[] parameterTypes = {<input type="text" pattern="String.class,String.class" />};
+				 				Constructor konstruktor = klasse.getConstructor(<input type="text" pattern="parameterTypes"/>);
+				 				Object[] argumente = <input type="text" pattern="{&quot;Anton&quot;,&quot;Schmid&quot;}" />;
+				 				Name name = (Name)konstruktor.newInstance(<input type="text" pattern="argumente"/>);</pre>
+			</article>
 		</section>
 
 	</body>
