@@ -1,0 +1,85 @@
+<html>
+	<head>
+		<title>Presentation</title>
+
+		<meta charset='utf-8'>
+		<script
+		src='http://html5slides.googlecode.com/svn/trunk/slides.js'></script>
+	</head>
+
+	<style>
+		/* Your individual styles here, or just use inline styles if that’s
+		 what you want. */
+
+	</style>
+
+	<body style='display: none'>
+
+		<section class='slides layout-regular'>
+
+			<!-- Your slides (<article>s) go here. Delete or comment out the
+			slides below. -->
+
+			<article>
+				<p>
+					In welcher Zeile tritt ein Kompilierfehler auf? (Jede richtige Antwort ist zu setzen)
+					<br />
+				</p>
+				<pre>public class UnsereKlasse {
+							<br />    static String a;         // Zeile1
+							    final static int b = 1; // Zeile 2
+							<br />    public static class InnereKlasse {
+							        String c;             // Zeile3
+						      static int d;         // Zeile4
+								   }
+							}</pre>								
+				
+
+
+				<p>
+					Bitte markieren Sie alle korrekten Antworten.
+				</p>
+
+				<input type="checkbox"  value="false">
+				Zeile 1
+				<br/>
+				<input type="checkbox"  value="true">
+				In keiner Zeile
+				<br/>
+				<input type="checkbox"  value="false">
+				Zeile 3
+				<br/>
+				<input type="checkbox"  value="false">
+				Zeile 4
+				<br/>
+				<input type="checkbox"  value="false">
+				Zeile 2
+				<br/>
+			</article>
+			<article>
+				<p>
+					Gegeben sei der folgende Programmcode:
+				</p>
+				&#13;&#10; 				<pre>String eins = &quot;HTWG&quot;;<br />String zwei = &quot;HTWG&quot;;<br />System.out.println(eins.equals(zwei));<br /></pre>
+				&#13;&#10;
+
+				<p>
+					Was wird auf der Konsole ausgegeben?
+				</p>
+
+				<input type="radio" name="meh" value="true">
+				Immer true
+				<br/>
+				<input type="radio" name="meh" value="false">
+				Immer false
+				<br/>
+				<input type="radio" name="meh" value="false">
+				Das hängt von der Implementierung der JVM ab
+				<br/>
+
+			</article>
+
+		</section>
+
+	</body>
+</html>
