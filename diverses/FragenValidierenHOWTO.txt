@@ -1,0 +1,158 @@
+class="omm_single_choice"
+- Korrekt: wenn RadioButton angewählt, der "value=true"
+- Falsch: alles andere
+- Falsch: nichts gewählt
+- Methode: prüfen ob value=true mit checked übereinstimmt
+
+class="omm_multiple_choice"
+- Korrekt: wenn alle Checkboxen angewählt, die "value=true"
+- Falsch: wenn Checkbox angewählt, die "correct=false"
+- Falsch: wenn keine Checkbox angewählt
+- Methode: prüfen ob value=true mit checked übereinstimmt
+
+class="omm_open_question"
+- Korrekt: wenn Eingabetext im 'input type="text"' dem Wert in Question-Attribut 'pattern="Lösung"' entspricht
+- Falsch: alles andere
+- Methode: prüft Textfeld und pattern-Attribute auf Gleicheit(equals)
+
+class="omm_cloze_text"
+- Korrekt: wenn Eingabetext('input type="text"') dem Inhalt der doppelten eckigen Klammern "[[ asdf ]]" entspricht
+- Falsch: alles andere
+- Methode: prüft Textfeld und pattern-Attribute auf Gleicheit(equals) (Mehrfachaufruf der Methode aus OpenQuestion.)
+
+class="omm_match_task"
+- Korrekt/Methode: mehrere DIVs bilden eine 'Tabelle'. Der Wert aus dem Attribute name von Parent.Parent muss mit dem name Attribute aus des Kindes übereinstimmen. 
+- Falsch: alles andere
+
+
+/** komplette, möglicherweise nötige Ãœbergabeparameter 
+* '@' steht für Attribut
+* answer bzw List<answer> bzw Array<answer>
+**/
+
+ --> @notice_on_correct muss "Diese Antwort ist richtig" gesetzt werden falls nicht weiter spezifiziert.
+
+MultipleChoice ( @name, @body=Frage, @notice=, @notice_on_wrong, @notice_on_correct, answer(@body=Antwort selbst, @correct) ){
+
+
+
+
+
+
+}
+
+SingleChoice ( @name, @body, @notice, @notice_on_wrong, @notice_on_correct, answer(@body, @correct) ){
+
+
+
+
+
+
+
+}
+
+OpenQuestion( @name, @body, @notice, @notice_on_wrong, @notice_on_correct, @pattern){
+
+
+
+
+
+
+}
+
+ClozeText( @name, @body, @notice, @notice_on_wrong, @notice_on_correct ){
+
+
+
+
+
+
+
+}
+
+MatchTask ( @name, @body, @notice, @notice_on_wrong, @notice_on_correct, answer(@notice, @body) ) {
+
+
+
+
+
+
+
+}
+
+
+
+/** nur Check auf Korrektheit;
+* PseudoPseudoCode;
+* evtl Methodenaufruf pro Antwortmöglichkeit statt pro Frage; 
+* wie immer ohne GewÃ¤hr.
+**/
+
+isMultipleChoiceCorrect(List<answer> answers, List<Checkbox> checkboxes){
+	Boolean isCorrect = true;
+	For( Answer answer : answers){
+		If (answer.correct.equals("true")){
+			If(checkbox.isChecked){
+				// do nothing
+			} else if (checkbox.isChecked == false){
+				isCorrect = false;
+			}
+		}
+		If (answer.correct.equals("false")){
+			If(checkbox.isChecked){
+				isCorrect = false;
+			} else if (checkbox.isChecked == false){
+				// do nothing
+			}
+		}
+	}
+	Return isCorrect;
+}
+
+isSingleChoiceCorrect(List<answer> answers, List<Radiobutton> radiobuttons) {
+	Boolean isCorrect = true;
+	For (Radiobutton radiobutton : radiobuttons) {
+		If(radiobutton.isChecked) {
+			If(answer.correct.equals("true"){
+				// do nothing
+			} else {
+				isCorrect = false;
+			}
+		}
+	}
+}
+
+isOpenQuestionCorrect(PatternAttribut pattern, InputFieldText text) {
+	Boolean isCorrect = false;
+	If(pattern.equals(text){
+		isCorrect = true;
+	} else {
+		isCorrect = false;
+	}
+	Return isCorrect;
+}
+
+isClozeTextCorrect(BodyAttribut body, List<InputFieldText> texts){
+	Boolean isCorrect = true;
+	List<String> correctAnswers = scanForAnswerBrackets(body);
+	For (int i = 0; i < texts.size(); i++){
+		If(texts.get(i).equals.correctAnswers.get(i)){
+			// do nothing
+		} else {
+			isCorrect = false;
+		}
+	}
+	Return isCorrect;
+}
+
+isMatchTaskCorrect(List<answer> answers){
+	Boolean isCorrect = true;
+	For (answer answer : answers){
+		If(answer.notice.fitsTo(answer.body)){
+			// do nothing
+		} else {
+			isCorrect = false;
+		}
+	}
+	Return isCorrect;
+}
