@@ -16,6 +16,7 @@ function omm_xmlParser() {
 			topicCounter++;
 		});
 		omm_display.initEventHanlder();
+		omm_display.removeMessage();
 	}
 
 	//schreibt die Fragen mit benoetigten Antworten, Hinweisen, etc. in ein div Element welches durch die CSS-Klasse "hidden" versteckt wird
