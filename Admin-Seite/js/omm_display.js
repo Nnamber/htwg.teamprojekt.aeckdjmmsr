@@ -11,6 +11,7 @@ function omm_display() {
 	this.initEventHanlder = function() {
 		initCheckAllEventHandler();
 		initCheckThemaEventHandler();
+		initGeneratehtmlFromCheckedEventHandler();
 	};
 
 	this.showMessage = function(message, isError) {
@@ -22,7 +23,7 @@ function omm_display() {
 			noticePanel.addClass("alert alert-success");
 		}
 	};
-	
+
 	this.removeMessage = function() {
 		//Alert löschen
 		jQuery(noticePanel).html(" ");
@@ -35,7 +36,7 @@ function omm_display() {
 		jQuery(themaCheckboxes).change(function(eventObject) {
 			var checkboxes = jQuery(this).parents(omm_cssSelector_themaRow).find(":checkbox");
 
-			if (jQuery(this).prop('checked') == true) {
+			if (jQuery(this).prop('checked') === true) {
 				checkboxes.prop("checked", true);
 			} else {
 				checkboxes.prop("checked", false);
@@ -46,13 +47,16 @@ function omm_display() {
 	function initCheckAllEventHandler() {
 		jQuery(omm_cssSelector_selectAll + " :checkbox").change(function(eventObject) {
 			var allCheckboxes = jQuery(themaTable).find(":checkbox");
-			if (jQuery(this).prop('checked') == true) {
+			if (jQuery(this).prop('checked') === true) {
 				allCheckboxes.prop("checked", true);
 			} else {
 				allCheckboxes.prop("checked", false);
 			}
 		});
+	}
 
+	function initGeneratehtmlFromCheckedEventHandler() {
+		jQuery(omm_cssSelector_saveHTML).click(omm_save.saveHtml);
 	}
 
 };;
