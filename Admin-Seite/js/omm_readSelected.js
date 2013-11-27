@@ -23,7 +23,7 @@ function omm_readSelected() {
             jQuery(htmlPageContent).find("body").append(function() {
                 var article = document.createElement("article");
                 jQuery(article).append(function(){
-                    return jQuery(element).parent().parent().find(omm_cssSelector_hiddenQuestion);
+                    return jQuery(element).parent().parent().find(omm_cssSelector_hiddenQuestion).clone();
                 });
                 return article;
             });
