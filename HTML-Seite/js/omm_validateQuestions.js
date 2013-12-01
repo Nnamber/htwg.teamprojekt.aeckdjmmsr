@@ -14,12 +14,14 @@ function omm_validateQuestions() {
 					break;
 				case "omm_question-type-OpenQuestion":
 					//alert("OpenQuestion");
+					validateOpenQuestion(this);
 					break;
 				case "omm_question-type-MatchTask":
 					//alert("Matschtask");
 					break;
 				case "omm_question-type-ClozeText":
 					//alert("ClozeText");
+					validateClozeText(this);
 					break;
 			}
 		});
@@ -27,6 +29,7 @@ function omm_validateQuestions() {
 
 	function validateMultipleChoice(currentquestion) {
 		var iscorrect = true;
+		// $( "input:checkbox:checked" ).val();
 		$(currentquestion).find('input:checkbox').each(function(index, element) {
 			if ($(element).is(":checked")) {
 				if ($(element).attr("value") == "true") {
@@ -54,10 +57,22 @@ function omm_validateQuestions() {
 		}
 	}
 
-	function validateClozeText() {
+	function validateClozeText(currentquestion) {
+
 	}
 
-	function validateOpenQuestion() {
+	function validateOpenQuestion(currentquestion) {
+		var iscorrect = true;
+		$(currentquestion).find('input:text').each(function(index, element) {
+			if ($(element).val() == $(element).attr('pattern')) {
+				// do nothing
+			} else {
+				iscorrect = false;
+			}
+		});
+		if(iscorrect){
+			$(currentquestion).html("richtig");
+		}
 	}
 
 	function validateMatchTask() {
