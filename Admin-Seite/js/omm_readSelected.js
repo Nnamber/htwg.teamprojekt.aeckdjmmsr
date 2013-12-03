@@ -1,12 +1,11 @@
 function omm_readSelected() {
 
     var htmlPageContent;
+    var stylesheets = ['css/bootstrap.min.css', 'css/font-awesome.min.css'];
+    var scriptSources = ['js/jquery-2.0.3.js', 'js/bootstrap.min.js', 'js/slides.js', 'js/omm_validateQuestions.js', 'js/omm_main.js'];
 
     this.readSelectedQuestions = function() {
         generateHtmlPageScaffold();
-
-
-
         insertQuestionSlides();
 
         var htmlPageContentString = jQuery(htmlPageContent).html();
@@ -17,11 +16,20 @@ function omm_readSelected() {
         htmlPageContent = document.createElement("html");
         jQuery(htmlPageContent).html("<head></head><body></body>");
         var head = jQuery(htmlPageContent).find("head");
-        head.html("<title>Presentation</title><meta charset='utf-8'><!-- Bootstrap core CSS --><link href='css/bootstrap.min.css' rel='stylesheet'><!-- Icons--><link href='css/font-awesome.min.css' rel='stylesheet'><!-- Bootstrap core JavaScript --><script src='js/jquery-2.0.3.js'></script><script src='js/bootstrap.min.js'></script><!-- OMM JavaScript--><script src='./js/slides.js'></script><script src='js/omm_validateQuestions.js'></script><script src='js/omm_main.js'></script>");
+        head.append("<title>Presentation</title><meta charset='utf-8'>");
+
+        //Add scripts and stylesheets
+        addStylesheetLinks(head, stylesheets);
+        addScriptSources(head, scriptSources);
+
         var body = jQuery(htmlPageContent).find("body");
+
         //hide body until goolge script.js is loaded
-        body.style = "display: none";
-        body.append("<section class='slides layout-regular'></section>")
+        body.attr("style", "display: none");
+        body.append(createSection);
+
+        //Add bottom fixed navbar
+        addFooter(body);
     }
 
     function insertQuestionSlides() {
@@ -29,11 +37,55 @@ function omm_readSelected() {
             jQuery(htmlPageContent).find(".slides").append(function() {
                 var article = document.createElement("article");
                 jQuery(article).append(function() {
-                    var articleContent = jQuery(element).parent().parent().find(omm_cssSelector_hiddenQuestion).children().clone();
-                    return articleContent;
+                    //Create container 
+                    var container = document.createElement("div");
+                    jQuery(container).addClass("container");
+
+                    //Append content
+                    jQuery(container).append(jQuery(element).parent().parent().find(omm_cssSelector_hiddenQuestion).children().clone());
+                    
+                    return container;
                 });
                 return article;
             });
         });
     }
+
+    function createSection() {
+        var section = document.createElement("section");
+        section.className = "slides layout-regular";
+        return section;
+    }
+
+    function addStylesheetLinks(head, stylesheets) {
+        jQuery(stylesheets).each(function(index) {
+            var link = document.createElement("link");
+            link.rel = 'stylesheet';
+            link.href = stylesheets[index];
+            head.append(link);
+        });
+    }
+
+    function addScriptSources(head, sources) {
+        jQuery(sources).each(function(index) {
+            var script = document.createElement("script");
+            script.src = sources[index];
+            head.append(script);
+        });
+    }
+
+    function addFooter(body) {
+        var footer = document.createElement("div");
+        jQuery(footer).attr("id", "footer");
+        jQuery(footer).addClass("container");
+        var nav = document.createElement("nav");
+        jQuery(nav).addClass("navbar navbar-fixed-bottom");
+        var inner = document.createElement("div");
+        jQuery(inner).addClass("navbar-inner navbar-content-center");
+
+        jQuery(nav).append(inner);
+        jQuery(footer).append(nav);
+        body.append(footer);
+    }
+
 }
