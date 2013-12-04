@@ -1,5 +1,8 @@
 function omm_readSelected() {
 
+	var generateAnswers = new omm_answerGenerator();
+	var student_questionNumberArea = "omm_question-number-area";
+
 	var htmlPageContent;
 	var stylesheets = ['css/bootstrap.css', 'css/font-awesome.min.css', 'css/omm_slideStyle.css'];
 	var scriptSources = ['js/jquery-2.0.3.js', 'js/bootstrap.min.js', 'js/slides.js', 'js/omm_validateQuestions.js', 'js/omm_main.js', 'js/omm_dragAndDrop.js'];
@@ -33,10 +36,28 @@ function omm_readSelected() {
 	}
 
 	function insertQuestionSlides() {
-		var omm_generateAnswers = new omm_answerGenerator();
-		jQuery(omm_cssSelector_themaTable + " " + omm_cssSelector_panelBody + " :checked").each(function(index, element) {
+		var currentQuestionNumber = 1;
+		var selectedQuestions = jQuery(omm_cssSelector_themaTable + " " + omm_cssSelector_panelBody + " :checked");
+		var totalQuestionNumber = selectedQuestions.length;
+		selectedQuestions.each(function(index, element) {
 			jQuery(htmlPageContent).find(".slides").append(function() {
 				var article = document.createElement("article");
+				jQuery(article).append(function() {
+
+					var questionTitel = jQuery(element).parent().parent().find(omm_cssSelector_questionTitle).text();
+
+					var questionNumberArea = document.createElement("div");
+					jQuery(questionNumberArea).addClass(student_questionNumberArea);
+					var p = document.createElement("p");
+					jQuery(p).append("Frage #<span class='omm_current-question-number'></span>/<span class='omm_total-question-number'></span>: ");
+					jQuery(p).append(questionTitel);
+					jQuery(questionNumberArea).append(p);
+					jQuery(questionNumberArea).find(".omm_current-question-number").append(currentQuestionNumber);
+					jQuery(questionNumberArea).find(".omm_total-question-number").append(totalQuestionNumber);
+
+					return questionNumberArea;
+				});
+
 				jQuery(article).append(function() {
 
 					//Create container
@@ -55,7 +76,7 @@ function omm_readSelected() {
 					//Append content
 					jQuery(body).append(jQuery(element).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-body-html").children().clone());
 					$(form).append(body);
-					$(form).append(omm_generateAnswers.getStyledAnswers($(element)));
+					$(form).append(generateAnswers.getStyledAnswers($(element)));
 					return container;
 				});
 				return article;
