@@ -12,6 +12,8 @@ var omm_cssSelector_fileInput = "#omm_fileinput";
 var omm_cssSelector_saveHTML = "#omm_save-html";
 var omm_cssSelector_hiddenQuestion = ".omm_question";
 var omm_cssSelector_questionTitle = ".omm_question-title";
+var omm_cssSelector_clozeTextInput = ".omm_cloze-text-input";
+var omm_cssSelector_ommClozeTextHiddenAnswer = ".omm-cloze-text-hidden-answer";
 
 
 jQuery(document).ready(function() {
