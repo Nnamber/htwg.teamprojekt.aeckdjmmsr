@@ -1,202 +1,208 @@
 function omm_xmlParser() {
-	var that = this;
-	var xmlFile;
-	var xmlString;
-	var styler = new omm_styler();
+    var that = this;
+    var xmlFile;
+    var xmlString;
+    var styler = new omm_styler();
 
-	function parse(document) {
-		var topicCounter = 1;
-		$(omm_cssSelector_themaTable).html("");
-		
-		//wenn versteckt, dann wiederherstellen des "Alles auswählen" Button
-		$("#omm_select-all").removeClass('hidden');
+    function parse(document) {
+        var topicCounter = 1;
+        $(omm_cssSelector_themaTable).html("");
 
-		$(document).find("course").find("lesson").each(function() {
-			$(omm_cssSelector_themaTable).append(htmlLesson(topicCounter, $(this).attr("name")) + questionDivHtml($(this), topicCounter) + '</div>');
-			topicCounter++;
-		});
-		omm_display.initEventHanlder();
-		omm_display.removeMessage();
-	}
+        //wenn versteckt, dann wiederherstellen des "Alles auswählen" Button
+        $("#omm_select-all").removeClass('hidden');
 
-	//schreibt die Fragen mit benoetigten Antworten, Hinweisen, etc. in ein div Element welches durch die CSS-Klasse "hidden" versteckt wird
-	function questionDivHtml(xmlLessonObject, topicCounter) {
-		var x = '<div id="collapse' + topicCounter + '" class="panel-collapse collapse">';
-		x += '<div class="omm_panel-body">';
-		x += '<table class="table table-striped table-hover">';
-		var questionCounter = 1;
+        $(document).find("course").find("lesson").each(function() {
+            $(omm_cssSelector_themaTable).append(htmlLesson(topicCounter, $(this).attr("name")) + questionDivHtml($(this), topicCounter) + '</div>');
+            topicCounter++;
+        });
+        omm_display.initEventHanlder();
+        omm_display.removeMessage();
+    }
 
-		//fuer jede Frage im XML-Dokument
-		$(xmlLessonObject).find("question").each(function() {
-			x += '<tr>';
-			//Geruest fuer Frage bereitstellen, so wie Fragennummer, Titel, Tabelle und Checkbox
-			x += htmlQuestion(questionCounter, $(this).attr("name"));
+    //schreibt die Fragen mit benoetigten Antworten, Hinweisen, etc. in ein div Element welches durch die CSS-Klasse "hidden" versteckt wird
+    function questionDivHtml(xmlLessonObject, topicCounter) {
+        var x = '<div id="collapse' + topicCounter + '" class="panel-collapse collapse">';
+        x += '<div class="omm_panel-body">';
+        x += '<table class="table table-striped table-hover">';
+        var questionCounter = 1;
 
-			//DIV-Element fuer Details der Frage
-			x += '<td><div class="hidden omm_question">';
+        //fuer jede Frage im XML-Dokument
+        $(xmlLessonObject).find("question").each(function() {
+            x += '<tr>';
+            //Geruest fuer Frage bereitstellen, so wie Fragennummer, Titel, Tabelle und Checkbox
+            x += htmlQuestion(questionCounter, $(this).attr("name"));
 
-			var wellFormedQuestionBody;
-			var questionAnswers = new Array();
-			if ($(this).attr("type") != 'ClozeText') {
-				wellFormedQuestionBody = styler.getWellFormedQuestionBody($(this));
-				x += htmlQuestionBody(wellFormedQuestionBody);
-				//div fuer Antworten erzeugen
-				x += '<div class="omm_question-answers-html">';
-				$(this).find('answer').each(function() {
-					questionAnswers.push($(this));
-					x += htmlQuestionAnswers($(this));
-				});
+            //DIV-Element fuer Details der Frage
+            x += '<td><div class="hidden omm_question">';
 
-				//div fuer Antworten schließen
-				x += '</div>';
-			} else {
-				wellFormedQuestionBody = styler.getWellFormedQuestionBody($(this));
-				x += htmlQuestionBodyClozeText(wellFormedQuestionBody);
-			}
+            var wellFormedQuestionBody;
+            var questionAnswers = new Array();
+            if ($(this).attr("type") != 'ClozeText') {
+                wellFormedQuestionBody = styler.getWellFormedQuestionBody($(this));
+                x += htmlQuestionBody(wellFormedQuestionBody);
+                //div fuer Antworten erzeugen
+                x += '<div class="omm_question-answers-html">';
+                $(this).find('answer').each(function() {
+                    questionAnswers.push($(this));
+                    x += htmlQuestionAnswers($(this));
+                });
 
-			x += htmlQuestionNoticeOnWrong($(this).attr('notice_on_wrong'));
-			x += htmlQuestionType($(this).attr('type'));
-			x += htmlQuestionNoticeOnCorrect($(this).attr('notice_on_correct'));
-			x += htmlQuestionPattern($(this).attr('pattern'));
+                //div fuer Antworten schließen
+                x += '</div>';
+            } else {
+                wellFormedQuestionBody = styler.getWellFormedQuestionBody($(this));
+                x += htmlQuestionBodyClozeText(wellFormedQuestionBody);
+            }
 
-			//div fuer Fragendetails schließen
-			x += '</div></td>';
+            x += htmlQuestionNoticeOnWrong($(this).attr('notice_on_wrong'));
+            x += htmlQuestionType($(this).attr('type'));
+            x += htmlQuestionNoticeOnCorrect($(this).attr('notice_on_correct'));
+            x += htmlQuestionPattern($(this).attr('pattern'));
 
-			x += htmlQuestionInfoContent(wellFormedQuestionBody, questionAnswers);
-			x += '</tr>';
-			questionCounter++;
-		});
-		x += '</table></div></div>';
-		return x;
-	}
+            //div fuer Fragendetails schließen
+            x += '</div></td>';
 
-	function htmlQuestionBodyClozeText(clozeString) {
-		var patternG = /\[\[.+?]]*?/g;
-		var patternF = /\[\[.+?]]*?/;
-		var patternBracket = /(\[|])/g;
+            x += htmlQuestionInfoContent(wellFormedQuestionBody, questionAnswers);
+            x += '</tr>';
+            questionCounter++;
+        });
+        x += '</table></div></div>';
+        return x;
+    }
 
-		var answers = clozeString.match(patternG);
-		var body = '<div class="omm_question-body-html">';
-		for (answer in answers) {
-			var a = answers[answer].replace(patternBracket, "");
-			// eckige Klammern zur besseren Kennzeichnung eingefügt. Optional. Allerdings mehrere Antworten möglich [[xxx | yyy]]. Take care!
-			body += clozeString.replace(patternF, "<div class='omm_cloze-text-input'><div class='omm-cloze-text-hidden-answer'>[[" + a + "]]</div><input type='text' value='STUPID TEXTFIELD, TODO'/></div>");
-		}
-		body += '</div>';
+    function htmlQuestionBodyClozeText(clozeString) {
+        var patternG = /\[\[.+?]]*?/g;
+        var patternF = /\[\[.+?]]*?/;
+        var patternBracket = /(\[|])/g;
 
-		return body;
-	}
+        var answers = clozeString.match(patternG);
+        var body = '<div class="omm_question-body-html">';
+        for (answer in answers) {
+            var a = answers[answer].replace(patternBracket, "");
+            // eckige Klammern zur besseren Kennzeichnung eingefügt. Optional. Allerdings mehrere Antworten möglich [[xxx | yyy]]. Take care!
+            body += clozeString.replace(patternF, "<div class='omm_cloze-text-input'><div class='omm-cloze-text-hidden-answer'>[[" + a + "]]</div><input type='text' value='STUPID TEXTFIELD, TODO'/></div>");
+        }
+        body += '</div>';
 
-	function htmlLesson(lessonCounter, lessonTitle) {
-		var lessonHtml = '<div class="panel panel-default omm_thema-row"><div class="panel-heading"><div class="panel-title"><input type="checkbox"/><a data-toggle="collapse" data-parent="#omm_thema-table" href="#collapse' + lessonCounter + '"> Thema ' + lessonCounter + ': <span class="omm_lesson-title">' + lessonTitle + '</span></a></div></div>';
-		return lessonHtml;
-	}
+        return body;
+    }
 
-	function htmlQuestion(questionCounter, questionTitle) {
-		var questionHtml = '<td><input type="checkbox" class="pull-right"/></td><td>Frage ' + questionCounter + ': <span class="omm_question-title">' + questionTitle + '</span></td>';
-		return questionHtml;
-	}
+    function htmlLesson(lessonCounter, lessonTitle) {
+        var lessonHtml = '<div class="panel panel-default omm_thema-row"><div class="panel-heading"><div class="panel-title"><input type="checkbox"/><a data-toggle="collapse" data-parent="#omm_thema-table" href="#collapse' + lessonCounter + '"> Thema ' + lessonCounter + ': <span class="omm_lesson-title">' + lessonTitle + '</span></a></div></div>';
+        return lessonHtml;
+    }
 
-	function htmlQuestionBody(questionBody) {
-		var questionBodyHtml = '<div class="omm_question-body-html">' + questionBody + '</div>';
-		return questionBodyHtml;
-	}
+    function htmlQuestion(questionCounter, questionTitle) {
+        var questionHtml = '<td><input type="checkbox" class="pull-right"/></td><td>Frage ' + questionCounter + ': <span class="omm_question-title">' + questionTitle + '</span></td>';
+        return questionHtml;
+    }
 
-	function htmlQuestionAnswers(questionAnswers) {
-		var questionAnswerHtml = "";
+    function htmlQuestionBody(questionBody) {
+        var questionBodyHtml = '<div class="omm_question-body-html">' + questionBody + '</div>';
+        return questionBodyHtml;
+    }
 
-		$(questionAnswers).each(function() {
-			questionAnswerHtml += '<div class="omm_answer-body-html">';
-			questionAnswerHtml += $(this).attr('body');
-			questionAnswerHtml += '<div class="omm_answer-correct-html">';
-			questionAnswerHtml += $(this).attr('correct');
-			questionAnswerHtml += '</div></div>';
-		});
+    function htmlQuestionAnswers(questionAnswers) {
+        var questionAnswerHtml = "";
 
-		return questionAnswerHtml;
+        $(questionAnswers).each(function() {
+            questionAnswerHtml += '<div class="omm_answer-body-html">';
+            questionAnswerHtml += $(this).attr('body');
+            questionAnswerHtml += '<div class="omm_answer-correct-html">';
+            questionAnswerHtml += $(this).attr('correct');
+            questionAnswerHtml += '</div>';
+            if ($(this).attr('notice') !== "") {
+                questionAnswerHtml += '<div class="omm_answer-notice-html">';
+                questionAnswerHtml += $(this).attr('notice');
+                questionAnswerHtml += '</div>';
+            }
+            questionAnswerHtml += '</div>';
+        });
 
-	}
+        return questionAnswerHtml;
 
-	function htmlQuestionNoticeOnWrong(questionNoticeOnWrong) {
-		var questionNoticeOnWrongHtml = "";
-		questionNoticeOnWrongHtml = '<div class="omm_question-notice-on-wrong-html">' + questionNoticeOnWrong + '</div>';
+    }
 
-		return questionNoticeOnWrongHtml;
-	}
+    function htmlQuestionNoticeOnWrong(questionNoticeOnWrong) {
+        var questionNoticeOnWrongHtml = "";
+        questionNoticeOnWrongHtml = '<div class="omm_question-notice-on-wrong-html">' + questionNoticeOnWrong + '</div>';
 
-	function htmlQuestionType(questionType) {
-		var questionTypeHtml = "";
-		questionTypeHtml = '<div class="omm_question-type-html">' + questionType + '</div>';
+        return questionNoticeOnWrongHtml;
+    }
 
-		return questionTypeHtml;
-	}
+    function htmlQuestionType(questionType) {
+        var questionTypeHtml = "";
+        questionTypeHtml = '<div class="omm_question-type-html">' + questionType + '</div>';
 
-	function htmlQuestionNoticeOnCorrect(questionNoticeOnCorrect) {
-		var questionNoticeOnCorrectHtml = "";
+        return questionTypeHtml;
+    }
 
-		questionNoticeOnCorrectHtml = '<div class="omm_question-notice-on-correct-html">' + questionNoticeOnCorrect + '</div>';
-		return questionNoticeOnCorrectHtml;
-	}
+    function htmlQuestionNoticeOnCorrect(questionNoticeOnCorrect) {
+        var questionNoticeOnCorrectHtml = "";
 
-	function htmlQuestionPattern(questionPattern) {
-		var questionPatternHtml = "";
-		questionPatternHtml = '<div class="omm_question-pattern-html">' + questionPattern + '</div>';
+        questionNoticeOnCorrectHtml = '<div class="omm_question-notice-on-correct-html">' + questionNoticeOnCorrect + '</div>';
+        return questionNoticeOnCorrectHtml;
+    }
 
-		return questionPatternHtml;
-	}
+    function htmlQuestionPattern(questionPattern) {
+        var questionPatternHtml = "";
+        questionPatternHtml = '<div class="omm_question-pattern-html">' + questionPattern + '</div>';
 
-	function htmlQuestionInfoContent(questionBody, questionAnswers) {
-		var questionInfoContent = '<td><span class="omm_question-info" rel="popover" data-content=\'' + questionBody;
-		questionInfoContent += '<div class="omm_question-info-answer"><ol>';
-		jQuery(questionAnswers).each(function(index) {
-			questionInfoContent += '<li>';
-			questionInfoContent += $(questionAnswers[index]).attr('body');
-			questionInfoContent += '</li>';
-		});
-		questionInfoContent += '</ol></div>\'><i class="fa fa-info-circle fa-lg"></i></span></td>';
-		return questionInfoContent;
-	}
+        return questionPatternHtml;
+    }
+
+    function htmlQuestionInfoContent(questionBody, questionAnswers) {
+        var questionInfoContent = '<td><span class="omm_question-info" rel="popover" data-content=\'' + questionBody;
+        questionInfoContent += '<div class="omm_question-info-answer"><ol>';
+        jQuery(questionAnswers).each(function(index) {
+            questionInfoContent += '<li>';
+            questionInfoContent += $(questionAnswers[index]).attr('body');
+            questionInfoContent += '</li>';
+        });
+        questionInfoContent += '</ol></div>\'><i class="fa fa-info-circle fa-lg"></i></span></td>';
+        return questionInfoContent;
+    }
 
 
-	this.readXml = function() {
-		$.ajax({
-			//ToDo: Pfad ueberarbeiten, z.b. mit relativem Pfad, evt Johner fragen
-			url : omm_DefaultPath, // name of file you want to parse
-			dataType : "xml",
-			success : parse,
-			error : function() {
-				//"Alles auswählen" Button ausblenden
-				$("#omm_select-all").addClass('hidden');
-				omm_display.showMessage("Es wurde keine XML-Datei unter dem Default-Pfad gefunden", true);
-			}
-		});
-	};
+    this.readXml = function() {
+        $.ajax({
+            //ToDo: Pfad ueberarbeiten, z.b. mit relativem Pfad, evt Johner fragen
+            url: omm_DefaultPath, // name of file you want to parse
+            dataType: "xml",
+            success: parse,
+            error: function() {
+                //"Alles auswählen" Button ausblenden
+                $("#omm_select-all").addClass('hidden');
+                omm_display.showMessage("Es wurde keine XML-Datei unter dem Default-Pfad gefunden", true);
+            }
+        });
+    };
 
-	this.validateXml = function(input) {
-		var val = input.target.files[0];
-		var res = val.name.substr(val.name.lastIndexOf('.')) == '.xml';
-		console.log("validateXML");
-		if (!res) {
-			//ToDO: Fehlernachricht überarbeiten
-			omm_display.showMessage("Wrong Type", true);
-		} else {
-			$("#omm_xml-dialog-uebernehmen").removeAttr("disabled");
-			xmlFile = val;
-		}
-	};
+    this.validateXml = function(input) {
+        var val = input.target.files[0];
+        var res = val.name.substr(val.name.lastIndexOf('.')) == '.xml';
+        console.log("validateXML");
+        if (!res) {
+            //ToDO: Fehlernachricht überarbeiten
+            omm_display.showMessage("Wrong Type", true);
+        } else {
+            $("#omm_xml-dialog-uebernehmen").removeAttr("disabled");
+            xmlFile = val;
+        }
+    };
 
-	//Liest XML aus uns speichert das Ergbenis zunächst als String, dann parsen auf XML-String
-	this.parseXMLToVariable = function() {
-		var r = new FileReader();
-		r.onload = function(e) {
-			var xmlString;
-			var contents = e.target.result;
-			xmlString = contents;
-			//console.log(xmlString);
-			xmlString = $.parseXML(xmlString);
-			parse(xmlString);
-		};
+    //Liest XML aus uns speichert das Ergbenis zunächst als String, dann parsen auf XML-String
+    this.parseXMLToVariable = function() {
+        var r = new FileReader();
+        r.onload = function(e) {
+            var xmlString;
+            var contents = e.target.result;
+            xmlString = contents;
+            //console.log(xmlString);
+            xmlString = $.parseXML(xmlString);
+            parse(xmlString);
+        };
 
-		r.readAsText(xmlFile);
-	};
+        r.readAsText(xmlFile);
+    };
 }
