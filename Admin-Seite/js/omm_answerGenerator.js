@@ -22,13 +22,13 @@ function omm_answerGenerator() {
 				alert("Sie sind ein aufrichtiger Zweibeiner");
 				break;
 			case "OpenQuestion":
-				alert("Sie haben ein Dreirad gewonnen");
+				x += openQuestionGenerator(question);
 				break;
 			case "MatchTask":
 				alert("Gehen Sie auf allen Vieren und werden Sie bescheidener");
 				break;
 			case "SingleChoice":
-				alert("Gehen Sie auf allen Vieren und werden Sie bescheidener");
+				x += singleChoiceGenerator(question);
 				break;
 		}
 		return x;
@@ -40,9 +40,31 @@ function omm_answerGenerator() {
 			var correct = $(element).find('.omm_answer-correct-html').text();
 			var answer = $(element)[0].childNodes[0].nodeValue.trim();
 			x += '<div class="checkbox"><label><input type="checkbox"  value="' + correct + '">' + answer + '</label></div>';
-			x +='<br/>';
 		});
-	return x;
+		return x;
+	}
+
+	function singleChoiceGenerator(question) {
+		var x = "";
+		//name for the radio buttons has to be the same but should be unique site wise
+		//need to find a better solution
+		var answerName = Math.random();
+		$(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
+			var correct = $(element).find('.omm_answer-correct-html').text();
+			var answer = $(element)[0].childNodes[0].nodeValue.trim();
+			x += '<div class="radio"><label><input type="radio"  name="' + answerName + '" value="' + correct + '">' + answer + '</label></div>';
+		});
+		return x;
+	}
+
+	function openQuestionGenerator(question) {
+		var x = "";
+		var answer = $(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-pattern-html").text();
+		console.log(answer);
+		x += '<div class="form-group"><label><input type="text" pattern="'+ answer +'" class="form-control"></label></div>';
+		console.log(x);
+
+		return x;
 	}
 
 }

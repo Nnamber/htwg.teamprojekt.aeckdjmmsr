@@ -33,7 +33,7 @@ function omm_readSelected() {
 	}
 
 	function insertQuestionSlides() {
-
+		var omm_generateAnswers = new omm_answerGenerator();
 		jQuery(omm_cssSelector_themaTable + " " + omm_cssSelector_panelBody + " :checked").each(function(index, element) {
 			jQuery(htmlPageContent).find(".slides").append(function() {
 				var article = document.createElement("article");
@@ -54,6 +54,7 @@ function omm_readSelected() {
 					jQuery(body).attr("class", "form-group");
 					//Append content
 					jQuery(body).append(jQuery(element).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-body-html").children().clone());
+					$(form).append(body);
 					$(form).append(omm_generateAnswers.getStyledAnswers($(element)));
 					return container;
 				});
