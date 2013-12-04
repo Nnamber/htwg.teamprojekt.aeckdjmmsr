@@ -1,3 +1,7 @@
+var omm_selector_divDropAnswer = "div.omm_drop-answer";
+var omm_selector_divDragable = "div.dragable";
+var omm_selector_attrName = "name";
+
 function omm_validateQuestions() {
 
 	this.validate = function() {
@@ -15,6 +19,7 @@ function omm_validateQuestions() {
 					validateOpenQuestion(this);
 					break;
 				case "omm_question-type-MatchTask":
+					validateMatchTask(this);
 					break;
 				case "omm_question-type-ClozeText":
 					validateClozeText(this);
@@ -61,10 +66,21 @@ function omm_validateQuestions() {
 		commonValidation(currentquestion);
 	}
 
-	function validateMatchTask() {
+	function validateMatchTask(currentquestion) {
+		var iscorrect = true;
+		$(currentquestion).find(omm_selector_divDropAnswer).each(function(index,element) {
+			if($(element).attr(omm_selector_attrName) == $(element).find(omm_selector_divDragable).attr(omm_selector_attrName)){
+				//Do nothing
+			}else{
+				iscorrect = false;
+			}
+		});
+		if(iscorrect){
+			$(currentquestion).html("richtig");
+		}
 	}
 	
-	//call in case of closetext and openquestion
+	//call in case of clozetext and openquestion
 	function commonValidation(currentquestion){
 		var iscorrect = true;
 		$(currentquestion).find('input:text').each(function(index, element) {
