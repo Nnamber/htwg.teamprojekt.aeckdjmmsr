@@ -1,5 +1,5 @@
-var omm_selector_divDropAnswer = "div.omm_drop-answer";
-var omm_selector_divDragable = "div.dragable";
+var omm_selector_divDropAnswer = "div.omm_droppable";
+var omm_selector_divDragable = "div.omm_draggable";
 var omm_selector_attrName = "name";
 
 function omm_validateQuestions() {
