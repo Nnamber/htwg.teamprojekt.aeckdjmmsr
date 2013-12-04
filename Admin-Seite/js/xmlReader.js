@@ -39,7 +39,7 @@ function omm_xmlParser() {
 			var questionAnswers = new Array();
 			if ($(this).attr("type") != 'ClozeText') {
 				wellFormedQuestionBody = styler.getWellFormedQuestionBody($(this));
-				x += htmlQuestionBody(wellFormedQuestionBody);
+				x += htmlQuestionBody($(this).attr('body'));
 				//div fuer Antworten erzeugen
 				x += '<div class="omm_question-answers-html">';
 				$(this).find('answer').each(function() {
@@ -51,7 +51,7 @@ function omm_xmlParser() {
 				x += '</div>';
 			} else {
 				wellFormedQuestionBody = styler.getWellFormedQuestionBody($(this));
-				x += htmlQuestionBodyClozeText(wellFormedQuestionBody);
+				x += htmlQuestionBodyClozeText($(this).attr('body'));
 			}
 
 			x += htmlQuestionNoticeOnWrong($(this).attr('notice_on_wrong'));
@@ -81,7 +81,6 @@ function omm_xmlParser() {
 			var a = answers[answer].replace(patternBracket, "");
 			// eckige Klammern zur besseren Kennzeichnung eingefügt. Optional. Allerdings mehrere Antworten möglich [[xxx | yyy]]. Take care!
 			body += clozeString.replace(patternF, "<div class='omm_cloze-text-input'><div class='omm-cloze-text-hidden-answer'>[[" + a + "]]</div><input type='text' value='STUPID TEXTFIELD, TODO'/></div>");
-			console.log(body);
 		}
 		body += '</div>';
 
