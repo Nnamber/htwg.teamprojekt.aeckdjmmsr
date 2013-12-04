@@ -1,5 +1,3 @@
-var omm_generateAnswers = new omm_answerGenerator();
-
 function omm_readSelected() {
 
 	var htmlPageContent;

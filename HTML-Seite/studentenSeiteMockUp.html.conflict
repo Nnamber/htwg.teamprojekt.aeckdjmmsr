@@ -48,7 +48,7 @@
 	</style>
 
 	<body style='display: none'>
-		<section class='slides layout-regular'>
+		<section class='slides layout-regular template-default'>
 
 			<!-- Your slides (<article>s) go here. Delete or comment out the
 			slides below. -->
@@ -95,6 +95,9 @@
 
 
 
+
+
+
 				<p>
 					Was wird auf der Konsole ausgegeben?
 				</p>
@@ -123,6 +126,27 @@
 				&#13;&#10;
 
 
+<<<<<<< HEAD
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
+>>>>>>> cd905955745d3cca8f62be8fedd03284d8630fce
 				<p>
 					 
 				</p>
@@ -165,9 +189,34 @@
 					Was kann man annotieren? Bitte ordnen Sie die Schlüsselworte zu.
 				</p>
 				<div>
-					<div id="" style="border: 1px solid black; width: 200px; height: 50px;">
-						Konstruktoren
+					<div>
+						<div id="" style="border: 1px solid black; width: 200px; height: 50px;">
+							Konstruktoren
+						</div>
+						<div id="1" style="border: 1px solid black; width: 200px; height: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)" name="Konstruktoren"></div>
 					</div>
+<<<<<<< HEAD
+					<div>
+						<div id="" style="border: 1px solid black; width: 200px; height: 50px;">
+							Attribute
+						</div>
+						<div id="2" style="border: 1px solid black; width: 200px; height: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)" name="Attribute"></div>
+					</div>
+
+					<div>
+						<div id="" style="border: 1px solid black; width: 200px; height: 50px;">
+							Methoden
+						</div>
+						<div id="3" style="border: 1px solid black; width: 200px; height: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)" name="Methoden"></div>
+
+					</div>
+					<div>
+						<div id="" style="border: 1px solid black; width: 200px; height: 50px;">
+							Klassen
+						</div>
+						<div id="4" style="border: 1px solid black; width: 200px; height: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)" name="Klassen"></div>
+					</div>
+=======
 					<div id="1" class="omm_droppable" name="Konstruktoren" style="border: 1px solid black; width: 200px; height: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
 					<div id="" style="border: 1px solid black; width: 200px; height: 50px;">
 						Attribute
@@ -181,6 +230,7 @@
 						Klassen
 					</div>
 					<div id="4" class="omm_droppable" name="Klassen" style="border: 1px solid black; width: 200px; height: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+>>>>>>> cd905955745d3cca8f62be8fedd03284d8630fce
 				</div>
 
 				<br/>
@@ -189,6 +239,15 @@
 					<div class="omm_draggable" style="border:1px solid black:" id="CONSTRUCTOR" draggable="true" ondragstart="drag(event)" ondrop="" width="336" height="69" name="Konstruktoren">
 						CONSTRUCTOR
 					</div>
+<<<<<<< HEAD
+					<div  class="dragable" style="border:1px solid black:" id="FIELD" draggable="true" ondragstart="drag(event)" width="336" height="69" name="Attribute">
+						FIELD
+					</div>
+					<div  class="dragable" style="border:1px solid black:" id="METHOD" draggable="true" ondragstart="drag(event)" width="336" height="69" name="Methoden">
+						METHOD
+					</div>
+					<div  class="dragable" style="border:1px solid black:" id="TYPE" draggable="true" ondragstart="drag(event)" width="336" height="69" name="Klassen">
+=======
 					<div  class="omm_draggable" style="border:1px solid black:" id="FIELD" draggable="true" ondragstart="drag(event)" width="336" height="69" name="Attribute">
 						FIELD
 					</div>
@@ -196,6 +255,7 @@
 						METHOD
 					</div>
 					<div  class="omm_draggable" style="border:1px solid black:" id="TYPE" draggable="true" ondragstart="drag(event)" width="336" height="69" name="Klassen">
+>>>>>>> cd905955745d3cca8f62be8fedd03284d8630fce
 						TYPE
 					</div>
 				</div>

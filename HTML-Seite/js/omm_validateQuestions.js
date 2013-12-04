@@ -1,3 +1,7 @@
+var omm_selector_divDropAnswer = "div.omm_droppable";
+var omm_selector_divDragable = "div.omm_draggable";
+var omm_selector_attrName = "name";
+
 function omm_validateQuestions() {
 
 	this.validate = function() {
@@ -10,17 +14,14 @@ function omm_validateQuestions() {
 					break;
 				case "omm_question-type-MultipleChoice":
 					validateMultipleChoice(this);
-					//alert("MultipleChoice");
 					break;
 				case "omm_question-type-OpenQuestion":
-					//alert("OpenQuestion");
 					validateOpenQuestion(this);
 					break;
 				case "omm_question-type-MatchTask":
-					//alert("Matschtask");
+					validateMatchTask(this);
 					break;
 				case "omm_question-type-ClozeText":
-					//alert("ClozeText");
 					validateClozeText(this);
 					break;
 			}
@@ -58,10 +59,29 @@ function omm_validateQuestions() {
 	}
 
 	function validateClozeText(currentquestion) {
-
+		commonValidation(currentquestion);
 	}
 
 	function validateOpenQuestion(currentquestion) {
+		commonValidation(currentquestion);
+	}
+
+	function validateMatchTask(currentquestion) {
+		var iscorrect = true;
+		$(currentquestion).find(omm_selector_divDropAnswer).each(function(index,element) {
+			if($(element).attr(omm_selector_attrName) == $(element).find(omm_selector_divDragable).attr(omm_selector_attrName)){
+				//Do nothing
+			}else{
+				iscorrect = false;
+			}
+		});
+		if(iscorrect){
+			$(currentquestion).html("richtig");
+		}
+	}
+	
+	//call in case of clozetext and openquestion
+	function commonValidation(currentquestion){
 		var iscorrect = true;
 		$(currentquestion).find('input:text').each(function(index, element) {
 			if ($(element).val() == $(element).attr('pattern')) {
@@ -73,9 +93,6 @@ function omm_validateQuestions() {
 		if(iscorrect){
 			$(currentquestion).html("richtig");
 		}
-	}
-
-	function validateMatchTask() {
 	}
 
 }
