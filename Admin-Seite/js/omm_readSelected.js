@@ -2,7 +2,7 @@ function omm_readSelected() {
 
 	var htmlPageContent;
 	var stylesheets = ['css/bootstrap.css', 'css/font-awesome.min.css', 'css/omm_slideStyle.css'];
-	var scriptSources = ['js/jquery-2.0.3.js', 'js/bootstrap.min.js', 'js/slides.js', 'js/omm_validateQuestions.js', 'js/omm_main.js'];
+	var scriptSources = ['js/jquery-2.0.3.js', 'js/bootstrap.min.js', 'js/slides.js', 'js/omm_validateQuestions.js', 'js/omm_main.js', 'js/omm_dragAndDrop.js'];
 
 	this.readSelectedQuestions = function() {
 		generateHtmlPageScaffold();
