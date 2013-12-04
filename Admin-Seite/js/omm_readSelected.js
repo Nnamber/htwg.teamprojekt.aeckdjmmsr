@@ -1,7 +1,7 @@
 function omm_readSelected() {
 
     var htmlPageContent;
-    var stylesheets = ['css/bootstrap.min.css', 'css/font-awesome.min.css'];
+    var stylesheets = ['css/bootstrap.css', 'css/font-awesome.min.css', 'css/omm_slideStyle.css'];
     var scriptSources = ['js/jquery-2.0.3.js', 'js/bootstrap.min.js', 'js/slides.js', 'js/omm_validateQuestions.js', 'js/omm_main.js'];
 
     this.readSelectedQuestions = function() {
@@ -35,20 +35,22 @@ function omm_readSelected() {
     function insertQuestionSlides() {
         jQuery(omm_cssSelector_themaTable + " " + omm_cssSelector_panelBody + " :checked").each(function(index, element) {
             jQuery(htmlPageContent).find(".slides").append(function() {
-                var article = document.createElement("article");
+                var article = document.createElement("article");  
                 jQuery(article).append(function() {
+
                     //Create container 
                     var container = document.createElement("div");
                     jQuery(container).addClass("container");
 
-					//Create form
-					//necessary for 'novalidate' attr. 
-					var form = document.createElement("form");
-					jQuery(form).attr("novalidate", "novalidate");		
-					jQuery(container).append(form);
+                    //Create form
+                    //necessary for 'novalidate' attr. 
+                    var form = document.createElement("form");
+                    jQuery(form).attr("novalidate", "novalidate");
+                    jQuery(container).append(form);
+
                     //Append content
                     jQuery(form).append(jQuery(element).parent().parent().find(omm_cssSelector_hiddenQuestion).children().clone());
-                    
+
                     return container;
                 });
                 return article;
@@ -92,5 +94,4 @@ function omm_readSelected() {
         jQuery(footer).append(nav);
         body.append(footer);
     }
-
 }
