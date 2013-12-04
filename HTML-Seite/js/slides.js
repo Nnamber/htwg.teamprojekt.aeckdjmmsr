@@ -444,7 +444,7 @@ function handleBodyKeyDown(event) {
 
 		case 37:
 		// left arrow
-		case 8:
+		//case 8:
 		// Backspace
 		case 33:
 			// PgUp
