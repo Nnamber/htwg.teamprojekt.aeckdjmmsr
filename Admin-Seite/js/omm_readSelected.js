@@ -41,8 +41,13 @@ function omm_readSelected() {
                     var container = document.createElement("div");
                     jQuery(container).addClass("container");
 
+					//Create form
+					//necessary for 'novalidate' attr. 
+					var form = document.createElement("form");
+					jQuery(form).attr("novalidate", "novalidate");		
+					jQuery(container).append(form);
                     //Append content
-                    jQuery(container).append(jQuery(element).parent().parent().find(omm_cssSelector_hiddenQuestion).children().clone());
+                    jQuery(form).append(jQuery(element).parent().parent().find(omm_cssSelector_hiddenQuestion).children().clone());
                     
                     return container;
                 });
