@@ -39,7 +39,7 @@ function omm_xmlParser() {
 			var questionAnswers = new Array();
 			if ($(this).attr("type") != 'ClozeText') {
 				wellFormedQuestionBody = styler.getWellFormedQuestionBody($(this));
-				x += htmlQuestionBody($(this).attr('body'));
+				x += htmlQuestionBody(wellFormedQuestionBody);
 				//div fuer Antworten erzeugen
 				x += '<div class="omm_question-answers-html">';
 				$(this).find('answer').each(function() {
@@ -51,7 +51,7 @@ function omm_xmlParser() {
 				x += '</div>';
 			} else {
 				wellFormedQuestionBody = styler.getWellFormedQuestionBody($(this));
-				x += htmlQuestionBodyClozeText($(this).attr('body'));
+				x += htmlQuestionBodyClozeText(wellFormedQuestionBody);
 			}
 
 			x += htmlQuestionNoticeOnWrong($(this).attr('notice_on_wrong'));
