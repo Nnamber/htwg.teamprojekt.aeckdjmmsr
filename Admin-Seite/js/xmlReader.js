@@ -79,8 +79,8 @@ function omm_xmlParser() {
         var body = '<div class="omm_question-body-html">';
         for (answer in answers) {
             var a = answers[answer].replace(patternBracket, "");
-            // eckige Klammern zur besseren Kennzeichnung eingefügt. Optional. Allerdings mehrere Antworten möglich [[xxx | yyy]]. Take care!
-            body += clozeString.replace(patternF, "<div class='omm_cloze-text-input'><div class='omm-cloze-text-hidden-answer'>[[" + a + "]]</div><input type='text' value='STUPID TEXTFIELD, TODO'/></div>");
+            // eckige Klammern zur besseren Kennzeichnung eingefuegt. Optional. Allerdings mehrere Antworten moeglich [[xxx | yyy]]. Take care!
+            body += clozeString.replace(patternF, "<div class='omm_cloze-text-input'><div class='omm-cloze-text-hidden-answer'>[[" + a + "]]</div></div>");
         }
         body += '</div>';
 

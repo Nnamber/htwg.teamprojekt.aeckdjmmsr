@@ -1,97 +1,123 @@
 function omm_answerGenerator() {
 
-    this.getStyledAnswers = function(question) {
-        var x = "";
-        x += '<div class="omm_question-answers-html">';
-        console.log($(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-type-html").text());
+	/**
+	 * Appends styled answer options into question body.
+	 *
+	 * @param {jQuery} question Checkbox from admin side
+	 * @param {jQuery} questionBody Generated question body to write into
+	 *
+	 */
+	this.addStyledAnswers = function(question, questionBody) {
+		var answersContainer = document.createElement("div");
+		jQuery(answersContainer).addClass("omm_question-answers-html");
 
-        x += answerDespatcher(question);
-        //div fuer Antworten schlieÃŸen
-        x += '</div>';
-        return x;
-    };
+		console.log($(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-type-html").text());
 
-    function answerDespatcher(question) {
-        var questionTyp = $(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-type-html").text();
-        var x = "";
-        switch (questionTyp) {
-            case "MultipleChoice":
-                x += multipleChoiceGenerator(question);
-                break;
-            case "ClozeText":
-                alert("Sie sind ein aufrichtiger Zweibeiner");
-                break;
-            case "OpenQuestion":
-                x += openQuestionGenerator(question);
-                break;
-            case "MatchTask":
-                x += matchTaskGenerator(question);
-                break;
-            case "SingleChoice":
-                x += singleChoiceGenerator(question);
-                break;
-        }
-        return x;
-    }
+		answerDespatcher(question, jQuery(answersContainer), questionBody);
 
-    function multipleChoiceGenerator(question) {
-        var x = "";
-        $(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
-            var correct = $(element).find('.omm_answer-correct-html').text();
-            var answer = $(element)[0].childNodes[0].nodeValue.trim();
-            x += '<div class="checkbox"><label><input type="checkbox"  value="' + correct + '">' + answer + '</label></div>';
-        });
-        return x;
-    }
+		questionBody.append(answersContainer);
+	};
 
-    function singleChoiceGenerator(question) {
-        var x = "";
-        //name for the radio buttons has to be the same but should be unique site wise
-        //need to find a better solution
-        var answerName = Math.random();
-        $(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
-            var correct = $(element).find('.omm_answer-correct-html').text();
-            var answer = $(element)[0].childNodes[0].nodeValue.trim();
-            x += '<div class="radio"><label><input type="radio"  name="' + answerName + '" value="' + correct + '">' + answer + '</label></div>';
-        });
-        return x;
-    }
+	function answerDespatcher(question, answersContainer, questionBody) {
+		var questionTyp = $(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-type-html").text();
+		switch (questionTyp) {
 
-    function openQuestionGenerator(question) {
-        var x = "";
-        var answer = $(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-pattern-html").text();
-        console.log(answer);
-        x += '<div class="form-group"><label><input type="text" pattern="' + answer + '" class="form-control"></label></div>';
-        console.log(x);
+			case "MultipleChoice":
+				answersContainer.append(multipleChoiceGenerator(question));
+				break;
+			case "ClozeText":
+				//Dont return elements, set them into question body
+				colzeTextGenerator(questionBody);
+				break;
+			case "OpenQuestion":
+				answersContainer.append(openQuestionGenerator(question));
+				break;
+			case "MatchTask":
+				answersContainer.append(matchTaskGenerator(question));
+				break;
+			case "SingleChoice":
+				answersContainer.append(singleChoiceGenerator(question));
+				break;
+		}
+	}
 
-        return x;
-    }
+	function multipleChoiceGenerator(question) {
+		var x = "";
+		$(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
+			var correct = $(element).find('.omm_answer-correct-html').text();
+			var answer = $(element)[0].childNodes[0].nodeValue.trim();
+			x += '<div class="checkbox"><label><input type="checkbox"  value="' + correct + '">' + answer + '</label></div>';
+		});
+		return x;
+	}
 
-    function matchTaskGenerator(question) {
-        var x = "";
-        //name for the radio buttons has to be the same but should be unique site wise
-        //need to find a better solution
-        var answerName = Math.random();
-        var i = 0;
-        $(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
-            var nameVariable = $(element)[0].childNodes[0].nodeValue.trim();
+	function singleChoiceGenerator(question) {
+		var x = "";
+		//name for the radio buttons has to be the same but should be unique site wise
+		//need to find a better solution
+		var answerName = Math.random();
+		$(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
+			var correct = $(element).find('.omm_answer-correct-html').text();
+			var answer = $(element)[0].childNodes[0].nodeValue.trim();
+			x += '<div class="radio"><label><input type="radio"  name="' + answerName + '" value="' + correct + '">' + answer + '</label></div>';
+		});
+		return x;
+	}
 
-            x += '<div class="control-group"><div class="omm_droppable-answer">' + nameVariable + '</div>';
-            x += '<div id="' + i + '" class="omm_droppable" name="' + nameVariable + '" ondrop="drop(event)" ondragover="allowDrop(event)"></div></div>';
+	function openQuestionGenerator(question) {
+		var x = "";
+		var answer = $(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-pattern-html").text();
+		console.log(answer);
+		x += '<div class="form-group"><label><input type="text" pattern="' + answer + '" class="form-control"></label></div>';
+		console.log(x);
 
-        });
-        
-        x += '<div ondrop="drop(event)" id="answerField" ondragover="allowDrop(event)" class="control-group">';
-        $(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
-            var nameVariable = $(element)[0].childNodes[0].nodeValue.trim();
-            var dragNDropAnswer = $(element).find('.omm_answer-notice-html').text();
+		return x;
+	}
+
+	function matchTaskGenerator(question) {
+		var x = "";
+		//name for the radio buttons has to be the same but should be unique site wise
+		//need to find a better solution
+		var answerName = Math.random();
+		var i = 0;
+		$(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
+			var nameVariable = $(element)[0].childNodes[0].nodeValue.trim();
+
+			x += '<div class="control-group"><div class="omm_droppable-answer">' + nameVariable + '</div>';
+			x += '<div id="' + i + '" class="omm_droppable" name="' + nameVariable + '" ondrop="drop(event)" ondragover="allowDrop(event)"></div></div>';
+
+		});
+
+		x += '<div ondrop="drop(event)" id="answerField" ondragover="allowDrop(event)" class="control-group">';
+		$(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
+			var nameVariable = $(element)[0].childNodes[0].nodeValue.trim();
+			var dragNDropAnswer = $(element).find('.omm_answer-notice-html').text();
 
             x += '<div class="omm_draggable" id="'+ answerName +'" draggable="true" ondragstart="drag(event)"name="'+nameVariable+'">';
-            x += dragNDropAnswer;
-            x += '</div>';
-        });
-        x += '</div>';
-        return x;
-    }
+			x += dragNDropAnswer;
+			x += '</div>';
+		});
+		x += '</div>';
+		return x;
+	}
+
+	function colzeTextGenerator(questionBody) {
+		//Set PlainObject with attributes
+		var attributes = {
+			type : "text"
+		};
+		//Find placeholder div-elements for input fields
+		questionBody.find(omm_cssSelector_clozeTextInput).each(function(index, element) {
+			var pattern = jQuery(element).find(omm_cssSelector_ommClozeTextHiddenAnswer).text();
+                        //TODO: Eckige Klammern in Pattern nötig? Check htmlQuestionBodyClozeText() in xmlReader
+                        pattern = pattern.replace(/(\[\[|\]\])/g, "");
+			var inputField = document.createElement("input");
+			//Set pattern
+			attributes.patter = pattern;
+			jQuery(inputField).attr(attributes);
+			jQuery(element).after(inputField);
+			jQuery(element).remove();
+		});
+	}
 
 }

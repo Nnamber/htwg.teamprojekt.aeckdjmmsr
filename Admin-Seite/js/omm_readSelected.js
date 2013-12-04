@@ -36,12 +36,12 @@ function omm_readSelected() {
 	}
 
 	function insertQuestionSlides() {
-		var currentQuestionNumber = 1;
 		var selectedQuestions = jQuery(omm_cssSelector_themaTable + " " + omm_cssSelector_panelBody + " :checked");
 		var totalQuestionNumber = selectedQuestions.length;
 		selectedQuestions.each(function(index, element) {
 			jQuery(htmlPageContent).find(".slides").append(function() {
 				var article = document.createElement("article");
+                                //Append Question Number Area and Question titel
 				jQuery(article).append(function() {
 
 					var questionTitel = jQuery(element).parent().parent().find(omm_cssSelector_questionTitle).text();
@@ -52,12 +52,13 @@ function omm_readSelected() {
 					jQuery(p).append("Frage #<span class='omm_current-question-number'></span>/<span class='omm_total-question-number'></span>: ");
 					jQuery(p).append(questionTitel);
 					jQuery(questionNumberArea).append(p);
-					jQuery(questionNumberArea).find(".omm_current-question-number").append(currentQuestionNumber);
+					jQuery(questionNumberArea).find(".omm_current-question-number").append(index + 1);
 					jQuery(questionNumberArea).find(".omm_total-question-number").append(totalQuestionNumber);
 
 					return questionNumberArea;
 				});
 
+                                //Append Content
 				jQuery(article).append(function() {
 
 					//Create container
@@ -72,14 +73,15 @@ function omm_readSelected() {
 					jQuery(container).append(form);
 
 					var body = document.createElement("div");
-					jQuery(body).attr("class", "form-group");
+                                        //TODO: css Klasse auf richtigem Element? Schlieﬂt Antworten nicht mit ein.
+					jQuery(body).addClass("form-group");
 					//Append content
 					jQuery(body).append(jQuery(element).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-body-html").children().clone());
-					$(form).append(body);
-					$(form).append(generateAnswers.getStyledAnswers($(element)));
+					
+					generateAnswers.addStyledAnswers($(element), $(body));
+                                        $(form).append(body);
 					return container;
 				});
-                                currentQuestionNumber += 1;
 				return article;
 			});
 		});
