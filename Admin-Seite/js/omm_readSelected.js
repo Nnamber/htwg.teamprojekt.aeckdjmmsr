@@ -79,6 +79,7 @@ function omm_readSelected() {
 					$(form).append(generateAnswers.getStyledAnswers($(element)));
 					return container;
 				});
+                                currentQuestionNumber += 1;
 				return article;
 			});
 		});
