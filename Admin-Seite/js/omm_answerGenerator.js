@@ -78,22 +78,23 @@ function omm_answerGenerator() {
 		var x = "";
 		//name for the radio buttons has to be the same but should be unique site wise
 		//need to find a better solution
-		var answerName = Math.random();
+		//TODO: replace var i with index of .each() ?
 		var i = 0;
 		$(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
 			var nameVariable = $(element)[0].childNodes[0].nodeValue.trim();
 
-			x += '<div class="control-group"><div class="omm_droppable-answer">' + nameVariable + '</div>';
+			x += '<div class="omm_answer-field"><div class="omm_droppable-answer">' + nameVariable + '</div>';
 			x += '<div id="' + i + '" class="omm_droppable" name="' + nameVariable + '" ondrop="drop(event)" ondragover="allowDrop(event)"></div></div>';
-
+			i += 1;
 		});
 
-		x += '<div ondrop="drop(event)" id="answerField" ondragover="allowDrop(event)" class="control-group">';
+		x += '<div ondrop="drop(event)" id="answerField" ondragover="allowDrop(event)" class="omm_answer-field-big">';
 		$(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
+			var answerName = Math.random();
 			var nameVariable = $(element)[0].childNodes[0].nodeValue.trim();
 			var dragNDropAnswer = $(element).find('.omm_answer-notice-html').text();
 
-            x += '<div class="omm_draggable" id="'+ answerName +'" draggable="true" ondragstart="drag(event)"name="'+nameVariable+'">';
+			x += '<div class="omm_draggable btn-default" id="' + answerName + '" draggable="true" ondragstart="drag(event)"name="' + nameVariable + '">';
 			x += dragNDropAnswer;
 			x += '</div>';
 		});
@@ -109,8 +110,8 @@ function omm_answerGenerator() {
 		//Find placeholder div-elements for input fields
 		questionBody.find(omm_cssSelector_clozeTextInput).each(function(index, element) {
 			var pattern = jQuery(element).find(omm_cssSelector_ommClozeTextHiddenAnswer).text();
-                        //TODO: Eckige Klammern in Pattern nötig? Check htmlQuestionBodyClozeText() in xmlReader
-                        pattern = pattern.replace(/(\[\[|\]\])/g, "");
+			//TODO: Eckige Klammern in Pattern nï¿½tig? Check htmlQuestionBodyClozeText() in xmlReader
+			pattern = pattern.replace(/(\[\[|\]\])/g, "");
 			var inputField = document.createElement("input");
 			//Set pattern
 			attributes.patter = pattern;
