@@ -1,5 +1,7 @@
 function omm_readSelected() {
 
+    var omm_student_questionNumberArea = "omm_question-number-area";
+
     var htmlPageContent;
     var stylesheets = ['css/bootstrap.css', 'css/font-awesome.min.css', 'css/omm_slideStyle.css'];
     var scriptSources = ['js/jquery-2.0.3.js', 'js/bootstrap.min.js', 'js/slides.js', 'js/omm_validateQuestions.js', 'js/omm_main.js'];
@@ -33,17 +35,36 @@ function omm_readSelected() {
     }
 
     function insertQuestionSlides() {
-        jQuery(omm_cssSelector_themaTable + " " + omm_cssSelector_panelBody + " :checked").each(function(index, element) {
+        var currentQuestionNumber = 1;
+        var selectedQuestions = jQuery(omm_cssSelector_themaTable + " " + omm_cssSelector_panelBody + " :checked");
+        var totalQuestionNumber = selectedQuestions.length;
+        selectedQuestions.each(function(index, element) {
             jQuery(htmlPageContent).find(".slides").append(function() {
-                var article = document.createElement("article");  
+                var article = document.createElement("article");
+                jQuery(article).append(function() {
+                    
+                    var questionTitel = jQuery(element).parent().parent().find(omm_cssSelector_questionTitle).text();
+                    
+                    var questionNumberArea = document.createElement("div");
+                    jQuery(questionNumberArea).addClass(omm_student_questionNumberArea);
+                    var p = document.createElement("p");
+                    jQuery(p).append("Frage #<span class='omm_current-question-number'></span>/<span class='omm_total-question-number'></span>: ");
+                    jQuery(p).append(questionTitel);
+                    jQuery(questionNumberArea).append(p);
+                    jQuery(questionNumberArea).find(".omm_current-question-number").append(currentQuestionNumber);
+                    jQuery(questionNumberArea).find(".omm_total-question-number").append(totalQuestionNumber);
+
+                    return questionNumberArea;
+                });
+
                 jQuery(article).append(function() {
 
-                    //Create container 
+                    //Create container
                     var container = document.createElement("div");
                     jQuery(container).addClass("container");
 
                     //Create form
-                    //necessary for 'novalidate' attr. 
+                    //necessary for 'novalidate' attr.
                     var form = document.createElement("form");
                     jQuery(form).attr("novalidate", "novalidate");
                     jQuery(container).append(form);
@@ -94,4 +115,5 @@ function omm_readSelected() {
         jQuery(footer).append(nav);
         body.append(footer);
     }
+
 }
