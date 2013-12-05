@@ -429,6 +429,8 @@ function updateHash() {
 /* Event listeners */
 
 function handleBodyKeyDown(event) {
+                console.log(event.keyCode);
+                
 	switch (event.keyCode) {
 		case 39:
 		// right arrow
@@ -474,8 +476,23 @@ function handleBodyKeyDown(event) {
 	}
 };
 
+function handleBodyScrollWheel(evt){
+    var delta = evt.originalEvent.detail < 0 || evt.originalEvent.wheelDelta > 0 ? 1 : -1;
+    if (delta < 0) {
+        // scroll down
+        prevSlide();
+        evt.preventDefault();
+    } else {
+        // scroll up
+        nextSlide();
+        evt.preventDefault();
+     }
+}
+
 function addEventListeners() {
 	document.addEventListener('keydown', handleBodyKeyDown, false);
+        $(document).unbind('mousewheel DOMMouseScroll').on('mousewheel DOMMouseScroll', handleBodyScrollWheel);
+
 };
 
 /* Initialization */

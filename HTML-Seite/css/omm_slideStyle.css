@@ -12,7 +12,7 @@
 }
 
 .slides > article > .container {
-    margin-top: 60px;
+    margin-top: 80px;
 }
 
 #next-slide-area {
@@ -100,13 +100,22 @@
     border-radius: 4px;
 }
 
-.omm_droppable {
+.omm_droppable{
     float: right;
-    width: 500px;
-    height: 45px;
-    margin-top: -25px;
-    padding: 6px;
-    
+    width: 250px;
+    height: 44px;
+    margin-top: -8px;
+    padding: 6px;   
+    border: dashed 1px midnightblue;
+}
+
+//.omm_droppable:after{
+  //  content: attr(data-content) 'Antwort hier her ziehen.';
+//}
+
+.omm_droppable > .omm_draggable{
+    float: right;
+      
 }
 
 .omm_droppable-answer{
@@ -114,13 +123,16 @@
     width: 200px;
     height: 20px;
     display:inline-block;
-
+    text-align: center;
+    font-size: 18px;
 }
 
 .omm_answer-field-big{
+    white-space: nowrap;
     display: inline-block;
     padding: 9.5px;
     margin: 0px 0px 10px;
+    margin-top: 100px;
     font-size: 13px;
     line-height: 1.42857;
     word-break: break-all;
@@ -129,12 +141,26 @@
     background-color: rgb(245, 245, 245);
     border: 1px solid rgb(204, 204, 204);
     border-radius: 4px;
-
+    width: 500px;
+    height: 60px;
 }
+
 .omm_draggable{
     background-color: rgb(245, 245, 245);
-
     display:inline-block;
-    float: right;
-    padding: 5px;
+    float: left;
+    padding: 3px;
+    border: solid lightblue 2px;
+    cursor: move;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.checkbox > label{
+    margin-left: 3px;
+    display: inline-block;
+}
+
+.omm_answer-field-big >.omm_draggable{
+    margin: 5px;
 }
