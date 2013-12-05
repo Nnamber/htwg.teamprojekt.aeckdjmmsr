@@ -73,22 +73,24 @@ function omm_answerGenerator() {
 
 		return x;
 	}
-
+        /* Generates a MatchTask question. Has a counter to make answerfields unique.
+         *  @param {jQuery} question Checkbox from admin side
+         *  
+         */
 	function matchTaskGenerator(question) {
 		var x = "";
+                var questionTitle = $(question).parent().parent().find(" .omm_question-title").text();
+                questionTitle = questionTitle.replace(/\s/g, "");
 		//name for the radio buttons has to be the same but should be unique site wise
 		//need to find a better solution
-		//TODO: replace var i with index of .each() ?
-		var i = 0;
 		$(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
 			var nameVariable = $(element)[0].childNodes[0].nodeValue.trim();
-
+                        var nameVariableId = nameVariable.replace(/\s/g, "");
 			x += '<div class="omm_answer-field"><div class="omm_droppable-answer">' + nameVariable + '</div>';
-			x += '<div id="' + i + '" class="omm_droppable" name="' + nameVariable + '" ondrop="drop(event)" ondragover="allowDrop(event)"></div></div>';
-			i += 1;
+			x += '<div id="' + index + nameVariableId + '" class="omm_droppable" name="' + nameVariable + '" ondrop="drop(event)" ondragover="allowDrop(event)"></div></div>';
 		});
 
-		x += '<div ondrop="drop(event)" id="answerField" ondragover="allowDrop(event)" class="omm_answer-field-big">';
+		x += '<div ondrop="drop(event)" id="answerField'+questionTitle+'" ondragover="allowDrop(event)" class="omm_answer-field-big">';
 		$(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
 			var answerName = Math.random();
 			var nameVariable = $(element)[0].childNodes[0].nodeValue.trim();
