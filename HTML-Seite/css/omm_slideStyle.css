@@ -180,7 +180,7 @@ Colors for dimension testing
     }
 }*/
 
-@media (max-width: 900px) {
+@media (max-width: 900px), (max-height: 700px){
 /*    .slides > article {
         background-color: #ff6633 !important;
     }*/
