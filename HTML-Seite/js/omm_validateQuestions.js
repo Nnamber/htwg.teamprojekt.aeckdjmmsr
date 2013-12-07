@@ -7,22 +7,25 @@ function omm_validateQuestions() {
 	this.validate = function() {
 		//Dispach-Function: redirect to matching function
 		$('article').each(function(index) {
-			var currentQuestionType = this.className.split(" ")[0];
+			var container = $(this).find(".container");
+			var classNames = $(container).attr("class");
+			var currentQuestionType = classNames.split(" ")[0];
+			var articleFormGroup = $(this).find(".form-group");
 			switch (currentQuestionType) {
-				case "omm_question-type-SingleChoice":
-					validateSingleChoice(this);
+				case "SingleChoice":
+					validateSingleChoice(articleFormGroup);
 					break;
-				case "omm_question-type-MultipleChoice":
-					validateMultipleChoice(this);
+				case "MultipleChoice":
+					validateMultipleChoice(articleFormGroup);
 					break;
-				case "omm_question-type-OpenQuestion":
-					validateOpenQuestion(this);
+				case "OpenQuestion":
+					validateOpenQuestion(articleFormGroup);
 					break;
-				case "omm_question-type-MatchTask":
-					validateMatchTask(this);
+				case "MatchTask":
+					validateMatchTask(articleFormGroup);
 					break;
-				case "omm_question-type-ClozeText":
-					validateClozeText(this);
+				case "ClozeText":
+					validateClozeText(articleFormGroup);
 					break;
 			}
 		});
@@ -30,11 +33,10 @@ function omm_validateQuestions() {
 
 	function validateMultipleChoice(currentquestion) {
 		var iscorrect = true;
-		// $( "input:checkbox:checked" ).val();
 		$(currentquestion).find('input:checkbox').each(function(index, element) {
 			if ($(element).is(":checked")) {
 				if ($(element).attr("value") == "true") {
-					// do nothing
+					//currentquestion.find
 				} else {
 					iscorrect = false;
 				}
@@ -46,8 +48,11 @@ function omm_validateQuestions() {
 				}
 			}
 		});
+		$(currentquestion).addClass("omm_callout");
 		if (iscorrect) {
-			$(currentquestion).html("richtig");
+			$(currentquestion).addClass("omm_callout-right");
+		}else {
+			$(currentquestion).addClass("omm_callout-wrong");
 		}
 	}
 
