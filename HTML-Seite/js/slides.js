@@ -430,7 +430,6 @@ function updateHash() {
 
 function handleBodyKeyDown(event) {
         setSlideSize(event.target);
-        $('html,body').scrollTop(0);
 	switch (event.keyCode) {
 		case 39:
 		// right arrow
@@ -439,6 +438,7 @@ function handleBodyKeyDown(event) {
 		case 32:
 		// space
 		case 34:
+                        $('html,body').scrollTop(0);    
 			// PgDn
 			nextSlide();
 			event.preventDefault();
@@ -449,30 +449,36 @@ function handleBodyKeyDown(event) {
 		//case 8:
 		// Backspace
 		case 33:
+                        $('html,body').scrollTop(0);
 			// PgUp
 			prevSlide();
 			event.preventDefault();
 			break;
 
 		case 40:
-			// down arrow
-			if (isChromeVoxActive()) {
-				speakNextItem();
-			} else {
-				nextSlide();
-			}
-			event.preventDefault();
-			break;
-
+                        if(eventTargetContainerParent.height() <= 700){     
+                            $('html,body').scrollTop(0);                            
+                            // down arrow
+                            if (isChromeVoxActive()) {
+                                    speakNextItem();
+                            } else {
+                                    nextSlide();
+                            }
+                            event.preventDefault();
+                            break;
+                        }
 		case 38:
-			// up arrow
-			if (isChromeVoxActive()) {
-				speakPrevItem();
-			} else {
-				prevSlide();
-			}
-			event.preventDefault();
-			break;
+                        if(eventTargetContainerParent.height() <= 700){
+                            $('html,body').scrollTop(0);
+                            // up arrow
+                            if (isChromeVoxActive()) {
+                                    speakPrevItem();
+                            } else {
+                                    prevSlide();
+                            }
+                            event.preventDefault();
+                            break;
+                        }
 	}
 };
 
@@ -487,11 +493,11 @@ function handleBodyScrollWheel(event){
         var delta = event.originalEvent.detail < 0 || event.originalEvent.wheelDelta > 0 ? 1 : -1;
         if (delta < 0) {
             // scroll down
-            prevSlide();
+            nextSlide();
             event.preventDefault();
         } else {
             // scroll up
-            nextSlide();
+            prevSlide();
             event.preventDefault();
          }
     }
@@ -565,12 +571,11 @@ function makeBuildLists() {
 function setSlideSize(){
         //make slides scrollable in height if necessary
         $(".container").each(function(i, elementInitial) {
-            console.log("do");
+            
              var containerHeight = $(elementInitial).height();
              if(containerHeight > $('.article').height()){
-                 $(elementInitial).parent().css('min-height', containerHeight + 110);
+                 $(elementInitial).parent().css('min-height', containerHeight + 310);
                  $(elementInitial).parent().css('margin-bottom', "20px !important");
-
              }
         });
 }

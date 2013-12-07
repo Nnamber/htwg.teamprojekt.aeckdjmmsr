@@ -86,7 +86,7 @@ function omm_answerGenerator() {
 		$(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
 			var nameVariable = $(element)[0].childNodes[0].nodeValue.trim();
                         var nameVariableId = nameVariable.replace(/\s/g, "");
-			x += '<div class="omm_answer-field"><div class="omm_droppable-answer" ><span>' + nameVariable + '</span></div>';
+			x += '<div class="omm_answer-field row"><div class="omm_droppable-answer" ><span>' + nameVariable + '</span></div>';
 			x += '<div id="' + index + nameVariableId + '" class="omm_droppable" name="' + nameVariable + '" ondrop="drop(event)" ondragover="allowDrop(event)" title="Richtige Antwort hier her ziehen."></div></div>';
 		});
 

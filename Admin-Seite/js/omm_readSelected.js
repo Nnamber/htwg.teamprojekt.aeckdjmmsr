@@ -73,7 +73,7 @@ function omm_readSelected() {
 					jQuery(container).append(form);
 
 					var body = document.createElement("div");
-                                        //TODO: css Klasse auf richtigem Element? Schließt Antworten nicht mit ein.
+                                        //TODO: css Klasse auf richtigem Element? Schlieï¿½t Antworten nicht mit ein.
 					jQuery(body).addClass("form-group");
 					//Append content
 					jQuery(body).append(jQuery(element).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-body-html").children().clone());
@@ -84,7 +84,7 @@ function omm_readSelected() {
 				});
 				return article;
 			});
-		});
+                    });
 	}
 
 	function createSection() {
