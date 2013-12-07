@@ -139,7 +139,7 @@ function omm_validateQuestions() {
 				var tableRow = document.createElement("tr");
 				$(tableRow).append("<td>"+questionNr+"</td><td><a href='#'>"+ questionName +"</a></td><td>"+ questionAnswer +"</td>");
 				$(tableRow).click('click', function() {
-					for (var i = 0; i < article.length; i++){
+					for (var i = 0; i < $('article').length - questionNr; i++){
 						prevSlide();
 					}
 					/*$(element).removeAttr("class");
