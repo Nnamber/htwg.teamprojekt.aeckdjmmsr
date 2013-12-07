@@ -130,32 +130,36 @@ function omm_validateQuestions() {
 		$(table).addClass("table-hover");
 		$(table).append("<thead><tr><th>#</th><th>Frage</th><th>Antwort</th></tr></thead>");	
 		$(table).append(tableBody);
+		var totalQuestions = $(".omm_total-question-number").text()[0];
+		var rightAnswers = 0;
 		$('article').each(function(index, element){
 			var formgroup = $(element).find(".form-group");
 			if(formgroup.length !== 0){
 				var questionNr = $(element).find(".omm_current-question-number").text();
 				var questionName = $(element).find(".omm_current-question-name").text();
 				var questionAnswer = $(formgroup).hasClass("omm_callout-wrong") ? "falsch" : "richtig";
+				if(questionAnswer == "richtig"){
+					rightAnswers++;
+				}
 				var tableRow = document.createElement("tr");
 				$(tableRow).append("<td>"+questionNr+"</td><td><a href='#'>"+ questionName +"</a></td><td>"+ questionAnswer +"</td>");
 				$(tableRow).click('click', function() {
 					for (var i = 0; i < $('article').length - questionNr; i++){
 						prevSlide();
 					}
-					/*$(element).removeAttr("class");
-					$('section').find(".current").removeAttr("class");
-					$('section').find(".far-past").removeAttr("class");
-					$('section').find(".past").removeAttr("class");
-					$('section').find(".next").removeAttr("class");
-					$('section').find(".far-next").removeAttr("class");					
-					$(element).attr("class", "current");
-					initialize();
-					updateSlides();*/
 				}, false);
 				$(table).append(tableRow);
+				
 			}
 		});
-		$(slide).find(".validationSlide").append(table);
+		var form = $(slide).find(".validationSlide");
+		$(form).append(table);
+		//Display the amount of right answers
+		if(rightAnswers != totalQuestions){
+			$(form).append("<div class='alert alert-danger'>Sie haben "+ rightAnswers +" von "+ totalQuestions +" richtig beantwortet. Das schaffen sicher besser!</div>");
+		}else{
+			$(form).append("<div class='alert alert-success'>Herzlichen Glückwunsch, Sie haben alle Fragen richtig beantwortet. Weiter so!</div>");
+		}
 	}
 	
 	this.jumpToSlide = function() {
