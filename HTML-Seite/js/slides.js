@@ -206,18 +206,20 @@ function buildNextItem() {
 };
 
 function prevSlide() {
-	if (curSlide > 0) {
+        //update slide height
+        setSlideSize();
+        if (curSlide > 0) {
             
 		curSlide--;
                 //jump to top of page
                 $('html,body').scrollTop(0); 
-                //update slide height
-                setSlideSize();
 		updateSlides();
 	}
 };
 
 function nextSlide() {
+        //update slide height
+        setSlideSize();
 	if (buildNextItem()) {
 		return;
 	}
@@ -226,8 +228,6 @@ function nextSlide() {
 		curSlide++;
                 //jump to top of page
                 $('html,body').scrollTop(0);
-                //update slide height
-                setSlideSize();
 		updateSlides();
 	}
 };
@@ -436,8 +436,8 @@ function updateHash() {
 /* Event listeners */
 
 function handleBodyKeyDown(event) {
-        var eventTargetContainerParent = $(event.target).parent();
-        console.log($(event.target).parent().height());
+        /* get current slide height */
+        var eventTargetContainerParent = $(getSlideEl(curSlide)).height();
 	switch (event.keyCode) {
 		case 39:
 		// right arrow
@@ -474,7 +474,6 @@ function handleBodyKeyDown(event) {
                         }
 		case 38:
                         if(eventTargetContainerParent.height() <= 700){
-                            console.log("dum");
                             // up arrow
                             if (isChromeVoxActive()) {
                                     speakPrevItem();
@@ -579,7 +578,7 @@ function setSlideSize(){
         $(".container").each(function(i, elementInitial) {
             var containerHeight = $(elementInitial).height();
             if(containerHeight > $('.article').height()){
-                $(elementInitial).parent().css('min-height', containerHeight + 100);
+                $(elementInitial).parent().css('min-height', containerHeight + 105);
                 $(elementInitial).parent().css('margin-bottom', "20px !important");
             }});
 
@@ -609,7 +608,6 @@ function handleDomLoaded() {
 	makeBuildLists();
 	document.body.classList.add('loaded');
         setSlideSize();
-
 };
 
 function initialize() {
