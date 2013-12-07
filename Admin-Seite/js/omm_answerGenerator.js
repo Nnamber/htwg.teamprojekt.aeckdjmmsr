@@ -65,7 +65,7 @@ function omm_answerGenerator() {
 		var x = "";
 		var answer = $(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-pattern-html").text();
 		console.log(answer);
-		x += '<div class="form-group"><label><input type="text" pattern="' + answer + '" class="form-control"></label></div>';
+		x += '<div><label><input type="text" pattern="' + answer + '" class="form-control"></label></div>';
 		console.log(x);
 
 		return x;
