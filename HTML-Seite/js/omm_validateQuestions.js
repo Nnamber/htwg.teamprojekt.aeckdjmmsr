@@ -64,9 +64,15 @@ function omm_validateQuestions() {
 	}
 
 	function validateSingleChoice(currentquestion) {
-		var rightAnswer = $(currentquestion).find('input[type=radio][value=true]:checked');
-		if (rightAnswer.length > 0) {
-			$(currentquestion).html("richtig");
+		var answer = $(currentquestion).find('input[type=radio][value=true]:checked');
+		var correctAnswerDiv = $(currentquestion).find("input[type=radio][value=true]").parent().parent(".radio");		
+		if (answer.length > 0) {
+			// $(currentquestion).html("richtig");
+			$(currentquestion).addClass("omm_callout omm_callout-right");
+			// $(correctAnswerDiv).addClass("omm_callout-answer omm_callout-answer-right"); // unnötig
+		} else{
+			$(currentquestion).addClass("omm_callout omm_callout-wrong");
+			$(correctAnswerDiv).addClass("omm_callout-answer omm_callout-answer-right");
 		}
 	}
 
