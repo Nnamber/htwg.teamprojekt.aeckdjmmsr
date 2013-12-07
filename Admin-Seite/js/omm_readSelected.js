@@ -65,6 +65,8 @@ function omm_readSelected() {
 
 					//Create container
 					var container = document.createElement("div");
+                                        var questionType = jQuery(element).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-type-html").text();
+                                        $(container).addClass(questionType);
 					jQuery(container).addClass("container");
 
 					//Create form

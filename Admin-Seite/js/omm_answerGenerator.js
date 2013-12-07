@@ -10,9 +10,6 @@ function omm_answerGenerator() {
 	this.addStyledAnswers = function(question, questionBody) {
 		var answersContainer = document.createElement("div");
 		jQuery(answersContainer).addClass("omm_question-answers-html");
-
-		console.log($(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-type-html").text());
-
 		answerDespatcher(question, jQuery(answersContainer), questionBody);
 
 		questionBody.append(answersContainer);
