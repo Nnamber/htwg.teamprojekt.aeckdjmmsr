@@ -27,7 +27,7 @@ function omm_answerGenerator() {
 				break;
 			case "ClozeText":
 				//Dont return elements, set them into question body
-				colzeTextGenerator(questionBody);
+				clozeTextGenerator(questionBody);
 				break;
 			case "OpenQuestion":
 				answersContainer.append(openQuestionGenerator(question));
@@ -104,7 +104,7 @@ function omm_answerGenerator() {
 		return x;
 	}
 
-	function colzeTextGenerator(questionBody) {
+	function clozeTextGenerator(questionBody) {
 		//Set PlainObject with attributes
 		var attributes = {
 			type : "text"
@@ -116,7 +116,7 @@ function omm_answerGenerator() {
 			pattern = pattern.replace(/(\[\[|\]\])/g, "");
 			var inputField = document.createElement("input");
 			//Set pattern
-			attributes.patter = pattern;
+			attributes.pattern = pattern;
 			jQuery(inputField).attr(attributes);
 			jQuery(element).after(inputField);
 			jQuery(element).remove();
