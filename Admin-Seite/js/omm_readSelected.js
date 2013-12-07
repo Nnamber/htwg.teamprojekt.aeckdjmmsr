@@ -10,10 +10,12 @@ function omm_readSelected() {
 	this.readSelectedQuestions = function() {
 		generateHtmlPageScaffold();
 		insertQuestionSlides();
+		insertValidationSlide();
 
 		var htmlPageContentString = jQuery(htmlPageContent).html();
 		return htmlPageContentString;
 	};
+	
 
 	function generateHtmlPageScaffold() {
 		htmlPageContent = document.createElement("html");
@@ -85,6 +87,48 @@ function omm_readSelected() {
 				return article;
 			});
                     });
+	}
+	
+	function insertValidationSlide(){
+		jQuery(htmlPageContent).find(".slides").append(function() {
+			var article = document.createElement("article");
+			jQuery(article).append(function() {
+
+				var validationTitle = "Auswertung";
+	
+				var questionNumberArea = document.createElement("div");
+				jQuery(questionNumberArea).addClass(student_questionNumberArea);
+				var p = document.createElement("p");
+				jQuery(p).append(validationTitle);
+				jQuery(questionNumberArea).append(p);
+				return questionNumberArea;
+			});
+			
+			jQuery(article).append(function() {
+
+					//Create container
+					var container = document.createElement("div");
+					jQuery(container).addClass("container");
+
+					//Create form
+					//necessary for 'novalidate' attr.
+					var form = document.createElement("form");
+					jQuery(form).attr("novalidate", "novalidate");
+					jQuery(form).attr("role", "form");
+					jQuery(container).append(form);
+					var body = document.createElement("div");
+                                        //TODO: css Klasse auf richtigem Element? Schlie�t Antworten nicht mit ein.
+					jQuery(body).addClass("form-group");
+					//Append content
+					jQuery(form).append(body);
+
+					jQuery(body).append("<button type='button' class='btn btn-success' id='checkAnswer'>Auswertung starten</button>");
+
+					return container;
+			});
+				
+			return article;
+		});
 	}
 
 	function createSection() {

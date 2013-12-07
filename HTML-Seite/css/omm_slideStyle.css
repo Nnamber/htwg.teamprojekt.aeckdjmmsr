@@ -221,5 +221,37 @@ Colors for dimension testing
         -moz-transition: -moz-transform .3s ease-out;
         -webkit-transition: -webkit-transform .3s ease-out;
     }
+}
 
+/* Validation Style */
+.omm_callout {
+  margin: 20px 0;
+  padding: 20px;
+  border-left: 3px solid #eee;
+}
+
+.omm_callout-wrong {
+  background-color: #FDE7E9;
+  border-color: #FC0A0A;
+}
+
+.omm_callout-right {
+  background-color: #A2FA99;
+  border-color: #36D80E;
+}
+
+.omm_callout-answer{
+/*  margin: 20px 0;
+  padding: 20px;*/
+  border-left: 3px solid #eee;
+}
+
+.omm_callout-answer-wrong{
+  background-color: #F38A93;
+  border-color: #FC0A0A;
+}
+
+.omm_callout-answer-right{
+  background-color: #9DF376;
+  border-color: #1c5005;
 }
