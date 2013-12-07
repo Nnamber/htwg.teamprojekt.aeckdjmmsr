@@ -84,7 +84,9 @@
     margin: 5px;
     background-color: lightblue;
     max-width: 80%;
-    height: 4%;
+    min-height: 4%;
+    height: 7%;
+    max-height: 10%;
     border: solid 1px;
     border-radius: 5px 10px 5px 10px / 10px 5px 10px 5px;
     padding: 1%;
