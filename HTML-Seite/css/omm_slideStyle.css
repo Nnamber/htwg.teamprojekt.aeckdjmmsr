@@ -84,7 +84,7 @@
     margin: 5px;
     background-color: lightblue;
     max-width: 80%;
-    min-height: 4%;
+    min-height: 10%;
     height: 7%;
     max-height: 10%;
     border: solid 1px;
@@ -113,25 +113,21 @@
 
 .omm_droppable > .omm_draggable{
     float: right;
-    margin:  0%;
-    height: 100%;
-    padding: 0.5% !important;
-    padding-left: 1% !important;
-    padding-right: 1% !important;
-
+    padding: 1.5%;
+    margin: 2%;
 }
 
 .omm_droppable-answer{
     display:inline-block;
     width: 50%;
     max-width: 50%;
-    padding-top: 0.5%;
     height: 100%;
  }
 
 .omm_droppable-answer > span{
     text-align: left;
     display: inline-block;
+    margin: 4.5%;
 }
 .omm_answer-field-big{
     display: inline-block;
@@ -169,7 +165,7 @@
 }
 
 .omm_answer-field-big >.omm_draggable{
-    margin: 5px;
+    margin: 2%;
     padding: 1.5%;
 }
 
