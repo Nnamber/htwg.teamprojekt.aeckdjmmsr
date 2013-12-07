@@ -52,7 +52,7 @@ function omm_readSelected() {
 					jQuery(questionNumberArea).addClass(student_questionNumberArea);
 					var p = document.createElement("p");
 					jQuery(p).append("Frage #<span class='omm_current-question-number'></span>/<span class='omm_total-question-number'></span>: ");
-					jQuery(p).append(questionTitel);
+					jQuery(p).append("<span class='omm_current-question-name'>"+ questionTitel + "</span>");
 					jQuery(questionNumberArea).append(p);
 					jQuery(questionNumberArea).find(".omm_current-question-number").append(index + 1);
 					jQuery(questionNumberArea).find(".omm_total-question-number").append(totalQuestionNumber);
@@ -115,16 +115,10 @@ function omm_readSelected() {
 					//Create form
 					//necessary for 'novalidate' attr.
 					var form = document.createElement("form");
-					jQuery(form).attr("novalidate", "novalidate");
 					jQuery(form).attr("role", "form");
+					jQuery(form).attr("class","validationSlide");
 					jQuery(container).append(form);
-					var body = document.createElement("div");
-                                        //TODO: css Klasse auf richtigem Element? Schlie�t Antworten nicht mit ein.
-					jQuery(body).addClass("form-group");
-					//Append content
-					jQuery(form).append(body);
-
-					jQuery(body).append("<button type='button' class='btn btn-success' id='checkAnswer'>Auswertung starten</button>");
+					jQuery(form).append("<button type='button' class='btn btn-success' id='checkAnswer'>Auswertung starten</button>");
 
 					return container;
 			});

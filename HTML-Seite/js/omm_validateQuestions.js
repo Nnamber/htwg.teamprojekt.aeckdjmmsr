@@ -3,7 +3,7 @@ var omm_selector_divDragable = "div.omm_draggable";
 var omm_selector_attrName = "name";
 
 function omm_validateQuestions() {
-
+	var lastSlide;
 	this.validate = function() {
 		//Dispach-Function: redirect to matching function
 		$('article').each(function(index) {
@@ -28,7 +28,10 @@ function omm_validateQuestions() {
 					validateClozeText(articleFormGroup);
 					break;
 			}
+			lastArticle = this;
 		});
+		
+		createStatisticTable(lastArticle);
 	};
 
 	function validateMultipleChoice(currentquestion) {
@@ -117,4 +120,23 @@ function omm_validateQuestions() {
 		}
 	}
 
+	function createStatisticTable(slide){
+		//Remove 'Auserwerten' button
+		$(omm_cssSelector_checkAnswer).remove();
+		//Create table with answered questions
+		var table = document.createElement("table");
+		var tableBody = document.createElement("tbody");
+		$(table).addClass("table");
+		$(table).append("<thead><tr><th>#</th><th>Frage</th><th>Antwort</th></tr></thead>");	
+		$(table).append(tableBody);
+		$('article').each(function(index, element){
+			if($(element).find("form-group") != null ){
+			var questionNr = $(element).find(".omm_current-question-number").text();
+			var questionName = $(element).find(".omm_current-question-name").text();
+			$(tableBody).append("<tr><td>"+questionNr+"</td><td>"+ questionName +"</td></tr>");
+			
+			}
+		});
+		$(slide).find(".validationSlide").append(table);
+	}
 }
