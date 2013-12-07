@@ -34,17 +34,20 @@ function omm_validateQuestions() {
 	function validateMultipleChoice(currentquestion) {
 		var iscorrect = true;
 		$(currentquestion).find('input:checkbox').each(function(index, element) {
+			$(element).parent().parent(".checkbox").addClass("omm_callout-answer");
 			if ($(element).is(":checked")) {
 				if ($(element).attr("value") == "true") {
-					//currentquestion.find
+					$(element).parent().parent(".checkbox").addClass("omm_callout-answer-right");
 				} else {
+					$(element).parent().parent(".checkbox").addClass("omm_callout-answer-wrong");
 					iscorrect = false;
 				}
 			} else {
 				if ($(element).attr("value") == "true") {
 					iscorrect = false;
+					$(element).parent().parent(".checkbox").addClass("omm_callout-answer-wrong");
 				} else {
-					// do nothing
+					$(element).parent().parent(".checkbox").addClass("omm_callout-answer-right");
 				}
 			}
 		});
@@ -89,14 +92,19 @@ function omm_validateQuestions() {
 	function commonValidation(currentquestion){
 		var iscorrect = true;
 		$(currentquestion).find('input:text').each(function(index, element) {
+			$(element).addClass("omm_callout-text");
 			if ($(element).val() == $(element).attr('pattern')) {
-				// do nothing
+				$(element).addClass("omm_callout-text-right");
 			} else {
+				$(element).addClass("omm_callout-text-wrong");
 				iscorrect = false;
 			}
 		});
+		$(currentquestion).addClass("omm_callout");
 		if(iscorrect){
-			$(currentquestion).html("richtig");
+			$(currentquestion).addClass("omm_callout-right");
+		}else{
+			$(currentquestion).addClass("omm_callout-wrong");
 		}
 	}
 

@@ -255,3 +255,17 @@ Colors for dimension testing
   background-color: #9DF376;
   border-color: #1c5005;
 }
+
+.omm_callout-text-wrong, .omm_callout-text-right{
+	border-width: 2px;
+	-webkit-box-shadow: inset 0 3px 2px rgba(0,0,0,0.075);
+	box-shadow: inset 0 3px 2px rgba(0,0,0,0.075);
+}
+.omm_callout-text-wrong{
+	border-color: #F5110C;
+}
+
+
+.omm_callout-text-right{
+	border-color: #1c5005;
+}
