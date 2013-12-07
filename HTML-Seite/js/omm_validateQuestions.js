@@ -127,16 +127,38 @@ function omm_validateQuestions() {
 		var table = document.createElement("table");
 		var tableBody = document.createElement("tbody");
 		$(table).addClass("table");
+		$(table).addClass("table-hover");
 		$(table).append("<thead><tr><th>#</th><th>Frage</th><th>Antwort</th></tr></thead>");	
 		$(table).append(tableBody);
 		$('article').each(function(index, element){
-			if($(element).find("form-group") != null ){
-			var questionNr = $(element).find(".omm_current-question-number").text();
-			var questionName = $(element).find(".omm_current-question-name").text();
-			$(tableBody).append("<tr><td>"+questionNr+"</td><td>"+ questionName +"</td></tr>");
-			
+			var formgroup = $(element).find(".form-group");
+			if(formgroup.length !== 0){
+				var questionNr = $(element).find(".omm_current-question-number").text();
+				var questionName = $(element).find(".omm_current-question-name").text();
+				var questionAnswer = $(formgroup).hasClass("omm_callout-wrong") ? "falsch" : "richtig";
+				var tableRow = document.createElement("tr");
+				$(tableRow).append("<td>"+questionNr+"</td><td><a href='#'>"+ questionName +"</a></td><td>"+ questionAnswer +"</td>");
+				$(tableRow).click('click', function() {
+					for (var i = 0; i < article.length; i++){
+						prevSlide();
+					}
+					/*$(element).removeAttr("class");
+					$('section').find(".current").removeAttr("class");
+					$('section').find(".far-past").removeAttr("class");
+					$('section').find(".past").removeAttr("class");
+					$('section').find(".next").removeAttr("class");
+					$('section').find(".far-next").removeAttr("class");					
+					$(element).attr("class", "current");
+					initialize();
+					updateSlides();*/
+				}, false);
+				$(table).append(tableRow);
 			}
 		});
 		$(slide).find(".validationSlide").append(table);
 	}
+	
+	this.jumpToSlide = function() {
+	
+	};
 }
