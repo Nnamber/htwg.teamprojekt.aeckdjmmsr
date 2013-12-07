@@ -54,6 +54,10 @@ function omm_validateQuestions() {
 		$(currentquestion).addClass("omm_callout");
 		if (iscorrect) {
 			$(currentquestion).addClass("omm_callout-right");
+			$(currentquestion).find(".checkbox").each(function(index,element) {
+				$(element).removeAttr("class");
+				$(element).attr("class", "checkbox");
+			});
 		}else {
 			$(currentquestion).addClass("omm_callout-wrong");
 		}
@@ -92,7 +96,6 @@ function omm_validateQuestions() {
 	function commonValidation(currentquestion){
 		var iscorrect = true;
 		$(currentquestion).find('input:text').each(function(index, element) {
-			$(element).addClass("omm_callout-text");
 			if ($(element).val() == $(element).attr('pattern')) {
 				$(element).addClass("omm_callout-text-right");
 			} else {
