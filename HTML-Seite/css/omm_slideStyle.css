@@ -249,7 +249,7 @@ Colors for dimension testing
         position: relative;
         overflow: hidden;
         width: 70% !important;
-        height: 10% !important;
+        height: 90% !important;
         left: 0% !important;
         top: 0% !important;
         margin-left: 10% !important;
@@ -283,7 +283,7 @@ Colors for dimension testing
 	-o-transform: translate(1130px);
 	-moz-transform: translate(1130px);
 	-webkit-transform: translate3d(1130px, 0, 0);
-        margin-top: -20.2%;
+        margin-top: -28.2%;
         height: 80%;
     }
     .slides > article.past {
@@ -292,7 +292,7 @@ Colors for dimension testing
 	-o-transform: translate(-1130px);
 	-moz-transform: translate(-1130px);
 	-webkit-transform: translate3d(-1130px, 0, 0);
-         margin-top: -20.2%;
+        margin-top: -28.2%;
          height: 80%;
 }
     .slides > article.far-next {
