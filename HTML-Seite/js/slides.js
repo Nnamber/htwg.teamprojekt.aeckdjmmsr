@@ -437,7 +437,7 @@ function updateHash() {
 
 function handleBodyKeyDown(event) {
 	/* get current slide height */
-	var eventTargetContainerParent = $(getSlideEl(curSlide)).height();
+	var eventTargetContainerParent = $(getSlideEl(curSlide)).find('.container').height();
 	switch (event.keyCode) {
 		case 39:
 		// right arrow
@@ -462,7 +462,7 @@ function handleBodyKeyDown(event) {
 			break;
 
 		case 40:
-			if (eventTargetContainerParent.height() <= 700) {
+			if (eventTargetContainerParent <= 700) {
 				// down arrow
 				if (isChromeVoxActive()) {
 					speakNextItem();
@@ -473,7 +473,7 @@ function handleBodyKeyDown(event) {
 				break;
 			}
 		case 38:
-			if (eventTargetContainerParent.height() <= 700) {
+			if (eventTargetContainerParent <= 700) {
 				// up arrow
 				if (isChromeVoxActive()) {
 					speakPrevItem();
@@ -488,10 +488,10 @@ function handleBodyKeyDown(event) {
 
 function handleBodyScrollWheel(event) {
 	//get the parent container of the event.target
-	var eventTargetContainerParent = $(event.target).parents(".container").parent();
+	var eventTargetContainerParent = $(getSlideEl(curSlide)).find('.container').height();
 
-	//test the height of the parent, if below 700 scrolling to next slide is ok
-	if (eventTargetContainerParent.height() <= 700) {
+    //test the height of the parent, if below 700 scrolling to next slide is ok
+	if (eventTargetContainerParent <= 700) {
 		//jump to the top of the page in case the previous page was scrollable
 		$('html,body').scrollTop(0);
 		var delta = event.originalEvent.detail < 0 || event.originalEvent.wheelDelta > 0 ? 1 : -1;
