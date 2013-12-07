@@ -1,6 +1,6 @@
 /*
  Google I/O 2011 HTML slides template
-
+s
  Authors: Luke Mahé (code)
  Marcin Wichary (code and design)
  Dominic Mazzoni (browser compatibility)
@@ -429,8 +429,8 @@ function updateHash() {
 /* Event listeners */
 
 function handleBodyKeyDown(event) {
-                console.log(event.keyCode);
-                
+        setSlideSize(event.target);
+        $('html,body').scrollTop(0);
 	switch (event.keyCode) {
 		case 39:
 		// right arrow
@@ -476,23 +476,30 @@ function handleBodyKeyDown(event) {
 	}
 };
 
-function handleBodyScrollWheel(evt){
-    var delta = evt.originalEvent.detail < 0 || evt.originalEvent.wheelDelta > 0 ? 1 : -1;
-    if (delta < 0) {
-        // scroll down
-        prevSlide();
-        evt.preventDefault();
-    } else {
-        // scroll up
-        nextSlide();
-        evt.preventDefault();
-     }
+function handleBodyScrollWheel(event){
+    //get the parent container of the event.target
+    var eventTargetContainerParent = $(event.target).parents(".container").parent();
+    
+    //test the height of the parent, if below 700 scrolling to next slide is ok
+    if(eventTargetContainerParent.height() <= 700){
+        //jump to the top of the page in case the previous page was scrollable
+        $('html,body').scrollTop(0);
+        var delta = event.originalEvent.detail < 0 || event.originalEvent.wheelDelta > 0 ? 1 : -1;
+        if (delta < 0) {
+            // scroll down
+            prevSlide();
+            event.preventDefault();
+        } else {
+            // scroll up
+            nextSlide();
+            event.preventDefault();
+         }
+    }
 }
 
 function addEventListeners() {
 	document.addEventListener('keydown', handleBodyKeyDown, false);
         $(document).unbind('mousewheel DOMMouseScroll').on('mousewheel DOMMouseScroll', handleBodyScrollWheel);
-
 };
 
 /* Initialization */
@@ -554,6 +561,19 @@ function makeBuildLists() {
 	}
 };
 
+
+function setSlideSize(){
+        //make slides scrollable in height if necessary
+        $(".container").each(function(i, elementInitial) {
+            console.log("do");
+             var containerHeight = $(elementInitial).height();
+             if(containerHeight > $('.article').height()){
+                 $(elementInitial).parent().css('min-height', containerHeight + 110);
+                 $(elementInitial).parent().css('margin-bottom', "20px !important");
+
+             }
+        });
+}
 function handleDomLoaded() {
 	slideEls = document.querySelectorAll('section.slides > article');
 
@@ -567,14 +587,16 @@ function handleDomLoaded() {
 	setupInteraction();
 	setupFrames();
 	makeBuildLists();
-
+    setSlideSize(null);
 	document.body.classList.add('loaded');
+
 };
 
 function initialize() {
 	getCurSlideFromHash();
 
 	document.addEventListener('DOMContentLoaded', handleDomLoaded, false);
+
 }
 
 initialize();
