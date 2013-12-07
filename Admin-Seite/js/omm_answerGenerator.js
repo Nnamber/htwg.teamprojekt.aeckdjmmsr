@@ -11,7 +11,7 @@ function omm_answerGenerator() {
 		var answersContainer = document.createElement("div");
 		jQuery(answersContainer).addClass("omm_question-answers-html");
 		answerDespatcher(question, jQuery(answersContainer), questionBody);
-
+                
 		questionBody.append(answersContainer);
 	};
 
@@ -65,7 +65,7 @@ function omm_answerGenerator() {
 		var x = "";
 		var answer = $(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-pattern-html").text();
 		console.log(answer);
-		x += '<div class="form-group"><label><input type="text" pattern="' + answer + '" class="form-control"></label></div>';
+		x += '<div><label><input type="text" pattern="' + answer + '" class="form-control"></label></div>';
 		console.log(x);
 
 		return x;
@@ -83,7 +83,7 @@ function omm_answerGenerator() {
 		$(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
 			var nameVariable = $(element)[0].childNodes[0].nodeValue.trim();
                         var nameVariableId = nameVariable.replace(/\s/g, "");
-			x += '<div class="omm_answer-field row"><div class="omm_droppable-answer" ><span>' + nameVariable + '</span></div>';
+			x += '<div class="omm_answer-field"><div class="omm_droppable-answer" ><span>' + nameVariable + '</span></div>';
 			x += '<div id="' + index + nameVariableId + '" class="omm_droppable" name="' + nameVariable + '" ondrop="drop(event)" ondragover="allowDrop(event)" title="Richtige Antwort hier her ziehen."></div></div>';
 		});
 
