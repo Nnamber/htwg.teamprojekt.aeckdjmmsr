@@ -1,6 +1,6 @@
 /*
  Google I/O 2011 HTML slides template
-s
+ s
  Authors: Luke Mahé (code)
  Marcin Wichary (code and design)
  Dominic Mazzoni (browser compatibility)
@@ -206,28 +206,28 @@ function buildNextItem() {
 };
 
 function prevSlide() {
-        //update slide height
-        setSlideSize();
-        if (curSlide > 0) {
-            
+	//update slide height
+	setSlideSize();
+	if (curSlide > 0) {
+
 		curSlide--;
-                //jump to top of page
-                $('html,body').scrollTop(0); 
+		//jump to top of page
+		$('html,body').scrollTop(0);
 		updateSlides();
 	}
 };
 
 function nextSlide() {
-        //update slide height
-        setSlideSize();
+	//update slide height
+	setSlideSize();
 	if (buildNextItem()) {
 		return;
 	}
 
 	if (curSlide < slideEls.length - 1) {
 		curSlide++;
-                //jump to top of page
-                $('html,body').scrollTop(0);
+		//jump to top of page
+		$('html,body').scrollTop(0);
 		updateSlides();
 	}
 };
@@ -436,8 +436,8 @@ function updateHash() {
 /* Event listeners */
 
 function handleBodyKeyDown(event) {
-        /* get current slide height */
-        var eventTargetContainerParent = $(getSlideEl(curSlide)).height();
+	/* get current slide height */
+	var eventTargetContainerParent = $(getSlideEl(curSlide)).height();
 	switch (event.keyCode) {
 		case 39:
 		// right arrow
@@ -462,54 +462,54 @@ function handleBodyKeyDown(event) {
 			break;
 
 		case 40:
-                        if(eventTargetContainerParent.height() <= 700){     
-                            // down arrow
-                            if (isChromeVoxActive()) {
-                                    speakNextItem();
-                            } else {
-                                    nextSlide();
-                            }
-                            event.preventDefault();
-                            break;
-                        }
+			if (eventTargetContainerParent.height() <= 700) {
+				// down arrow
+				if (isChromeVoxActive()) {
+					speakNextItem();
+				} else {
+					nextSlide();
+				}
+				event.preventDefault();
+				break;
+			}
 		case 38:
-                        if(eventTargetContainerParent.height() <= 700){
-                            // up arrow
-                            if (isChromeVoxActive()) {
-                                    speakPrevItem();
-                            } else {
-                                    prevSlide();
-                            }
-                            event.preventDefault();
-                            break;
-                        }
+			if (eventTargetContainerParent.height() <= 700) {
+				// up arrow
+				if (isChromeVoxActive()) {
+					speakPrevItem();
+				} else {
+					prevSlide();
+				}
+				event.preventDefault();
+				break;
+			}
 	}
 };
 
-function handleBodyScrollWheel(event){
-    //get the parent container of the event.target
-    var eventTargetContainerParent = $(event.target).parents(".container").parent();
-    
-    //test the height of the parent, if below 700 scrolling to next slide is ok
-    if(eventTargetContainerParent.height() <= 700){
-        //jump to the top of the page in case the previous page was scrollable
-        $('html,body').scrollTop(0);
-        var delta = event.originalEvent.detail < 0 || event.originalEvent.wheelDelta > 0 ? 1 : -1;
-        if (delta < 0) {
-            // scroll down
-            nextSlide();
-            event.preventDefault();
-        } else {
-            // scroll up
-            prevSlide();
-            event.preventDefault();
-         }
-    }
+function handleBodyScrollWheel(event) {
+	//get the parent container of the event.target
+	var eventTargetContainerParent = $(event.target).parents(".container").parent();
+
+	//test the height of the parent, if below 700 scrolling to next slide is ok
+	if (eventTargetContainerParent.height() <= 700) {
+		//jump to the top of the page in case the previous page was scrollable
+		$('html,body').scrollTop(0);
+		var delta = event.originalEvent.detail < 0 || event.originalEvent.wheelDelta > 0 ? 1 : -1;
+		if (delta < 0) {
+			// scroll down
+			nextSlide();
+			event.preventDefault();
+		} else {
+			// scroll up
+			prevSlide();
+			event.preventDefault();
+		}
+	}
 }
 
 function addEventListeners() {
 	document.addEventListener('keydown', handleBodyKeyDown, false);
-        $(document).unbind('mousewheel DOMMouseScroll').on('mousewheel DOMMouseScroll', handleBodyScrollWheel);
+	$(document).unbind('mousewheel DOMMouseScroll').on('mousewheel DOMMouseScroll', handleBodyScrollWheel);
 };
 
 /* Initialization */
@@ -535,19 +535,20 @@ function addFontStyle() {
 	var el = document.createElement('link');
 	el.rel = 'stylesheet';
 	el.type = 'text/css';
-//	el.href = 'http://fonts.googleapis.com/css?family=' + 'Open+Sans:regular,semibold,italic,italicsemibold|Droid+Sans+Mono';
-	el.href = PERMANENT_URL_PREFIX + './css/fonts';;
+	//	el.href = 'http://fonts.googleapis.com/css?family=' + 'Open+Sans:regular,semibold,italic,italicsemibold|Droid+Sans+Mono';
+	el.href = PERMANENT_URL_PREFIX + './css/fonts';
+	;
 
 	document.body.appendChild(el);
 };
 
 function addGeneralStyle() {
-// Set stylesheets in omm_readSelected
-//	var el = document.createElement('link');
-//	el.rel = 'stylesheet';
-//	el.type = 'text/css';
-//	el.href = PERMANENT_URL_PREFIX + './css/styles.css';
-//	document.body.appendChild(el);
+	// Set stylesheets in omm_readSelected
+	//	var el = document.createElement('link');
+	//	el.rel = 'stylesheet';
+	//	el.type = 'text/css';
+	//	el.href = PERMANENT_URL_PREFIX + './css/styles.css';
+	//	document.body.appendChild(el);
 
 	var el = document.createElement('meta');
 	el.name = 'viewport';
@@ -571,28 +572,29 @@ function makeBuildLists() {
 	}
 };
 
+function setSlideSize() {
 
-function setSlideSize(){
+	//make slides scrollable in height if necessary
+	$(".container").each(function(i, elementInitial) {
+		var containerHeight = $(elementInitial).height();
+		if (containerHeight > $('.article').height()) {
+			$(elementInitial).parent().css('min-height', containerHeight + 105);
+			$(elementInitial).parent().css('margin-bottom', "20px !important");
+		}
+	});
 
-        //make slides scrollable in height if necessary
-        $(".container").each(function(i, elementInitial) {
-            var containerHeight = $(elementInitial).height();
-            if(containerHeight > $('.article').height()){
-                $(elementInitial).parent().css('min-height', containerHeight + 105);
-                $(elementInitial).parent().css('margin-bottom', "20px !important");
-            }});
+	if ($(getSlideEl(curSlide + 1)).height() > 700) {
+		var height = $(getSlideEl(curSlide + 1)).height();
+		$("#next-slide-area").css('height', height);
+		console.log(height);
 
-        if($(getSlideEl(curSlide+1)).height() > 700){
-            var height = $(getSlideEl(curSlide+1)).height();
-            $("#next-slide-area").css('height', height);
-                        console.log(height);
-
-        }
-        if($(getSlideEl(curSlide-1)).height() > 700){
-            var height = $(getSlideEl(curSlide-1)).height();
-            $("#prev-slide-area").css('height', height);
-        }
+	}
+	if ($(getSlideEl(curSlide - 1)).height() > 700) {
+		var height = $(getSlideEl(curSlide - 1)).height();
+		$("#prev-slide-area").css('height', height);
+	}
 }
+
 function handleDomLoaded() {
 	slideEls = document.querySelectorAll('section.slides > article');
 
@@ -607,7 +609,7 @@ function handleDomLoaded() {
 	setupFrames();
 	makeBuildLists();
 	document.body.classList.add('loaded');
-        setSlideSize();
+	setSlideSize();
 };
 
 function initialize() {

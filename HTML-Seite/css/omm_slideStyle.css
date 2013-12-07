@@ -159,13 +159,16 @@
 .checkbox > label{
     margin-left: 3px;
     display: inline-block;
-    
+}
+
+.radio.omm_callout-answer {
+	margin-left: -5px;
+	padding-left: 22px;
 }
 
 .omm_answer-field-big >.omm_draggable{
     margin: 5px;
     padding: 1.5%;
-
 }
 
 /*
