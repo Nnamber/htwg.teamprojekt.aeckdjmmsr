@@ -7,22 +7,25 @@ function omm_validateQuestions() {
 	this.validate = function() {
 		//Dispach-Function: redirect to matching function
 		$('article').each(function(index) {
-			var currentQuestionType = this.className.split(" ")[0];
+			var container = $(this).find(".container");
+			var classNames = $(container).attr("class");
+			var currentQuestionType = classNames.split(" ")[0];
+			var articleFormGroup = $(this).find(".form-group");
 			switch (currentQuestionType) {
-				case "omm_question-type-SingleChoice":
-					validateSingleChoice(this);
+				case "SingleChoice":
+					validateSingleChoice(articleFormGroup);
 					break;
-				case "omm_question-type-MultipleChoice":
-					validateMultipleChoice(this);
+				case "MultipleChoice":
+					validateMultipleChoice(articleFormGroup);
 					break;
-				case "omm_question-type-OpenQuestion":
-					validateOpenQuestion(this);
+				case "OpenQuestion":
+					validateOpenQuestion(articleFormGroup);
 					break;
-				case "omm_question-type-MatchTask":
-					validateMatchTask(this);
+				case "MatchTask":
+					validateMatchTask(articleFormGroup);
 					break;
-				case "omm_question-type-ClozeText":
-					validateClozeText(this);
+				case "ClozeText":
+					validateClozeText(articleFormGroup);
 					break;
 			}
 		});
@@ -30,31 +33,46 @@ function omm_validateQuestions() {
 
 	function validateMultipleChoice(currentquestion) {
 		var iscorrect = true;
-		// $( "input:checkbox:checked" ).val();
 		$(currentquestion).find('input:checkbox').each(function(index, element) {
+			$(element).parent().parent(".checkbox").addClass("omm_callout-answer");
 			if ($(element).is(":checked")) {
 				if ($(element).attr("value") == "true") {
-					// do nothing
+					$(element).parent().parent(".checkbox").addClass("omm_callout-answer-right");
 				} else {
+					$(element).parent().parent(".checkbox").addClass("omm_callout-answer-wrong");
 					iscorrect = false;
 				}
 			} else {
 				if ($(element).attr("value") == "true") {
 					iscorrect = false;
+					$(element).parent().parent(".checkbox").addClass("omm_callout-answer-wrong");
 				} else {
-					// do nothing
+					$(element).parent().parent(".checkbox").addClass("omm_callout-answer-right");
 				}
 			}
 		});
+		$(currentquestion).addClass("omm_callout");
 		if (iscorrect) {
-			$(currentquestion).html("richtig");
+			$(currentquestion).addClass("omm_callout-right");
+			$(currentquestion).find(".checkbox").each(function(index,element) {
+				$(element).removeAttr("class");
+				$(element).attr("class", "checkbox");
+			});
+		}else {
+			$(currentquestion).addClass("omm_callout-wrong");
 		}
 	}
 
 	function validateSingleChoice(currentquestion) {
-		var rightAnswer = $(currentquestion).find('input[type=radio][value=true]:checked');
-		if (rightAnswer.length > 0) {
-			$(currentquestion).html("richtig");
+		var answer = $(currentquestion).find('input[type=radio][value=true]:checked');
+		var correctAnswerDiv = $(currentquestion).find("input[type=radio][value=true]").parent().parent(".radio");		
+		if (answer.length > 0) {
+			// $(currentquestion).html("richtig");
+			$(currentquestion).addClass("omm_callout omm_callout-right");
+			// $(correctAnswerDiv).addClass("omm_callout-answer omm_callout-answer-right"); // unnötig
+		} else{
+			$(currentquestion).addClass("omm_callout omm_callout-wrong");
+			$(correctAnswerDiv).addClass("omm_callout-answer omm_callout-answer-right");
 		}
 	}
 
@@ -85,13 +103,17 @@ function omm_validateQuestions() {
 		var iscorrect = true;
 		$(currentquestion).find('input:text').each(function(index, element) {
 			if ($(element).val() == $(element).attr('pattern')) {
-				// do nothing
+				$(element).addClass("omm_callout-text-right");
 			} else {
+				$(element).addClass("omm_callout-text-wrong");
 				iscorrect = false;
 			}
 		});
+		$(currentquestion).addClass("omm_callout");
 		if(iscorrect){
-			$(currentquestion).html("richtig");
+			$(currentquestion).addClass("omm_callout-right");
+		}else{
+			$(currentquestion).addClass("omm_callout-wrong");
 		}
 	}
 
