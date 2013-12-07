@@ -160,6 +160,9 @@ function omm_validateQuestions() {
 				var questionAnswer = $(formgroup).hasClass("omm_callout-wrong") ? "falsch" : "richtig";
 				if(questionAnswer == "richtig"){
 					rightAnswers++;
+					questionAnswer = "<i class='fa fa-check'></i> richtig";
+				}else{
+					questionAnswer = "<span class='glyphicon glyphicon-remove omm_notice'></span> falsch";
 				}
 				var tableRow = document.createElement("tr");
 				$(tableRow).append("<td>"+questionNr+"</td><td><a href='#'>"+ questionName +"</a></td><td>"+ questionAnswer +"</td>");
@@ -176,7 +179,7 @@ function omm_validateQuestions() {
 		$(form).append(table);
 		//Display the amount of right answers
 		if(rightAnswers != totalQuestions){
-			$(form).append("<div class='alert alert-danger'>Sie haben "+ rightAnswers +" von "+ totalQuestions +" richtig beantwortet. Das schaffen sicher besser!</div>");
+			$(form).append("<div class='alert alert-danger'>Sie haben "+ rightAnswers +" von "+ totalQuestions +" richtig beantwortet. Das schaffen Sie sicher besser!</div>");
 		}else{
 			$(form).append("<div class='alert alert-success'>Herzlichen Glückwunsch, Sie haben alle Fragen richtig beantwortet. Weiter so!</div>");
 		}
