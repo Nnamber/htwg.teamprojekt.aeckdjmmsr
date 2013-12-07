@@ -207,8 +207,12 @@ function buildNextItem() {
 
 function prevSlide() {
 	if (curSlide > 0) {
+            
 		curSlide--;
-
+                //jump to top of page
+                $('html,body').scrollTop(0); 
+                //update slide height
+                setSlideSize();
 		updateSlides();
 	}
 };
@@ -220,7 +224,10 @@ function nextSlide() {
 
 	if (curSlide < slideEls.length - 1) {
 		curSlide++;
-
+                //jump to top of page
+                $('html,body').scrollTop(0);
+                //update slide height
+                setSlideSize();
 		updateSlides();
 	}
 };
@@ -429,7 +436,8 @@ function updateHash() {
 /* Event listeners */
 
 function handleBodyKeyDown(event) {
-        setSlideSize(event.target);
+        var eventTargetContainerParent = $(event.target).parent();
+        console.log($(event.target).parent().height());
 	switch (event.keyCode) {
 		case 39:
 		// right arrow
@@ -438,7 +446,6 @@ function handleBodyKeyDown(event) {
 		case 32:
 		// space
 		case 34:
-                        $('html,body').scrollTop(0);    
 			// PgDn
 			nextSlide();
 			event.preventDefault();
@@ -449,7 +456,6 @@ function handleBodyKeyDown(event) {
 		//case 8:
 		// Backspace
 		case 33:
-                        $('html,body').scrollTop(0);
 			// PgUp
 			prevSlide();
 			event.preventDefault();
@@ -457,7 +463,6 @@ function handleBodyKeyDown(event) {
 
 		case 40:
                         if(eventTargetContainerParent.height() <= 700){     
-                            $('html,body').scrollTop(0);                            
                             // down arrow
                             if (isChromeVoxActive()) {
                                     speakNextItem();
@@ -469,7 +474,7 @@ function handleBodyKeyDown(event) {
                         }
 		case 38:
                         if(eventTargetContainerParent.height() <= 700){
-                            $('html,body').scrollTop(0);
+                            console.log("dum");
                             // up arrow
                             if (isChromeVoxActive()) {
                                     speakPrevItem();
@@ -569,15 +574,25 @@ function makeBuildLists() {
 
 
 function setSlideSize(){
+
         //make slides scrollable in height if necessary
         $(".container").each(function(i, elementInitial) {
-            
-             var containerHeight = $(elementInitial).height();
-             if(containerHeight > $('.article').height()){
-                 $(elementInitial).parent().css('min-height', containerHeight + 310);
-                 $(elementInitial).parent().css('margin-bottom', "20px !important");
-             }
-        });
+            var containerHeight = $(elementInitial).height();
+            if(containerHeight > $('.article').height()){
+                $(elementInitial).parent().css('min-height', containerHeight + 100);
+                $(elementInitial).parent().css('margin-bottom', "20px !important");
+            }});
+
+        if($(getSlideEl(curSlide+1)).height() > 700){
+            var height = $(getSlideEl(curSlide+1)).height();
+            $("#next-slide-area").css('height', height);
+                        console.log(height);
+
+        }
+        if($(getSlideEl(curSlide-1)).height() > 700){
+            var height = $(getSlideEl(curSlide-1)).height();
+            $("#prev-slide-area").css('height', height);
+        }
 }
 function handleDomLoaded() {
 	slideEls = document.querySelectorAll('section.slides > article');
@@ -592,8 +607,8 @@ function handleDomLoaded() {
 	setupInteraction();
 	setupFrames();
 	makeBuildLists();
-    setSlideSize(null);
 	document.body.classList.add('loaded');
+        setSlideSize();
 
 };
 
