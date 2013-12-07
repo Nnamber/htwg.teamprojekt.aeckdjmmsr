@@ -5,5 +5,4 @@ jQuery(document).ready(function() {
 
 	$(omm_cssSelector_checkAnswer).click(omm_validateQuestions.validate);
 
-
 });
