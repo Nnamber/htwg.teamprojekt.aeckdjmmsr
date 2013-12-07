@@ -34,46 +34,64 @@ function omm_validateQuestions() {
 	function validateMultipleChoice(currentquestion) {
 		var iscorrect = true;
 		$(currentquestion).find('input:checkbox').each(function(index, element) {
-			$(element).parent().parent(".checkbox").addClass("omm_callout-answer");
+			var checkboxGrandparentDiv = $(element).parent().parent(".checkbox");
+			$(checkboxGrandparentDiv).addClass("omm_callout-answer");
 			if ($(element).is(":checked")) {
 				if ($(element).attr("value") == "true") {
-					$(element).parent().parent(".checkbox").addClass("omm_callout-answer-right");
+					$(checkboxGrandparentDiv).addClass("omm_callout-answer-right");
 				} else {
-					$(element).parent().parent(".checkbox").addClass("omm_callout-answer-wrong");
+					$(checkboxGrandparentDiv).addClass("omm_callout-answer-wrong");
 					iscorrect = false;
 				}
 			} else {
 				if ($(element).attr("value") == "true") {
 					iscorrect = false;
-					$(element).parent().parent(".checkbox").addClass("omm_callout-answer-wrong");
+					$(checkboxGrandparentDiv).addClass("omm_callout-answer-wrong");
 				} else {
-					$(element).parent().parent(".checkbox").addClass("omm_callout-answer-right");
+					$(checkboxGrandparentDiv).addClass("omm_callout-answer-right");
 				}
 			}
 		});
+
 		$(currentquestion).addClass("omm_callout");
 		if (iscorrect) {
 			$(currentquestion).addClass("omm_callout-right");
-			$(currentquestion).find(".checkbox").each(function(index,element) {
+			$(currentquestion).find(".checkbox").each(function(index, element) {
 				$(element).removeAttr("class");
 				$(element).attr("class", "checkbox");
 			});
-		}else {
+		} else {
 			$(currentquestion).addClass("omm_callout-wrong");
+		}
+		appendNoticesToQuestion(currentquestion, iscorrect);
+	}
+
+	function appendNoticesToQuestion(currentquestion, iscorrect) {
+		if (iscorrect) {
+			var noticeOnRight = $(currentquestion).parent().parent().find(".omm_question-notice-on-right-html").text();
+			$(currentquestion).find(".container").append("<p>✔" + noticeOnRight + "</p>");
+		} else {
+			var noticeOnWrong = $(currentquestion).parent().parent().find(".omm_question-notice-on-wrong-html").text();
+			$(currentquestion).append("<p>† <span class='glyphicon glyphicon-star'></span> <em>" + noticeOnWrong + "</em></p>");
+			$(currentquestion).append("<span class='glyphicon glyphicon-star'></span>");
 		}
 	}
 
 	function validateSingleChoice(currentquestion) {
+		var iscorrect;
 		var answer = $(currentquestion).find('input[type=radio][value=true]:checked');
-		var correctAnswerDiv = $(currentquestion).find("input[type=radio][value=true]").parent().parent(".radio");		
+		var correctAnswerDiv = $(currentquestion).find("input[type=radio][value=true]").parent().parent(".radio");
 		if (answer.length > 0) {
+			iscorrect = true;
 			// $(currentquestion).html("richtig");
 			$(currentquestion).addClass("omm_callout omm_callout-right");
 			// $(correctAnswerDiv).addClass("omm_callout-answer omm_callout-answer-right"); // unnötig
-		} else{
+		} else {
+			iscorrect = false;
 			$(currentquestion).addClass("omm_callout omm_callout-wrong");
 			$(correctAnswerDiv).addClass("omm_callout-answer omm_callout-answer-right");
 		}
+		appendNoticesToQuestion(currentquestion, iscorrect);
 	}
 
 	function validateClozeText(currentquestion) {
@@ -86,20 +104,21 @@ function omm_validateQuestions() {
 
 	function validateMatchTask(currentquestion) {
 		var iscorrect = true;
-		$(currentquestion).find(omm_selector_divDropAnswer).each(function(index,element) {
-			if($(element).attr(omm_selector_attrName) == $(element).find(omm_selector_divDragable).attr(omm_selector_attrName)){
+		$(currentquestion).find(omm_selector_divDropAnswer).each(function(index, element) {
+			if ($(element).attr(omm_selector_attrName) == $(element).find(omm_selector_divDragable).attr(omm_selector_attrName)) {
 				//Do nothing
-			}else{
+			} else {
 				iscorrect = false;
 			}
 		});
-		if(iscorrect){
+		if (iscorrect) {
 			$(currentquestion).html("richtig");
 		}
+		appendNoticesToQuestion(currentquestion, iscorrect);
 	}
-	
+
 	//call in case of clozetext and openquestion
-	function commonValidation(currentquestion){
+	function commonValidation(currentquestion) {
 		var iscorrect = true;
 		$(currentquestion).find('input:text').each(function(index, element) {
 			if ($(element).val() == $(element).attr('pattern')) {
@@ -110,11 +129,12 @@ function omm_validateQuestions() {
 			}
 		});
 		$(currentquestion).addClass("omm_callout");
-		if(iscorrect){
+		if (iscorrect) {
 			$(currentquestion).addClass("omm_callout-right");
-		}else{
+		} else {
 			$(currentquestion).addClass("omm_callout-wrong");
 		}
+		appendNoticesToQuestion(currentquestion, iscorrect);
 	}
 
 }

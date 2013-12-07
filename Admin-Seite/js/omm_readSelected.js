@@ -4,7 +4,7 @@ function omm_readSelected() {
 	var student_questionNumberArea = "omm_question-number-area";
 
 	var htmlPageContent;
-	var stylesheets = ['css/bootstrap.css', 'css/font-awesome.min.css', 'css/omm_slideStyle.css', 'css/styles.css'];
+	var stylesheets = ['css/bootstrap.css', 'css/font-awesome.min.css', 'css/omm_slideStyle.css', 'css/styles.css', 'css/bootstrap-glyphicons.css'];
 	var scriptSources = ['js/jquery-2.0.3.js', 'js/bootstrap.min.js', 'js/slides.js', 'js/omm_validateQuestions.js', 'js/omm_main.js', 'js/omm_dragAndDrop.js'];
 
 	this.readSelectedQuestions = function() {
