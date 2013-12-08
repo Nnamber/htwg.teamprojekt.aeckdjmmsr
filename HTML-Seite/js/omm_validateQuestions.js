@@ -5,7 +5,7 @@ var omm_selector_attrName = "name";
 function omm_validateQuestions() {
 	var lastSlide;
 	this.validate = function() {
-		//Dispach-Function: redirect to matching function
+		//Dispatch-Function: redirect to matching function
 		$('article').each(function(index) {
 			var container = $(this).find(".container");
 			var classNames = $(container).attr("class");
@@ -69,17 +69,6 @@ function omm_validateQuestions() {
 		appendNoticesToQuestion(currentquestion, iscorrect);
 	}
 
-	function appendNoticesToQuestion(currentquestion, iscorrect) {
-		if (iscorrect) {
-			var noticeOnRight = $(currentquestion).parent().parent().find(".omm_question-notice-on-right-html").text();
-			$(currentquestion).find(".container").append("<p>✔" + noticeOnRight + "</p>");
-		} else {
-			var noticeOnWrong = $(currentquestion).parent().parent().find(".omm_question-notice-on-wrong-html").text();
-			$(currentquestion).append("<p>† <span class='glyphicon glyphicon-star'></span> <em>" + noticeOnWrong + "</em></p>");
-			$(currentquestion).append("<span class='glyphicon glyphicon-star'></span>");
-		}
-	}
-
 	function validateSingleChoice(currentquestion) {
 		var iscorrect;
 		var answer = $(currentquestion).find('input[type=radio][value=true]:checked');
@@ -139,9 +128,26 @@ function omm_validateQuestions() {
 		}
 		appendNoticesToQuestion(currentquestion, iscorrect);
 	}
+	
+	function appendNoticesToQuestion(currentquestion, iscorrect) {
+		var container = $(currentquestion).parent().parent();
+		if (iscorrect) {
+			var noticeOnRight = $(container).find(".omm_question-notice-on-right-html").text();
+			if (noticeOnRight.length !== 0) {
+				var alertBox = "<div class='alert alert-success'><p> <i class='fa fa-check'></i> <em>" + noticeOnRight + "</em></p></div>";
+				$(container).find("form").prepend(alertBox);
+			};
+		} else {
+			var noticeOnWrong = $(container).find(".omm_question-notice-on-wrong-html").text();
+			if (noticeOnWrong.length !== 0) {
+				var alertBox = "<div class='alert alert-danger'><p> <i class='fa fa-bolt'></i> <em>" + noticeOnWrong + "</em></p></div>";
+				$(container).find("form").prepend(alertBox);
+			};
+		}
+	}
 
 	function createStatisticTable(slide){
-		//Remove 'Auserwerten' button
+		//Remove 'Auswerten' button
 		$(omm_cssSelector_checkAnswer).remove();
 		//Create table with answered questions
 		var table = document.createElement("table");
@@ -150,7 +156,7 @@ function omm_validateQuestions() {
 		$(table).addClass("table-hover");
 		$(table).append("<thead><tr><th>#</th><th>Frage</th><th>Antwort</th></tr></thead>");	
 		$(table).append(tableBody);
-		var totalQuestions = $(".omm_total-question-number").text()[0];
+		var totalQuestions = $(".omm_total-question-number:first").text();
 		var rightAnswers = 0;
 		$('article').each(function(index, element){
 			var formgroup = $(element).find(".form-group");
@@ -160,9 +166,9 @@ function omm_validateQuestions() {
 				var questionAnswer = $(formgroup).hasClass("omm_callout-wrong") ? "falsch" : "richtig";
 				if(questionAnswer == "richtig"){
 					rightAnswers++;
-					questionAnswer = "<i class='fa fa-check'></i> richtig";
+					questionAnswer = "<i class='fa fa-check omm_notice'></i> richtig";
 				}else{
-					questionAnswer = "<span class='glyphicon glyphicon-remove omm_notice'></span> falsch";
+					questionAnswer = "<i class='fa fa-bolt omm_notice'></i> falsch";
 				}
 				var tableRow = document.createElement("tr");
 				$(tableRow).append("<td>"+questionNr+"</td><td><a href='#'>"+ questionName +"</a></td><td>"+ questionAnswer +"</td>");

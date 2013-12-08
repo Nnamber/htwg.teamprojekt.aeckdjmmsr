@@ -430,3 +430,11 @@ Colors for dimension testing
 .omm_callout-text-right{
 	border-color: #1c5005;
 }
+
+/* font awesome icons */
+.omm_notice.fa-bolt{ 
+	color: #FC0A0A;
+}
+.omm_notice.fa-check{
+	color: #1c5005;
+}
