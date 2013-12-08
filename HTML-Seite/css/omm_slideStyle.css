@@ -468,6 +468,7 @@ Colors for dimension testing
 
 .omm_callout-answer{
   border-left: 3px solid #eee;
+  border-radius: 4px;
 }
 
 .omm_callout-answer-wrong{
