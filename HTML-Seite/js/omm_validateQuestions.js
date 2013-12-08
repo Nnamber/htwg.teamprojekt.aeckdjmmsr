@@ -1,16 +1,28 @@
 var omm_selector_divDropAnswer = "div.omm_droppable";
 var omm_selector_divDragable = "div.omm_draggable";
-var omm_selector_attrName = "name";
+var omm_selector_container = ".container";
+var omm_selector_formGroup = ".form-group";
+var omm_selector_answerField = ".omm_answer-field";
+
+/*validation classes(styling right and wrong answers): */
+var omm_class_callout = "omm_callout";
+var omm_class_calloutAnswer = "omm_callout-answer";
+var omm_class_calloutAnswerRight = "omm_callout-answer-right";
+var omm_class_calloutAnswerWrong = "omm_callout-answer-wrong";
+var omm_class_calloutWrong = "omm_callout-wrong";
+var omm_class_calloutRight = "omm_callout-right";
+var omm_class_calloutTextRight = "omm_callout-text-right";
+var omm_class_calloutTextWrong = "omm_callout-text-wrong";
 
 function omm_validateQuestions() {
 	var lastSlide;
 	this.validate = function() {
 		//Dispatch-Function: redirect to matching function
 		$('article').each(function(index) {
-			var container = $(this).find(".container");
+			var container = $(this).find(omm_selector_container);
 			var classNames = $(container).attr("class");
 			var currentQuestionType = classNames.split(" ")[0];
-			var articleFormGroup = $(this).find(".form-group");
+			var articleFormGroup = $(this).find(omm_selector_formGroup);
 			switch (currentQuestionType) {
 				case "SingleChoice":
 					validateSingleChoice(articleFormGroup);
@@ -38,33 +50,33 @@ function omm_validateQuestions() {
 		var iscorrect = true;
 		$(currentquestion).find('input:checkbox').each(function(index, element) {
 			var checkboxGrandparentDiv = $(element).parent().parent(".checkbox");
-			$(checkboxGrandparentDiv).addClass("omm_callout-answer");
+			$(checkboxGrandparentDiv).addClass(omm_class_calloutAnswer);
 			if ($(element).is(":checked")) {
 				if ($(element).attr("value") == "true") {
-					$(checkboxGrandparentDiv).addClass("omm_callout-answer-right");
+					$(checkboxGrandparentDiv).addClass(omm_class_calloutAnswerRight);
 				} else {
-					$(checkboxGrandparentDiv).addClass("omm_callout-answer-wrong");
+					$(checkboxGrandparentDiv).addClass(omm_class_calloutAnswerWrong);
 					iscorrect = false;
 				}
 			} else {
 				if ($(element).attr("value") == "true") {
 					iscorrect = false;
-					$(checkboxGrandparentDiv).addClass("omm_callout-answer-wrong");
+					$(checkboxGrandparentDiv).addClass(omm_class_calloutAnswerWrong);
 				} else {
-					$(checkboxGrandparentDiv).addClass("omm_callout-answer-right");
+					$(checkboxGrandparentDiv).addClass(omm_class_calloutAnswerRight);
 				}
 			}
 		});
 
-		$(currentquestion).addClass("omm_callout");
+		$(currentquestion).addClass(omm_class_callout);
 		if (iscorrect) {
-			$(currentquestion).addClass("omm_callout-right");
+			$(currentquestion).addClass(omm_class_calloutRight);
 			$(currentquestion).find(".checkbox").each(function(index, element) {
 				$(element).removeAttr("class");
 				$(element).attr("class", "checkbox");
 			});
 		} else {
-			$(currentquestion).addClass("omm_callout-wrong");
+			$(currentquestion).addClass(omm_class_calloutWrong);
 		}
 		appendNoticesToQuestion(currentquestion, iscorrect);
 	}
@@ -75,12 +87,14 @@ function omm_validateQuestions() {
 		var correctAnswerDiv = $(currentquestion).find("input[type=radio][value=true]").parent().parent(".radio");
 		if (answer.length > 0) {
 			iscorrect = true;
-			$(currentquestion).addClass("omm_callout omm_callout-right");
-			// $(correctAnswerDiv).addClass("omm_callout-answer omm_callout-answer-right"); // unnötig
+			$(currentquestion).addClass(omm_class_callout);
+			$(currentquestion).addClass(omm_class_calloutRight);
 		} else {
 			iscorrect = false;
-			$(currentquestion).addClass("omm_callout omm_callout-wrong");
-			$(correctAnswerDiv).addClass("omm_callout-answer omm_callout-answer-right");
+			$(currentquestion).addClass(omm_class_calloutWrong);
+			$(currentquestion).addClass(omm_class_callout);
+			$(correctAnswerDiv).addClass(omm_class_calloutAnswer);
+			$(correctAnswerDiv).addClass(omm_class_calloutAnswerRight);
 		}
 		appendNoticesToQuestion(currentquestion, iscorrect);
 	}
@@ -102,27 +116,27 @@ function omm_validateQuestions() {
 			return a;			
 		});
 		$(currentquestion).find(omm_selector_divDropAnswer).each(function(index, element) {
-			if ($(element).attr(omm_selector_attrName) == $(element).find(omm_selector_divDragable).attr(omm_selector_attrName)) {
-				$(element).parent(".omm_answer-field").addClass("omm_callout-answer-right");
+			if ($(element).attr("name") == $(element).find(omm_selector_divDragable).attr("name")) {
+				$(element).parent(omm_selector_answerField).addClass(omm_class_calloutAnswerRight);
 			} else {
 				iscorrect = false;
-				$(element).parent(".omm_answer-field").addClass("omm_callout-answer-wrong");
+				$(element).parent(omm_selector_answerField).addClass(omm_class_calloutAnswerWrong);
 				$(answers).each(function(index){
-					if($(element).attr(omm_selector_attrName) == $(this).attr(omm_selector_attrName)){
+					if($(element).attr("name") == $(this).attr("name")){
 						$(element).append("<span>("+$(this).text()+")</span>");
 					}
 				});
 			}
 		});
-		$(currentquestion).addClass("omm_callout");
+		$(currentquestion).addClass(omm_class_callout);
 		/*$("#answerFieldRetentionPolicy").remove();*/
 		if (iscorrect) {
-			$(currentquestion).addClass("omm_callout-right");
-			$(currentquestion).find(".omm_answer-field").each(function(index, element) {
-				$(element).removeClass("omm_callout-answer-right");
+			$(currentquestion).addClass(omm_class_calloutRight);
+			$(currentquestion).find(omm_selector_answerField).each(function(index, element) {
+				$(element).removeClass(omm_class_calloutAnswerRight);
 			});
 		}else{
-			$(currentquestion).addClass("omm_callout-wrong");
+			$(currentquestion).addClass(omm_class_calloutWrong);
 		}
 		$(currentquestion).find("div.omm_answer-field-big").remove();
 		appendNoticesToQuestion(currentquestion, iscorrect);
@@ -133,17 +147,17 @@ function omm_validateQuestions() {
 		var iscorrect = true;
 		$(currentquestion).find('input:text').each(function(index, element) {
 			if ($(element).val() == $(element).attr('pattern')) {
-				$(element).addClass("omm_callout-text-right");
+				$(element).addClass(omm_class_calloutTextRight);
 			} else {
-				$(element).addClass("omm_callout-text-wrong");
+				$(element).addClass(omm_class_calloutTextWrong);
 				iscorrect = false;
 			}
 		});
-		$(currentquestion).addClass("omm_callout");
+		$(currentquestion).addClass(omm_class_callout);
 		if (iscorrect) {
-			$(currentquestion).addClass("omm_callout-right");
+			$(currentquestion).addClass(omm_class_calloutRight);
 		} else {
-			$(currentquestion).addClass("omm_callout-wrong");
+			$(currentquestion).addClass(omm_class_calloutWrong);
 		}
 		appendNoticesToQuestion(currentquestion, iscorrect);
 	}
@@ -178,11 +192,11 @@ function omm_validateQuestions() {
 		var totalQuestions = $(".omm_total-question-number:first").text();
 		var rightAnswers = 0;
 		$('article').each(function(index, element){
-			var formgroup = $(element).find(".form-group");
+			var formgroup = $(element).find(omm_selector_formGroup);
 			if(formgroup.length !== 0){
 				var questionNr = $(element).find(".omm_current-question-number").text();
 				var questionName = $(element).find(".omm_current-question-name").text();
-				var questionAnswer = $(formgroup).hasClass("omm_callout-wrong") ? "falsch" : "richtig";
+				var questionAnswer = $(formgroup).hasClass(omm_class_calloutWrong) ? "falsch" : "richtig";
 				if(questionAnswer == "richtig"){
 					rightAnswers++;
 					questionAnswer = "<i class='fa fa-check fa-2x omm_notice'></i> richtig";
