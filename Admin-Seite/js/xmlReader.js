@@ -72,17 +72,20 @@ function omm_xmlParser() {
     }
 
     function htmlQuestionBodyClozeText(clozeString) {
-        var patternG = /\[\[.+?]]*?/g;
-        var patternF = /\[\[.+?]]*?/;
+        var patternG = /\[\[.+?]]+?/g;
+        var patternF = /\[\[.+?]]+?/;
         var patternBracket = /(\[|])/g;
 
         var answers = clozeString.match(patternG);
         var body = '<div class="omm_question-body-html">';
+        
+        
         for (answer in answers) {
             var a = answers[answer].replace(patternBracket, "");
-            // eckige Klammern zur besseren Kennzeichnung eingefuegt. Optional. Allerdings mehrere Antworten moeglich [[xxx | yyy]]. Take care!
-            body += clozeString.replace(patternF, "<div class='omm_cloze-text-input'><div class='omm-cloze-text-hidden-answer'>[[" + a + "]]</div></div>");
+            // mehrere Antworten moeglich [[xxx | yyy]]. Take care!
+            clozeString = clozeString.replace(patternF, "<div class='omm_cloze-text-input'><div class='omm-cloze-text-hidden-answer'>" + a + "</div></div>");
         }
+        body += clozeString;
         body += '</div>';
 
         return body;
