@@ -188,7 +188,7 @@ function omm_validateQuestions() {
 		if(rightAnswers != totalQuestions){
 			$(form).append("<div class='alert alert-danger omm_alert-danger'>Sie haben "+ rightAnswers +" von "+ totalQuestions +" richtig beantwortet. Das schaffen Sie sicher besser!</div>");
 		}else{
-			$(form).append("<div class='alert alert-success omm_alert-success'>Herzlichen Glückwunsch, Sie haben alle Fragen richtig beantwortet. Weiter so!</div>");
+			$(form).append("<div class='alert alert-success omm_alert-success'>Herzlichen Glückwunsch, Sie haben alle Fragen richtig beantwortet. Weiter so! <i class='fa fa-thumbs-o-up'></i></div>");
 		}
 	}
 	
