@@ -75,7 +75,6 @@ function omm_validateQuestions() {
 		var correctAnswerDiv = $(currentquestion).find("input[type=radio][value=true]").parent().parent(".radio");
 		if (answer.length > 0) {
 			iscorrect = true;
-			// $(currentquestion).html("richtig");
 			$(currentquestion).addClass("omm_callout omm_callout-right");
 			// $(correctAnswerDiv).addClass("omm_callout-answer omm_callout-answer-right"); // unnötig
 		} else {
@@ -96,16 +95,36 @@ function omm_validateQuestions() {
 
 	function validateMatchTask(currentquestion) {
 		var iscorrect = true;
+		//No draggable elements allowed after validation
+		$(currentquestion).find(omm_selector_divDragable).removeAttr("draggable");
+		$(currentquestion).find(omm_selector_divDragable).removeAttr("ondragstart");
+		var answers = $.map($(currentquestion).find(omm_selector_divDragable), function(a) {
+			return a;			
+		});
 		$(currentquestion).find(omm_selector_divDropAnswer).each(function(index, element) {
 			if ($(element).attr(omm_selector_attrName) == $(element).find(omm_selector_divDragable).attr(omm_selector_attrName)) {
-				//Do nothing
+				$(element).parent(".omm_answer-field").addClass("omm_callout-answer-right");
 			} else {
 				iscorrect = false;
+				$(element).parent(".omm_answer-field").addClass("omm_callout-answer-wrong");
+				$(answers).each(function(index){
+					if($(element).attr(omm_selector_attrName) == $(this).attr(omm_selector_attrName)){
+						$(element).append("<span>("+$(this).text()+")</span>");
+					}
+				});
 			}
 		});
+		$(currentquestion).addClass("omm_callout");
+		/*$("#answerFieldRetentionPolicy").remove();*/
 		if (iscorrect) {
-			$(currentquestion).html("richtig");
+			$(currentquestion).addClass("omm_callout-right");
+			$(currentquestion).find(".omm_answer-field").each(function(index, element) {
+				$(element).removeClass("omm_callout-answer-right");
+			});
+		}else{
+			$(currentquestion).addClass("omm_callout-wrong");
 		}
+		$(currentquestion).find("div.omm_answer-field-big").remove();
 		appendNoticesToQuestion(currentquestion, iscorrect);
 	}
 
