@@ -3,7 +3,7 @@ function omm_readSelected() {
 	var generateAnswers = new omm_answerGenerator();
 	var student_questionNumberArea = "omm_question-number-area";
 
-	var htmlPageContent;
+	var htmlPage;
 	var stylesheets = ['css/bootstrap.css', 'css/font-awesome.min.css', 'css/omm_slideStyle.css', 'css/styles.css'];
 	var scriptSources = ['js/jquery-2.0.3.js', 'js/bootstrap.min.js', 'js/slides.js', 'js/omm_validateQuestions.js', 'js/omm_main.js', 'js/omm_dragAndDrop.js'];
 
@@ -12,16 +12,24 @@ function omm_readSelected() {
 		insertQuestionSlides();
 		insertValidationSlide();
 
-		var htmlPageContentString = jQuery(htmlPageContent).html();
-		return htmlPageContentString;
+                //Get browser build in serializer to serialize document element
+		var htmlPageString = new XMLSerializer().serializeToString(htmlPage);
+		return htmlPageString;
 	};
 	
 
 	function generateHtmlPageScaffold() {
-		htmlPageContent = document.createElement("html");
-		jQuery(htmlPageContent).html("<head></head><body></body>");
-		var head = jQuery(htmlPageContent).find("head");
-		head.append("<title>Presentation</title><meta charset='utf-8'>");
+            
+                //Create doucument
+                htmlPage = document.implementation.createHTMLDocument(omm_applicationTitle);
+                var htmlPageContent = htmlPage.documentElement;
+                
+                var head = jQuery(htmlPageContent).find("head");
+                
+                //Set meta
+                var charsetMeta = document.createElement("meta");
+                jQuery(charsetMeta).attr("charset","utf-8");
+		head.append(charsetMeta);
 
 		//Add scripts and stylesheets
 		addStylesheetLinks(head, stylesheets);
@@ -41,7 +49,7 @@ function omm_readSelected() {
 		var selectedQuestions = jQuery(omm_cssSelector_themaTable + " " + omm_cssSelector_panelBody + " :checked");
 		var totalQuestionNumber = selectedQuestions.length;
 		selectedQuestions.each(function(index, element) {
-			jQuery(htmlPageContent).find(".slides").append(function() {
+			jQuery(htmlPage.documentElement).find(".slides").append(function() {
 				var article = document.createElement("article");
                                 //Append Question Number Area and Question titel
 				jQuery(article).append(function() {
@@ -113,7 +121,7 @@ function omm_readSelected() {
 	}
 	
 	function insertValidationSlide(){
-		jQuery(htmlPageContent).find(".slides").append(function() {
+		jQuery(htmlPage.documentElement).find(".slides").append(function() {
 			var article = document.createElement("article");
 			jQuery(article).append(function() {
 
@@ -179,7 +187,7 @@ function omm_readSelected() {
 		jQuery(nav).addClass("navbar navbar-fixed-bottom");
 		var inner = document.createElement("div");
 		jQuery(inner).addClass("navbar-inner navbar-content-center");
-
+               
 		jQuery(nav).append(inner);
 		jQuery(footer).append(nav);
 		body.append(footer);
