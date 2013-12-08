@@ -123,9 +123,9 @@ function omm_validateQuestions() {
 				iscorrect = false;
 
 				$(element).parent(omm_selector_answerField).addClass(omm_class_calloutAnswerWrong);
-				$(answers).each(function(index){
-					if($(element).attr("name") == $(this).attr("name")){
-						$(element).append("<span>("+$(this).text()+")</span>");
+				$(answers).each(function(index) {
+					if ($(element).attr("name") == $(this).attr("name")) {
+						$(element).append("<span>(" + $(this).text() + ")</span>");
 
 					}
 				});
@@ -138,7 +138,7 @@ function omm_validateQuestions() {
 			$(currentquestion).find(omm_selector_answerField).each(function(index, element) {
 				$(element).removeClass(omm_class_calloutAnswerRight);
 			});
-		}else{
+		} else {
 			$(currentquestion).addClass(omm_class_calloutWrong);
 		}
 		$(currentquestion).find("div.omm_answer-field-big").remove();
@@ -202,13 +202,13 @@ function omm_validateQuestions() {
 		$(table).append(tableBody);
 		var totalQuestions = $(".omm_total-question-number:first").text();
 		var rightAnswers = 0;
-		$('article').each(function(index, element){
+		$('article').each(function(index, element) {
 			var formgroup = $(element).find(omm_selector_formGroup);
-			if(formgroup.length !== 0){
+			if (formgroup.length !== 0) {
 				var questionNr = $(element).find(".omm_current-question-number").text();
 				var questionName = $(element).find(".omm_current-question-name").text();
 				var questionAnswer = $(formgroup).hasClass(omm_class_calloutWrong) ? "falsch" : "richtig";
-				if(questionAnswer == "richtig"){
+				if (questionAnswer == "richtig") {
 					rightAnswers++;
 					questionAnswer = "<i class='fa fa-check-circle fa-2x omm_notice'></i>&nbsp;&nbsp;richtig";
 				} else {
@@ -234,19 +234,26 @@ function omm_validateQuestions() {
 		} else {
 			$(form).append("<div class='alert alert-success omm_alert-success'>Herzlichen Glückwunsch, Sie haben alle Fragen richtig beantwortet. Weiter so! <i class='fa fa-thumbs-o-up'></i></div>");
 		}
-		var percentCorrect = rightAnswers/totalQuestions;
+		var percentCorrect = Math.round((rightAnswers / totalQuestions)*100);
 		var progressbar = document.createElement("div");
 		$(progressbar).addClass('progress');
 		var progressbarCorrect = document.createElement("div");
 		$(progressbarCorrect).addClass('progress-bar');
 		$(progressbarCorrect).addClass('progress-bar-success');
-		$(progressbarCorrect).attr("style",("width:"+percentCorrect*100+"%"));
+		$(progressbarCorrect).attr("style", ("width:" + percentCorrect + "%"));
+		var captionCorrect = document.createElement("span");
+		$(captionCorrect).html(percentCorrect+ '% richtig');
+		$(progressbarCorrect).append(captionCorrect);
 		var progressbarWrong = document.createElement("div");
-		$(progressbarWrong).addClass('progress');
+		$(progressbarWrong).addClass('progress-bar');
 		$(progressbarWrong).addClass('progress-bar-danger');
-		$(progressbarWrong).attr("style",("width:"+(1-percentCorrect)*100+"%"));
+		$(progressbarWrong).attr("style", ("width:" + (100 - percentCorrect) + "%"));
+		var captionWrong = document.createElement("span");
+		$(captionWrong).html((100 - percentCorrect)+ '% falsch');
+		$(progressbarWrong).append(captionWrong);
 		$(progressbar).append(progressbarCorrect);
 		$(progressbar).append(progressbarWrong);
 		$(form).append(progressbar);
 	}
+
 }
