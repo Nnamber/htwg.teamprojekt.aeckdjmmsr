@@ -617,7 +617,7 @@ function handleDomLoaded() {
 	setupFrames();
 	makeBuildLists();
 	document.body.classList.add('loaded');
-	setSlideSize();
+	setSlideSize(null);
 };
 
 function initialize() {
