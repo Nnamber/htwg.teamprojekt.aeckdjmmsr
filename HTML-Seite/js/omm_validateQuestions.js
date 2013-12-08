@@ -42,8 +42,9 @@ function omm_validateQuestions() {
 			}
 			lastArticle = this;
 		});
-
 		createStatisticTable(lastArticle);
+		//make slide scrollable in height if necessary
+		setSlideSize();
 	};
 
 	function validateMultipleChoice(currentquestion) {
@@ -232,9 +233,4 @@ function omm_validateQuestions() {
 			$(form).append("<div class='alert alert-success omm_alert-success'>Herzlichen Glückwunsch, Sie haben alle Fragen richtig beantwortet. Weiter so! <i class='fa fa-thumbs-o-up'></i></div>");
 		}
 	}
-
-
-	this.jumpToSlide = function() {
-
-	};
 }
