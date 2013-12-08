@@ -122,10 +122,19 @@
     height: 100%;
  }
 
-.omm_droppable-answer > span{
+.omm_droppable-answer > span , .omm_droppable > span{
     text-align: left;
     display: inline-block;
+}
+
+.omm_droppable-answer > span {
     margin: 4.5%;
+}
+
+.omm_droppable > span{
+	margin: 3.5%;
+	color: #35B929;
+	font-weight: 700;
 }
 .omm_answer-field-big{
     display: inline-block;
@@ -260,7 +269,7 @@ Colors for dimension testing
         -o-box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
-        background-color: white;
+        background-color: black;
         box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
         border: 1px solid rgba(0, 0, 0, .3);
         transition: transform .3s ease-out;
@@ -276,7 +285,7 @@ Colors for dimension testing
     }
 }
 
-@media only screen and (min-width: 1281px) and (max-height: 1280px){
+@media only screen and (min-width: 1281px) and (min-height: 1000px){
     .slides > article.next {
 	display: block;
 	transform: translate(1130px);
