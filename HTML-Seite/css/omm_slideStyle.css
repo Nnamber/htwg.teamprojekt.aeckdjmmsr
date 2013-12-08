@@ -145,7 +145,7 @@
     border: 1px solid rgb(204, 204, 204);
     border-radius: 4px;
     width: 100%;
-    min-height: 70px;
+    min-height: 56px;
 }
 
 .omm_draggable{
@@ -294,7 +294,7 @@ Colors for dimension testing
 	-o-transform: translate(1130px);
 	-moz-transform: translate(1130px);
 	-webkit-transform: translate3d(1130px, 0, 0);
-        margin-top: -22.2%;
+        margin-top: -29.5%;
         height: 85%;
     }
     .slides > article.past {
@@ -303,7 +303,7 @@ Colors for dimension testing
 	-o-transform: translate(-1130px);
 	-moz-transform: translate(-1130px);
 	-webkit-transform: translate3d(-1130px, 0, 0);
-        margin-top: -22.2%;
+        margin-top: -29.5%;
          height: 85%;
 }
     .slides > article.far-next {
@@ -499,10 +499,10 @@ Colors for dimension testing
 
 /* font awesome icons */
 .omm_notice.fa-times-circle{ 
-	color: #FC0A0A;
+	color: #FF0000;
 }
 .omm_notice.fa-check-circle{
-	color: #1c5005;
+	color: #ABDD1F;
 }
 
 .omm_alert-danger{

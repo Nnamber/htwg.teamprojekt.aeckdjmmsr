@@ -192,6 +192,7 @@ function updateSlides() {
 function buildNextItem() {
 	var toBuild = slideEls[curSlide].querySelectorAll('.to-build');
 
+
 	if (!toBuild.length) {
 		return false;
 	}
@@ -201,13 +202,13 @@ function buildNextItem() {
 	if (isChromeVoxActive()) {
 		speakAndSyncToNode(toBuild[0]);
 	}
-
 	return true;
 };
 
 function prevSlide() {
+    	setSlideSize("back");
 	//update slide height
-	setSlideSize();
+	//setSlideSize();
 	if (curSlide > 0) {
 
 		curSlide--;
@@ -219,7 +220,7 @@ function prevSlide() {
 
 function nextSlide() {
 	//update slide height
-	setSlideSize();
+	setSlideSize("next");
 	if (buildNextItem()) {
 		return;
 	}
@@ -436,6 +437,8 @@ function updateHash() {
 /* Event listeners */
 
 function handleBodyKeyDown(event) {
+        var slideHeight=$(getSlideEl(curSlide)).height();
+        
 	switch (event.keyCode) {
 		case 39:
 		// right arrow
@@ -460,7 +463,7 @@ function handleBodyKeyDown(event) {
 			break;
 
 		case 40:
-			if (eventTargetContainerParent <= $(window).height()) {
+			if (slideHeight <= $(window).height()) {
 				// down arrow
 				if (isChromeVoxActive()) {
 					speakNextItem();
@@ -471,7 +474,7 @@ function handleBodyKeyDown(event) {
 				break;
 			}
 		case 38:
-			if (eventTargetContainerParent <= $(window).height()) {
+			if (slideHeight <= $(window).height()) {
 				// up arrow
 				if (isChromeVoxActive()) {
 					speakPrevItem();
@@ -485,10 +488,8 @@ function handleBodyKeyDown(event) {
 };
 
 function handleBodyScrollWheel(event) {
-	//get the parent container of the event.target
-	var eventTargetContainerParent = $(getSlideEl(curSlide)).find('.container').height();
-    //test the height of the parent, if below 700 scrolling to next slide is ok
-	if (eventTargetContainerParent <= $(window).height() || $(event.target).parents('.container').length === 0) {
+        //test the height of the parent, if below 700 scrolling to next slide is ok
+	if ($(getSlideEl(curSlide)).height() <= $(window).height() || $(event.target).parents('.container').length === 0) {
 		//jump to the top of the page in case the previous page was scrollable
 		$('html,body').scrollTop(0);
 		var delta = event.originalEvent.detail < 0 || event.originalEvent.wheelDelta > 0 ? 1 : -1;
@@ -569,25 +570,37 @@ function makeBuildLists() {
 	}
 };
 
-function setSlideSize() {
-
+function setSlideSize(direction) {
 	//make slides scrollable in height if necessary
-	$(".container").each(function(i, elementInitial) {
-		var containerHeight = $(elementInitial).height();
-		if (containerHeight > $('.article').height()) {
-			$(elementInitial).parent().css('min-height', containerHeight + 105);
-			$(elementInitial).parent().css('margin-bottom', "20px !important");
-		}
-	});
+        var nextItem = $(getSlideEl(curSlide + 1));
+        var prevItem = $(getSlideEl(curSlide - 1));
+        var curItem = $(getSlideEl(curSlide));
 
-	if ($(getSlideEl(curSlide + 1)).height() > 700) {
-		var height = $(getSlideEl(curSlide + 1)).height();
-		$("#next-slide-area").css('height', height);
-	}
-	if ($(getSlideEl(curSlide - 1)).height() > 700) {
-		var height = $(getSlideEl(curSlide - 1)).height();
-		$("#prev-slide-area").css('height', height);
-	}
+        if(direction === "next"){
+            if(nextItem !== null){
+                var containerHeight = $(nextItem).children('.container').height();
+                if (containerHeight > $(nextItem).height()) {
+                        $(nextItem).css('min-height', containerHeight + 105);
+                        $(nextItem).css('margin-bottom', "20px !important");
+                }
+             }
+            $(curItem).removeAttr("style");
+        }else if (direction === "back"){
+            if(prevItem !== null){
+               var containerHeight = $(prevItem).children('.container').height();
+               if (containerHeight > $(prevItem).height()) {
+                       $(prevItem).css('min-height', containerHeight + 105);
+                       $(prevItem).css('margin-bottom', "20px !important");
+               }
+            }
+            $(curItem).removeAttr("style");
+        } else if(direction === null){
+             var containerHeight = $(curItem).children('.container').height();
+             if (containerHeight > $(curItem).height()) {
+                        $(curItem).css('min-height', containerHeight + 105);
+                        $(curItem).css('margin-bottom', "20px !important");
+             }
+        }  
 }
 
 function handleDomLoaded() {
