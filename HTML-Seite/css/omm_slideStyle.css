@@ -9,8 +9,7 @@
 
 .slides > article {
     padding: 0px 0px !important;
-    background-color: green !important;
-}
+ }
 
 .slides > article > .container {
     margin-top: 80px;
@@ -172,7 +171,7 @@
 }
 
 .omm_answer-field-big >.omm_draggable{
-    margin: 2%;
+    margin: 0.5%;
     padding: 1.5%;
 }
 
@@ -271,7 +270,7 @@ Colors for dimension testing
         -o-box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
-        background-color: blue !important;
+        background-color: white;
         box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
         border: 1px solid rgba(0, 0, 0, .3);
         transition: transform .3s ease-out;
@@ -326,7 +325,7 @@ Colors for dimension testing
         -o-box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
-        background-color: orange !important;
+        background-color: white;
         box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
         border: 1px solid rgba(0, 0, 0, .3);
         transition: transform .3s ease-out;
@@ -342,7 +341,7 @@ Colors for dimension testing
     }
 }
 /*wxga*/
-@media only screen and (height: 626px) and (width: 1286px){
+@media only screen and (min-height: 626px) and (min-width: 1286px){
     .slides > article.next {
 	display: block;
 	transform: translate(1130px);
@@ -380,7 +379,7 @@ Colors for dimension testing
         -o-box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
-        background-color: red !important;
+        background-color: white;
         box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
         border: 1px solid rgba(0, 0, 0, .3);
         transition: transform .3s ease-out;
@@ -396,7 +395,7 @@ Colors for dimension testing
     }
 }
 
-@media only screen and (min-width: 1301px) and (device-aspect-ratio: 16/9){
+@media only screen and (min-width: 1301px){
     .slides > article.next {
 	display: block;
 	transform: translate(1130px);
@@ -404,7 +403,8 @@ Colors for dimension testing
 	-moz-transform: translate(1130px);
 	-webkit-transform: translate3d(1130px, 0, 0);
         margin-left: -10%;
-        height: 80%;
+        height: 85%;
+        margin-top: -19.5%;
     }
     .slides > article.past {
 	display: block;
@@ -413,7 +413,8 @@ Colors for dimension testing
 	-moz-transform: translate(-1130px);
 	-webkit-transform: translate3d(-1130px, 0, 0);
         margin-left:  -37%;
-        height: 80%;
+        height: 85%;
+        margin-top: -19.5%;
 }
     .slides > article.far-next {
         display: none !important;
@@ -434,7 +435,7 @@ Colors for dimension testing
         -o-box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
-        background-color: yellow !important;
+        background-color: white;
         box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
         border: 1px solid rgba(0, 0, 0, .3);
         transition: transform .3s ease-out;
@@ -454,9 +455,9 @@ Colors for dimension testing
 
 /* Validation Style */
 .omm_callout {
-  margin: 20px 0;
-  padding: 20px;
+  padding: 2%;
   border-left: 3px solid #eee;
+  border-radius: 4px;
 }
 
 .omm_callout-wrong {
@@ -470,8 +471,6 @@ Colors for dimension testing
 }
 
 .omm_callout-answer{
-/*  margin: 20px 0;
-  padding: 20px;*/
   border-left: 3px solid #eee;
 }
 
