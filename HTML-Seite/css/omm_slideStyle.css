@@ -521,3 +521,17 @@ Colors for dimension testing
 	text-align: left;
 	vertical-align: middle !important;
 }
+
+.MultipleChoice .omm_callout{
+	padding-left: 29px;
+}
+
+.omm_multipleChoiseXtra{
+	margin-left: -44px !important;
+}
+
+#omm_right-answer-info{
+	color: #ABDD1F;
+	margin-left: -21px;
+	font-size: x-large;
+}

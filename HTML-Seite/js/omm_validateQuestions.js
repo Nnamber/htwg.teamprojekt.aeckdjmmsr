@@ -55,16 +55,20 @@ function omm_validateQuestions() {
 			if ($(element).is(":checked")) {
 				if ($(element).attr("value") == "true") {
 					$(checkboxGrandparentDiv).addClass(omm_class_calloutAnswerRight);
+					$(checkboxGrandparentDiv).append("<input class='omm_multipleChoiseXtra' type='checkbox' checked='checked'>");
 				} else {
 					$(checkboxGrandparentDiv).addClass(omm_class_calloutAnswerWrong);
+					$(checkboxGrandparentDiv).append("<input class='omm_multipleChoiseXtra' type='checkbox'>");
 					iscorrect = false;
 				}
 			} else {
 				if ($(element).attr("value") == "true") {
 					iscorrect = false;
 					$(checkboxGrandparentDiv).addClass(omm_class_calloutAnswerWrong);
+					$(checkboxGrandparentDiv).append("<input class='omm_multipleChoiseXtra' type='checkbox' checked='checked'>");
 				} else {
-					$(checkboxGrandparentDiv).addClass(omm_class_calloutAnswerRight);
+					/*$(checkboxGrandparentDiv).addClass(omm_class_calloutAnswerRight);*/
+					$(checkboxGrandparentDiv).append("<input class='omm_multipleChoiseXtra' type='checkbox' >");
 				}
 			}
 		});
@@ -75,9 +79,11 @@ function omm_validateQuestions() {
 			$(currentquestion).find(".checkbox").each(function(index, element) {
 				$(element).removeAttr("class");
 				$(element).attr("class", "checkbox");
+				$(currentquestion).find(".omm_multipleChoiseXtra").remove();
 			});
 		} else {
 			$(currentquestion).addClass(omm_class_calloutWrong);
+			$(currentquestion).find('.omm_question-answers-html:last').append("<i id='omm_right-answer-info' class='fa fa-sort-desc fa-2x'> Richtige Antwort</i>");
 		}
 		appendNoticesToQuestion(currentquestion, iscorrect);
 	}
