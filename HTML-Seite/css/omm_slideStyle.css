@@ -123,10 +123,19 @@
     height: 100%;
  }
 
-.omm_droppable-answer > span{
+.omm_droppable-answer > span , .omm_droppable > span{
     text-align: left;
     display: inline-block;
+}
+
+.omm_droppable-answer > span {
     margin: 4.5%;
+}
+
+.omm_droppable > span{
+	margin: 3.5%;
+	color: #35B929;
+	font-weight: 700;
 }
 .omm_answer-field-big{
     display: inline-block;
@@ -490,9 +499,23 @@ Colors for dimension testing
 }
 
 /* font awesome icons */
-.omm_notice.fa-bolt{ 
+.omm_notice.fa-times-circle{ 
 	color: #FC0A0A;
 }
 .omm_notice.fa-check{
 	color: #1c5005;
+}
+
+.omm_alert-danger{
+	color:#000000;
+	font-weight: bold;
+}
+
+.omm_alert-success{
+	font-weight: bold;
+}
+
+.omm_statistic-table > td, .omm_statistic-table > td > i{
+	text-align: left;
+	vertical-align: middle !important;
 }

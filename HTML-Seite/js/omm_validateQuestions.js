@@ -75,7 +75,6 @@ function omm_validateQuestions() {
 		var correctAnswerDiv = $(currentquestion).find("input[type=radio][value=true]").parent().parent(".radio");
 		if (answer.length > 0) {
 			iscorrect = true;
-			// $(currentquestion).html("richtig");
 			$(currentquestion).addClass("omm_callout omm_callout-right");
 			// $(correctAnswerDiv).addClass("omm_callout-answer omm_callout-answer-right"); // unnötig
 		} else {
@@ -96,16 +95,36 @@ function omm_validateQuestions() {
 
 	function validateMatchTask(currentquestion) {
 		var iscorrect = true;
+		//No draggable elements allowed after validation
+		$(currentquestion).find(omm_selector_divDragable).removeAttr("draggable");
+		$(currentquestion).find(omm_selector_divDragable).removeAttr("ondragstart");
+		var answers = $.map($(currentquestion).find(omm_selector_divDragable), function(a) {
+			return a;			
+		});
 		$(currentquestion).find(omm_selector_divDropAnswer).each(function(index, element) {
 			if ($(element).attr(omm_selector_attrName) == $(element).find(omm_selector_divDragable).attr(omm_selector_attrName)) {
-				//Do nothing
+				$(element).parent(".omm_answer-field").addClass("omm_callout-answer-right");
 			} else {
 				iscorrect = false;
+				$(element).parent(".omm_answer-field").addClass("omm_callout-answer-wrong");
+				$(answers).each(function(index){
+					if($(element).attr(omm_selector_attrName) == $(this).attr(omm_selector_attrName)){
+						$(element).append("<span>("+$(this).text()+")</span>");
+					}
+				});
 			}
 		});
+		$(currentquestion).addClass("omm_callout");
+		/*$("#answerFieldRetentionPolicy").remove();*/
 		if (iscorrect) {
-			$(currentquestion).html("richtig");
+			$(currentquestion).addClass("omm_callout-right");
+			$(currentquestion).find(".omm_answer-field").each(function(index, element) {
+				$(element).removeClass("omm_callout-answer-right");
+			});
+		}else{
+			$(currentquestion).addClass("omm_callout-wrong");
 		}
+		$(currentquestion).find("div.omm_answer-field-big").remove();
 		appendNoticesToQuestion(currentquestion, iscorrect);
 	}
 
@@ -134,13 +153,13 @@ function omm_validateQuestions() {
 		if (iscorrect) {
 			var noticeOnRight = $(container).find(".omm_question-notice-on-right-html").text();
 			if (noticeOnRight.length !== 0) {
-				var alertBox = "<div class='alert alert-success'><p> <i class='fa fa-check'></i> <em>" + noticeOnRight + "</em></p></div>";
+				var alertBox = "<div class='alert alert-success omm-alert-success'><p> <i class='fa fa-check-circle fa-2x omm_notice'></i>&nbsp;&nbsp;<em>" + noticeOnRight + "</em></p></div>";
 				$(container).find("form").prepend(alertBox);
 			};
 		} else {
 			var noticeOnWrong = $(container).find(".omm_question-notice-on-wrong-html").text();
 			if (noticeOnWrong.length !== 0) {
-				var alertBox = "<div class='alert alert-danger'><p> <i class='fa fa-bolt'></i> <em>" + noticeOnWrong + "</em></p></div>";
+				var alertBox = "<div class='alert alert-danger omm_alert-danger'><p> <i class='fa fa-times-circle fa-2x omm_notice'></i>&nbsp;&nbsp;<em>" + noticeOnWrong + "</em></p></div>";
 				$(container).find("form").prepend(alertBox);
 			};
 		}
@@ -166,11 +185,12 @@ function omm_validateQuestions() {
 				var questionAnswer = $(formgroup).hasClass("omm_callout-wrong") ? "falsch" : "richtig";
 				if(questionAnswer == "richtig"){
 					rightAnswers++;
-					questionAnswer = "<i class='fa fa-check omm_notice'></i> richtig";
+					questionAnswer = "<i class='fa fa-check fa-2x omm_notice'></i> richtig";
 				}else{
-					questionAnswer = "<i class='fa fa-bolt omm_notice'></i> falsch";
+					questionAnswer = "<i class='fa fa-times-circle fa-2x omm_notice'></i>&nbsp;&nbsp;falsch";
 				}
 				var tableRow = document.createElement("tr");
+				$(tableRow).addClass("omm_statistic-table");
 				$(tableRow).append("<td>"+questionNr+"</td><td><a href='#'>"+ questionName +"</a></td><td>"+ questionAnswer +"</td>");
 				$(tableRow).click('click', function() {
 					for (var i = 0; i < $('article').length - questionNr; i++){
@@ -185,9 +205,9 @@ function omm_validateQuestions() {
 		$(form).append(table);
 		//Display the amount of right answers
 		if(rightAnswers != totalQuestions){
-			$(form).append("<div class='alert alert-danger'>Sie haben "+ rightAnswers +" von "+ totalQuestions +" richtig beantwortet. Das schaffen Sie sicher besser!</div>");
+			$(form).append("<div class='alert alert-danger omm_alert-danger'>Sie haben "+ rightAnswers +" von "+ totalQuestions +" richtig beantwortet. Das schaffen Sie sicher besser!</div>");
 		}else{
-			$(form).append("<div class='alert alert-success'>Herzlichen Glückwunsch, Sie haben alle Fragen richtig beantwortet. Weiter so!</div>");
+			$(form).append("<div class='alert alert-success omm_alert-success'>Herzlichen Glückwunsch, Sie haben alle Fragen richtig beantwortet. Weiter so! <i class='fa fa-thumbs-o-up'></i></div>");
 		}
 	}
 	
