@@ -30,7 +30,7 @@ function omm_validateQuestions() {
 			}
 			lastArticle = this;
 		});
-		
+
 		createStatisticTable(lastArticle);
 	};
 
@@ -99,7 +99,7 @@ function omm_validateQuestions() {
 		$(currentquestion).find(omm_selector_divDragable).removeAttr("draggable");
 		$(currentquestion).find(omm_selector_divDragable).removeAttr("ondragstart");
 		var answers = $.map($(currentquestion).find(omm_selector_divDragable), function(a) {
-			return a;			
+			return a;
 		});
 		$(currentquestion).find(omm_selector_divDropAnswer).each(function(index, element) {
 			if ($(element).attr(omm_selector_attrName) == $(element).find(omm_selector_divDragable).attr(omm_selector_attrName)) {
@@ -107,9 +107,9 @@ function omm_validateQuestions() {
 			} else {
 				iscorrect = false;
 				$(element).parent(".omm_answer-field").addClass("omm_callout-answer-wrong");
-				$(answers).each(function(index){
-					if($(element).attr(omm_selector_attrName) == $(this).attr(omm_selector_attrName)){
-						$(element).append("<span>("+$(this).text()+")</span>");
+				$(answers).each(function(index) {
+					if ($(element).attr(omm_selector_attrName) == $(this).attr(omm_selector_attrName)) {
+						$(element).append("<span>(" + $(this).text() + ")</span>");
 					}
 				});
 			}
@@ -121,7 +121,7 @@ function omm_validateQuestions() {
 			$(currentquestion).find(".omm_answer-field").each(function(index, element) {
 				$(element).removeClass("omm_callout-answer-right");
 			});
-		}else{
+		} else {
 			$(currentquestion).addClass("omm_callout-wrong");
 		}
 		$(currentquestion).find("div.omm_answer-field-big").remove();
@@ -147,25 +147,31 @@ function omm_validateQuestions() {
 		}
 		appendNoticesToQuestion(currentquestion, iscorrect);
 	}
-	
+
 	function appendNoticesToQuestion(currentquestion, iscorrect) {
 		var container = $(currentquestion).parent().parent();
+		var notice = $(container).find(".omm_question-notice-html").text();
+		if (notice.length !== 0) {
+			var alertBox = "<div class='alert alert-info omm_alert-info'><p> <i class='fa fa-quote-left fa-2x omm_notice'></i>&nbsp;&nbsp;<em>" + notice + "</em>&nbsp;&nbsp;<i class='fa fa-quote-right fa-2x omm_notice'></i></p></div>";
+			$(container).find("form").prepend(alertBox);
+		}
 		if (iscorrect) {
 			var noticeOnRight = $(container).find(".omm_question-notice-on-right-html").text();
-			if (noticeOnRight.length !== 0) {
-				var alertBox = "<div class='alert alert-success omm-alert-success'><p> <i class='fa fa-check-circle fa-2x omm_notice'></i>&nbsp;&nbsp;<em>" + noticeOnRight + "</em></p></div>";
-				$(container).find("form").prepend(alertBox);
-			};
+			// if (noticeOnRight.length !== 0) {
+			var alertBox = "<div class='alert alert-success omm-alert-success'><p> <i class='fa fa-check-circle fa-2x omm_notice'></i>&nbsp;&nbsp;<em>" + noticeOnRight + "</em></p></div>";
+			$(container).find("form").prepend(alertBox);
+			// };
 		} else {
 			var noticeOnWrong = $(container).find(".omm_question-notice-on-wrong-html").text();
-			if (noticeOnWrong.length !== 0) {
-				var alertBox = "<div class='alert alert-danger omm_alert-danger'><p> <i class='fa fa-times-circle fa-2x omm_notice'></i>&nbsp;&nbsp;<em>" + noticeOnWrong + "</em></p></div>";
-				$(container).find("form").prepend(alertBox);
-			};
+			// if (noticeOnWrong.length !== 0) {
+			var alertBox = "<div class='alert alert-danger omm_alert-danger'><p> <i class='fa fa-times-circle fa-2x omm_notice'></i>&nbsp;&nbsp;<em>" + noticeOnWrong + "</em></p></div>";
+			$(container).find("form").prepend(alertBox);
+			// };
 		}
+
 	}
 
-	function createStatisticTable(slide){
+	function createStatisticTable(slide) {
 		//Remove 'Auswerten' button
 		$(omm_cssSelector_checkAnswer).remove();
 		//Create table with answered questions
@@ -173,45 +179,46 @@ function omm_validateQuestions() {
 		var tableBody = document.createElement("tbody");
 		$(table).addClass("table");
 		$(table).addClass("table-hover");
-		$(table).append("<thead><tr><th>#</th><th>Frage</th><th>Antwort</th></tr></thead>");	
+		$(table).append("<thead><tr><th>#</th><th>Frage</th><th>Antwort</th></tr></thead>");
 		$(table).append(tableBody);
 		var totalQuestions = $(".omm_total-question-number:first").text();
 		var rightAnswers = 0;
-		$('article').each(function(index, element){
+		$('article').each(function(index, element) {
 			var formgroup = $(element).find(".form-group");
-			if(formgroup.length !== 0){
+			if (formgroup.length !== 0) {
 				var questionNr = $(element).find(".omm_current-question-number").text();
 				var questionName = $(element).find(".omm_current-question-name").text();
 				var questionAnswer = $(formgroup).hasClass("omm_callout-wrong") ? "falsch" : "richtig";
-				if(questionAnswer == "richtig"){
+				if (questionAnswer == "richtig") {
 					rightAnswers++;
-					questionAnswer = "<i class='fa fa-check fa-2x omm_notice'></i> richtig";
-				}else{
+					questionAnswer = "<i class='fa fa-check-circle fa-2x omm_notice'></i>&nbsp;&nbsp;richtig";
+				} else {
 					questionAnswer = "<i class='fa fa-times-circle fa-2x omm_notice'></i>&nbsp;&nbsp;falsch";
 				}
 				var tableRow = document.createElement("tr");
 				$(tableRow).addClass("omm_statistic-table");
-				$(tableRow).append("<td>"+questionNr+"</td><td><a href='#'>"+ questionName +"</a></td><td>"+ questionAnswer +"</td>");
+				$(tableRow).append("<td>" + questionNr + "</td><td><a href='#'>" + questionName + "</a></td><td>" + questionAnswer + "</td>");
 				$(tableRow).click('click', function() {
-					for (var i = 0; i < $('article').length - questionNr; i++){
+					for (var i = 0; i < $('article').length - questionNr; i++) {
 						prevSlide();
 					}
 				}, false);
 				$(table).append(tableRow);
-				
+
 			}
 		});
 		var form = $(slide).find(".validationSlide");
 		$(form).append(table);
 		//Display the amount of right answers
-		if(rightAnswers != totalQuestions){
-			$(form).append("<div class='alert alert-danger omm_alert-danger'>Sie haben "+ rightAnswers +" von "+ totalQuestions +" richtig beantwortet. Das schaffen Sie sicher besser!</div>");
-		}else{
+		if (rightAnswers != totalQuestions) {
+			$(form).append("<div class='alert alert-danger omm_alert-danger'>Sie haben " + rightAnswers + " von " + totalQuestions + " Fragen richtig beantwortet. Das schaffen Sie sicher besser!</div>");
+		} else {
 			$(form).append("<div class='alert alert-success omm_alert-success'>Herzlichen Glückwunsch, Sie haben alle Fragen richtig beantwortet. Weiter so! <i class='fa fa-thumbs-o-up'></i></div>");
 		}
 	}
-	
+
+
 	this.jumpToSlide = function() {
-	
+
 	};
 }
