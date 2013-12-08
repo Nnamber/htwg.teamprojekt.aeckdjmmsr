@@ -577,23 +577,23 @@ function setSlideSize(direction) {
         var curItem = $(getSlideEl(curSlide));
 
         if(direction === "next"){
-            if(nextItem !== null){
+            if(nextItem.hasClass('next')){
                 var containerHeight = $(nextItem).children('.container').height();
                 if (containerHeight > $(nextItem).height()) {
                         $(nextItem).css('min-height', containerHeight + 105);
                         $(nextItem).css('margin-bottom', "20px !important");
                 }
+                $(curItem).removeAttr("style");
              }
-            $(curItem).removeAttr("style");
         }else if (direction === "back"){
-            if(prevItem !== null){
+            if(prevItem.hasClass('past')){
                var containerHeight = $(prevItem).children('.container').height();
                if (containerHeight > $(prevItem).height()) {
                        $(prevItem).css('min-height', containerHeight + 105);
                        $(prevItem).css('margin-bottom', "20px !important");
                }
+				$(curItem).removeAttr("style");
             }
-            $(curItem).removeAttr("style");
         } else if(direction === null){
              var containerHeight = $(curItem).children('.container').height();
              if (containerHeight > $(curItem).height()) {

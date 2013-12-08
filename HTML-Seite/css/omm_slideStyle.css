@@ -234,13 +234,13 @@ Colors for dimension testing
 /*1280x800*/
 @media only screen  and (min-height: 651px) and (min-width: 1200px){
     .slides > article.next {
-	display: block;
-	transform: translate(1130px);
-	-o-transform: translate(1130px);
-	-moz-transform: translate(1130px);
-	-webkit-transform: translate3d(1130px, 0, 0);
-        margin-top: -22.0%;
-        height: 80%;
+		display: block;
+		transform: translate(1130px);
+		-o-transform: translate(1130px);
+		-moz-transform: translate(1130px);
+		-webkit-transform: translate3d(1130px, 0, 0);
+	        margin-top: -22.0%;
+	        height: 80%;
     }
     .slides > article.past {
 	display: block;
@@ -348,17 +348,14 @@ Colors for dimension testing
 	-o-transform: translate(1130px);
 	-moz-transform: translate(1130px);
 	-webkit-transform: translate3d(1130px, 0, 0);
-        margin-top: -20.0%;
-        height: 80% !important;
+        margin-left: -30% !important;
     }
     .slides > article.past {
-	display: block;
-	transform: translate(-1130px);
-	-o-transform: translate(-1130px);
-	-moz-transform: translate(-1130px);
-	-webkit-transform: translate3d(-1130px, 0, 0);
-         margin-top: -20.0%;
-         height: 80%;
+		display: block;
+		transform: translate(-1130px);
+		-o-transform: translate(-1130px);
+		-moz-transform: translate(-1130px);
+		-webkit-transform: translate3d(-1130px, 0, 0);
 }
     .slides > article.far-next {
         display: none !important;
@@ -379,7 +376,6 @@ Colors for dimension testing
         -o-box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
-        background-color: white;
         box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
         border: 1px solid rgba(0, 0, 0, .3);
         transition: transform .3s ease-out;
