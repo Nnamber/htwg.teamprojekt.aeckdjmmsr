@@ -497,6 +497,13 @@ Colors for dimension testing
 	border-color: #1c5005;
 }
 
+.validationSlide {
+	text-align: center;
+}
+#checkAnswer{
+	margin-top: 25%;
+}
+
 /* font awesome icons */
 .omm_notice.fa-times-circle{ 
 	color: #FF0000;
