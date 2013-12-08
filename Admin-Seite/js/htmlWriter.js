@@ -8,7 +8,7 @@ function omm_saveHtml() {
 			fileName = "Mindmailer";
 		}
 		var blob = new Blob([readSelected.readSelectedQuestions()], {
-			type : "text/plain;charset=utf-8"
+			type : "application/html;charset=utf-8"
 		});
 		saveAs(blob, fileName + ".html");
 	};
