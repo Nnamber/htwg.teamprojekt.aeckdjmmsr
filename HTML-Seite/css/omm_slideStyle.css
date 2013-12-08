@@ -365,7 +365,7 @@ Colors for dimension testing
         position: relative;
         overflow: hidden;
         width: 80% !important;
-        height: 90% !important;
+        height: 85% !important;
         left: 0% !important;
         top: 0% !important;
         margin-left: 10% !important;
@@ -468,6 +468,7 @@ Colors for dimension testing
 
 .omm_callout-answer{
   border-left: 3px solid #eee;
+  border-radius: 4px;
 }
 
 .omm_callout-answer-wrong{
@@ -520,4 +521,18 @@ Colors for dimension testing
 .omm_statistic-table > td, .omm_statistic-table > td > i{
 	text-align: left;
 	vertical-align: middle !important;
+}
+
+.MultipleChoice .omm_callout{
+	padding-left: 29px;
+}
+
+.omm_multipleChoiseXtra{
+	margin-left: -44px !important;
+}
+
+#omm_right-answer-info{
+	color: #ABDD1F;
+	margin-left: -21px;
+	font-size: x-large;
 }
