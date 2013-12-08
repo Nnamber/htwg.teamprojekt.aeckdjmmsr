@@ -139,7 +139,7 @@ function omm_readSelected() {
 					jQuery(form).attr("role", "form");
 					jQuery(form).attr("class","validationSlide");
 					jQuery(container).append(form);
-					jQuery(form).append("<button type='button' class='btn btn-success' id='checkAnswer'>Auswertung starten</button>");
+					jQuery(form).append("<button type='button' class='btn btn-primary btn-lg' id='checkAnswer'>Auswertung starten</button>");
 
 					return container;
 			});

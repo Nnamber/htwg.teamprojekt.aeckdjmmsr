@@ -44,7 +44,7 @@ function omm_validateQuestions() {
 		});
 		createStatisticTable(lastArticle);
 		//make slide scrollable in height if necessary
-		setSlideSize();
+		setSlideSize(null);
 	};
 
 	function validateMultipleChoice(currentquestion) {
