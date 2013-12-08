@@ -432,9 +432,23 @@ Colors for dimension testing
 }
 
 /* font awesome icons */
-.omm_notice.fa-bolt{ 
+.omm_notice.fa-times-circle{ 
 	color: #FC0A0A;
 }
 .omm_notice.fa-check{
 	color: #1c5005;
+}
+
+.omm_alert-danger{
+	color:#000000;
+	font-weight: bold;
+}
+
+.omm_alert-success{
+	font-weight: bold;
+}
+
+.omm_statistic-table > td, .omm_statistic-table > td > i{
+	text-align: left;
+	vertical-align: middle !important;
 }

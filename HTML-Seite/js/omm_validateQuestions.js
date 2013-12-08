@@ -134,13 +134,13 @@ function omm_validateQuestions() {
 		if (iscorrect) {
 			var noticeOnRight = $(container).find(".omm_question-notice-on-right-html").text();
 			if (noticeOnRight.length !== 0) {
-				var alertBox = "<div class='alert alert-success'><p> <i class='fa fa-check'></i> <em>" + noticeOnRight + "</em></p></div>";
+				var alertBox = "<div class='alert alert-success omm-alert-success'><p> <i class='fa fa-check-circle fa-2x omm_notice'></i>&nbsp;&nbsp;<em>" + noticeOnRight + "</em></p></div>";
 				$(container).find("form").prepend(alertBox);
 			};
 		} else {
 			var noticeOnWrong = $(container).find(".omm_question-notice-on-wrong-html").text();
 			if (noticeOnWrong.length !== 0) {
-				var alertBox = "<div class='alert alert-danger'><p> <i class='fa fa-bolt'></i> <em>" + noticeOnWrong + "</em></p></div>";
+				var alertBox = "<div class='alert alert-danger omm_alert-danger'><p> <i class='fa fa-times-circle fa-2x omm_notice'></i>&nbsp;&nbsp;<em>" + noticeOnWrong + "</em></p></div>";
 				$(container).find("form").prepend(alertBox);
 			};
 		}
@@ -166,11 +166,12 @@ function omm_validateQuestions() {
 				var questionAnswer = $(formgroup).hasClass("omm_callout-wrong") ? "falsch" : "richtig";
 				if(questionAnswer == "richtig"){
 					rightAnswers++;
-					questionAnswer = "<i class='fa fa-check omm_notice'></i> richtig";
+					questionAnswer = "<i class='fa fa-check fa-2x omm_notice'></i> richtig";
 				}else{
-					questionAnswer = "<i class='fa fa-bolt omm_notice'></i> falsch";
+					questionAnswer = "<i class='fa fa-times-circle fa-2x omm_notice'></i>&nbsp;&nbsp;falsch";
 				}
 				var tableRow = document.createElement("tr");
+				$(tableRow).addClass("omm_statistic-table");
 				$(tableRow).append("<td>"+questionNr+"</td><td><a href='#'>"+ questionName +"</a></td><td>"+ questionAnswer +"</td>");
 				$(tableRow).click('click', function() {
 					for (var i = 0; i < $('article').length - questionNr; i++){
@@ -185,9 +186,9 @@ function omm_validateQuestions() {
 		$(form).append(table);
 		//Display the amount of right answers
 		if(rightAnswers != totalQuestions){
-			$(form).append("<div class='alert alert-danger'>Sie haben "+ rightAnswers +" von "+ totalQuestions +" richtig beantwortet. Das schaffen Sie sicher besser!</div>");
+			$(form).append("<div class='alert alert-danger omm_alert-danger'>Sie haben "+ rightAnswers +" von "+ totalQuestions +" richtig beantwortet. Das schaffen Sie sicher besser!</div>");
 		}else{
-			$(form).append("<div class='alert alert-success'>Herzlichen Glückwunsch, Sie haben alle Fragen richtig beantwortet. Weiter so!</div>");
+			$(form).append("<div class='alert alert-success omm_alert-success'>Herzlichen Glückwunsch, Sie haben alle Fragen richtig beantwortet. Weiter so!</div>");
 		}
 	}
 	
