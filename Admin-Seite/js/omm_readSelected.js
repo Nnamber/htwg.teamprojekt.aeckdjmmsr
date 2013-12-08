@@ -80,15 +80,22 @@ function omm_readSelected() {
                                         $(noticeOnRight).text(noticeOnRightText);
                                         $(noticeOnRight).addClass("omm_question-notice-on-right-html");
                                         $(noticeOnRight).addClass("hidden");	
+                                        
+                                        var notice = document.createElement("div");
+                                        var noticeText = $(element).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-notice-html").text();
+                                        $(notice).text(noticeText);
+                                        $(notice).addClass("omm_question-notice-html");
+                                        $(notice).addClass("hidden");
 
 					//Create form
 					//necessary for 'novalidate' attr.
 					var form = document.createElement("form");
 					jQuery(form).attr("novalidate", "novalidate");
 					jQuery(form).attr("role", "form");
+					jQuery(container).append(notice);
 					jQuery(container).append(noticeOnRight);
-                                        jQuery(container).append(noticeOnWrong);
-                                        jQuery(container).append(form);
+                    jQuery(container).append(noticeOnWrong);
+                    jQuery(container).append(form);
                                         
 					var body = document.createElement("div");
                                         //TODO: css Klasse auf richtigem Element? Schlie�t Antworten nicht mit ein.

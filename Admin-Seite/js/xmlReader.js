@@ -54,6 +54,7 @@ function omm_xmlParser() {
                 x += htmlQuestionBodyClozeText(wellFormedQuestionBody);
             }
 
+			x += htmlQuestionNotice($(this).attr('notice'));
             x += htmlQuestionNoticeOnWrong($(this).attr('notice_on_wrong'));
             x += htmlQuestionType($(this).attr('type'));
             x += htmlQuestionNoticeOnCorrect($(this).attr('notice_on_correct'));
@@ -121,6 +122,13 @@ function omm_xmlParser() {
 
         return questionAnswerHtml;
 
+    }
+    
+    function htmlQuestionNotice(questionNotice){
+    	var questionNoticeHtml = "";
+    	questionNoticeHtml = '<div class="omm_question-notice-html">' + questionNotice + '</div>';
+    	
+    	return questionNoticeHtml;
     }
 
     function htmlQuestionNoticeOnWrong(questionNoticeOnWrong) {
