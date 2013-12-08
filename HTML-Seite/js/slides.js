@@ -438,6 +438,7 @@ function updateHash() {
 function handleBodyKeyDown(event) {
 	/* get current slide height */
 	var eventTargetContainerParent = $(getSlideEl(curSlide)).find('.container').height();
+
 	switch (event.keyCode) {
 		case 39:
 		// right arrow
@@ -489,9 +490,8 @@ function handleBodyKeyDown(event) {
 function handleBodyScrollWheel(event) {
 	//get the parent container of the event.target
 	var eventTargetContainerParent = $(getSlideEl(curSlide)).find('.container').height();
-
     //test the height of the parent, if below 700 scrolling to next slide is ok
-	if (eventTargetContainerParent <= 700) {
+	if (eventTargetContainerParent <= 700 || $(event.target).parents('.container').length === 0) {
 		//jump to the top of the page in case the previous page was scrollable
 		$('html,body').scrollTop(0);
 		var delta = event.originalEvent.detail < 0 || event.originalEvent.wheelDelta > 0 ? 1 : -1;
