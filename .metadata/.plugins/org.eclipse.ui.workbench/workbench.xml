@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="46" version="2.0">
+<workbench progressCount="50" version="2.0">
 <workbenchAdvisor/>
 <window height="780" maximized="true" width="1200" x="208" y="0">
 <fastViewData fastViewLocation="1024"/>
@@ -17,7 +17,8 @@
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="91" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
-<coolItem id="com.aptana.editor.html" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.ui.browser.editor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="com.aptana.editor.html" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -26,16 +27,10 @@
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-</presentation>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="com.aptana.editor.html" name="index.html" partName="index.html" path="C:/Users/Simon/Teamprojekt/htwg.teamprojekt.aeckdjmmsr/HTML-Seite/index.html" title="index.html" tooltip="HTML-Seite/index.html" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/HTML-Seite/index.html"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="342" selectionTopPixel="0"/>
-</editor>
 </editors>
 <views>
 <view id="org.eclipse.ui.navigator.ProjectExplorer" partName="Project Explorer">
@@ -45,7 +40,7 @@
 <view id="com.aptana.terminal.views.terminal" partName="Terminal">
 <viewState>
 <title>Terminal</title>
-<workingDirectory>C:\Users\Simon\Teamprojekt\htwg.teamprojekt.aeckdjmmsr\HTML-Seite</workingDirectory>
+<workingDirectory>C:\Users\Simon\aptana_workspaces\Teamprojekt\htwg.teamprojekt.aeckdjmmsr\HTML-Seite</workingDirectory>
 </viewState>
 </view>
 <view id="com.aptana.samples.ui.SamplesView" partName="Samples"/>
@@ -63,24 +58,23 @@
 <viewState/>
 </view>
 <view id="com.aptana.explorer.view" partName="App Explorer">
-<viewState CommonNavigator.LINKING_ENABLED="0" GitChangedFilesFilterEnabled="" activeProject="HTML-Seite">
+<viewState CommonNavigator.LINKING_ENABLED="0" GitChangedFilesFilterEnabled="" activeProject="htwg.teamprojekt.aeckdjmmsr">
 <project name="HTML-Seite">
-<selection>
-<element path="/HTML-Seite/index.html"/>
-</selection>
+<selection/>
 </project>
-<project name="htwg.teamprojekt.aeckdjmmsr">
-<selection>
-<element path="/HTML-Seite"/>
-</selection>
-</project>
+</viewState>
+</view>
+<view id="com.aptana.terminal.views.terminal:HTML-Seite" partName="HTML-Seite">
+<viewState>
+<title>HTML-Seite</title>
+<workingDirectory>C:\Users\Simon\aptana_workspaces\Teamprojekt\htwg.teamprojekt.aeckdjmmsr\HTML-Seite</workingDirectory>
 </viewState>
 </view>
 <view id="org.eclipse.ui.views.ContentOutline" partName="Outline">
 <viewState/>
 </view>
 </views>
-<perspectives activePart="com.aptana.terminal.views.terminal" activePerspective="com.aptana.ui.WebPerspective">
+<perspectives activePart="org.eclipse.ui.navigator.ProjectExplorer" activePerspective="com.aptana.ui.WebPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="com.aptana.ui.internal.WebPerspectiveFactory" id="com.aptana.ui.WebPerspective" label="Web"/>
 <alwaysOnActionSet id="com.aptana.browser.actionSet"/>
@@ -125,6 +119,7 @@
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="com.aptana.terminal.views.terminal"/>
 <view id="org.eclipse.ui.views.ProblemView"/>
+<view id="com.aptana.terminal.views.terminal:HTML-Seite"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <view id="com.aptana.samples.ui.SamplesView"/>
 <view id="com.aptana.snippets.ui.views.SnippetsView"/>
@@ -132,7 +127,7 @@
 <layout>
 <mainWindow>
 <info folder="true" part="left">
-<folder activePageID="com.aptana.explorer.view" appearance="2" expanded="2">
+<folder activePageID="org.eclipse.ui.navigator.ProjectExplorer" appearance="2" expanded="2">
 <page content="com.aptana.explorer.view" label="App Explorer"/>
 <page content="org.eclipse.ui.navigator.ProjectExplorer" label="Project Explorer"/>
 <page content="com.aptana.ui.io.remoteview" label="LabelNotFound"/>
@@ -150,11 +145,12 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.2393282" ratioLeft="342" ratioRight="1087" relationship="2" relative="left"/>
-<info folder="true" part="terminalArea" ratio="0.4900133" ratioLeft="368" ratioRight="383" relationship="4" relative="org.eclipse.ui.editorss">
-<folder activePageID="com.aptana.terminal.views.terminal" appearance="2" expanded="2">
+<info folder="true" part="terminalArea" ratio="0.5993538" ratioLeft="371" ratioRight="248" relationship="4" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="com.aptana.terminal.views.terminal" label="Terminal"/>
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
+<page content="com.aptana.terminal.views.terminal:HTML-Seite" label="HTML-Seite"/>
 <page content="org.eclipse.pde.runtime.LogView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.TaskList" label="LabelNotFound"/>
 <page content="org.eclipse.ui.browser.view:-0" label="LabelNotFound"/>
@@ -163,6 +159,7 @@
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
+<part id="3"/>
 </presentation>
 </folder>
 </info>
@@ -183,17 +180,7 @@
 </perspective>
 </perspectives>
 <workingSets/>
-<navigationHistory>
-<editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.aptana.editor.html" path="/HTML-Seite/index.html"/>
-</editors>
-<item historyLabel="index.html" index="0">
-<position info="not_deleted" x="371" y="0"/>
-</item>
-<item active="true" historyLabel="index.html" index="0">
-<position/>
-</item>
-</navigationHistory>
+<navigationHistory/>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
 <workbenchWindowAdvisor/>
@@ -210,6 +197,9 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.browser.editorSupport" name="xmlTest.html" tooltip="HTML-Seite/xmlTest.html">
+<persistable path="/HTML-Seite/xmlTest.html"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.aptana.editor.html" name="index.html" tooltip="HTML-Seite/index.html">
 <persistable path="/HTML-Seite/index.html"/>
 </file>

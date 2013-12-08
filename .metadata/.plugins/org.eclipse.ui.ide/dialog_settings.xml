@@ -11,4 +11,12 @@
 		<item value="org.eclipse.rcp:3.7.2.v20120120-1424-9DB5FmnFq5JCf1UA38R-kz0S0272"/>
 		<item value="org.radrails.rails:3.4.2.201308081726-7n-7Z7oKfjkqlemv"/>
 	</list>
+	<section name="ChooseWorkspaceDialogSettings">
+		<item value="185" key="DIALOG_Y_ORIGIN"/>
+		<item value="381" key="DIALOG_X_ORIGIN"/>
+	</section>
+	<section name="WORKBENCH_SETTINGS">
+		<list key="ENABLED_TRANSFERS">
+		</list>
+	</section>
 </section>
