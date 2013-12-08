@@ -185,10 +185,11 @@ function omm_readSelected() {
 		jQuery(footer).addClass("container");
 		var nav = document.createElement("nav");
 		jQuery(nav).addClass("navbar navbar-fixed-bottom");
-		var inner = document.createElement("div");
-		jQuery(inner).addClass("navbar-inner navbar-content-center");
+                var centerBlock = document.createElement("div");
+                jQuery(centerBlock).addClass("center-block omm_navbar");
+                jQuery(centerBlock).append("<a href='#'><i class='fa fa-arrow-left fa-2x pull-left omm_arrow-left'></i></a><a href='#'><i class='fa fa-arrow-right fa-2x pull-right omm_arrow-right'></i></a>");
                
-		jQuery(nav).append(inner);
+		jQuery(nav).append(centerBlock);
 		jQuery(footer).append(nav);
 		body.append(footer);
 	}
