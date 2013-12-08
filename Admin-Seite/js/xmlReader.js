@@ -177,7 +177,7 @@ function omm_xmlParser() {
 
     this.readXml = function() {
         $.ajax({
-            //ToDo: Pfad ueberarbeiten, z.b. mit relativem Pfad, evt Johner fragen
+            //TODO: Pfad ueberarbeiten, z.b. mit relativem Pfad, evt Johner fragen
             url: omm_DefaultPath, // name of file you want to parse
             dataType: "xml",
             success: parse,
@@ -194,7 +194,7 @@ function omm_xmlParser() {
         var res = val.name.substr(val.name.lastIndexOf('.')) == '.xml';
         console.log("validateXML");
         if (!res) {
-            //ToDO: Fehlernachricht überarbeiten
+            //TODO: Fehlernachricht überarbeiten
             omm_display.showMessage("Wrong Type", true);
         } else {
             $("#omm_xml-dialog-uebernehmen").removeAttr("disabled");
@@ -209,7 +209,6 @@ function omm_xmlParser() {
             var xmlString;
             var contents = e.target.result;
             xmlString = contents;
-            //console.log(xmlString);
             xmlString = $.parseXML(xmlString);
             parse(xmlString);
         };

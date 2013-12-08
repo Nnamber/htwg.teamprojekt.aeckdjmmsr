@@ -169,21 +169,23 @@ function omm_validateQuestions() {
 		var container = $(currentquestion).parent().parent();
 		var notice = $(container).find(".omm_question-notice-html").text();
 		if (notice.length !== 0) {
-			var alertBox = "<div class='alert alert-info omm_alert-info'><p> <i class='fa fa-quote-left fa-2x omm_notice'></i>&nbsp;&nbsp;<em>" + notice + "</em>&nbsp;&nbsp;<i class='fa fa-quote-right fa-2x omm_notice'></i></p></div>";
+			var alertBox = "<div class='alert alert-info omm_alert-info'><p> <i class='fa fa-quote-left omm_notice'></i>&nbsp;&nbsp;<em>" + notice + "</em>&nbsp;&nbsp;<i class='fa fa-quote-right omm_notice'></i></p></div>";
 			$(container).find("form").prepend(alertBox);
 		}
 		if (iscorrect) {
 			var noticeOnRight = $(container).find(".omm_question-notice-on-right-html").text();
-			// if (noticeOnRight.length !== 0) {
+			if (noticeOnRight.length == 0) {
+				noticeOnRight = "You rock, man!";
+			};
 			var alertBox = "<div class='alert alert-success omm-alert-success'><p> <i class='fa fa-check-circle fa-2x omm_notice'></i>&nbsp;&nbsp;<em>" + noticeOnRight + "</em></p></div>";
 			$(container).find("form").prepend(alertBox);
-			// };
 		} else {
 			var noticeOnWrong = $(container).find(".omm_question-notice-on-wrong-html").text();
-			// if (noticeOnWrong.length !== 0) {
+			if (noticeOnWrong.length == 0) {
+				noticeOnWrong = "Das geht besser.";
+			};
 			var alertBox = "<div class='alert alert-danger omm_alert-danger'><p> <i class='fa fa-times-circle fa-2x omm_notice'></i>&nbsp;&nbsp;<em>" + noticeOnWrong + "</em></p></div>";
 			$(container).find("form").prepend(alertBox);
-			// };
 		}
 
 	}
@@ -232,5 +234,19 @@ function omm_validateQuestions() {
 		} else {
 			$(form).append("<div class='alert alert-success omm_alert-success'>Herzlichen Glückwunsch, Sie haben alle Fragen richtig beantwortet. Weiter so! <i class='fa fa-thumbs-o-up'></i></div>");
 		}
+		var percentCorrect = rightAnswers/totalQuestions;
+		var progressbar = document.createElement("div");
+		$(progressbar).addClass('progress');
+		var progressbarCorrect = document.createElement("div");
+		$(progressbarCorrect).addClass('progress-bar');
+		$(progressbarCorrect).addClass('progress-bar-success');
+		$(progressbarCorrect).attr("style",("width:"+percentCorrect*100+"%"));
+		var progressbarWrong = document.createElement("div");
+		$(progressbarWrong).addClass('progress');
+		$(progressbarWrong).addClass('progress-bar-danger');
+		$(progressbarWrong).attr("style",("width:"+(1-percentCorrect)*100+"%"));
+		$(progressbar).append(progressbarCorrect);
+		$(progressbar).append(progressbarWrong);
+		$(form).append(progressbar);
 	}
 }
