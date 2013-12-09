@@ -110,7 +110,8 @@ function omm_readSelected() {
 					//TODO: css Klasse auf richtigem Element? Schlie�t Antworten nicht mit ein.
 					jQuery(body).addClass("form-group");
 					//Append content
-					jQuery(body).append(jQuery(element).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-body-html").children().clone());
+					//evtl '.contents().clone();' instead of 'clone()' in case of failures // do not use 'children()' as it ignores TextNodes!
+					jQuery(body).append(jQuery(element).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-body-html").clone()); 
 
 					generateAnswers.addStyledAnswers($(element), $(body));
 					$(form).append(body);
@@ -177,7 +178,7 @@ function omm_readSelected() {
 		var link = document.createElement("link");
 		link.rel = 'shortcut icon';
 		link.type = 'image/x-icon';
-		link.href = 'images/favicon.ico';
+		link.href = 'favicon.ico';
 		head.append(link);
 	}
 

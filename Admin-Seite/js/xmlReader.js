@@ -79,7 +79,6 @@ function omm_xmlParser() {
         var answers = clozeString.match(patternG);
         var body = '<div class="omm_question-body-html">';
         
-        
         for (answer in answers) {
             var a = answers[answer].replace(patternBracket, "");
             // mehrere Antworten moeglich [[xxx | yyy]]. Take care!
