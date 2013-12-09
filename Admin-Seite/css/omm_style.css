@@ -12,6 +12,12 @@ body {
 #omm_select-all {
 	margin-left: 15px;
 }
+
+/*.navbar {
+    background-color: rgb(72, 136, 195);
+    color: whitesmoke;
+}*/
+
 .omm_navbar-buttons li:first-child{
 	border-left: 1px solid;
 	border-left-color: rgb(75, 75, 75);
@@ -20,6 +26,11 @@ body {
 	border-right: 1px solid;
 	border-right-color: rgb(75, 75, 75);
 }
+
+/*.omm_navbar-buttons a{
+	color: whitesmoke;
+}*/
+
 
 .popover{
 	max-width: 500px;

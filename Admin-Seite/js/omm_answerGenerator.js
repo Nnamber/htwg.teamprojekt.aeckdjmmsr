@@ -115,6 +115,7 @@ function omm_answerGenerator() {
 			//Set pattern
 			attributes.pattern = pattern;
 			jQuery(inputField).attr(attributes);
+			jQuery(inputField).addClass('omm_clozetext');
 			jQuery(element).after(inputField);
 			jQuery(element).remove();
 		});

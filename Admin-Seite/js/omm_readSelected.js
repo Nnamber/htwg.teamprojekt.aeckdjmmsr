@@ -110,7 +110,8 @@ function omm_readSelected() {
 					//TODO: css Klasse auf richtigem Element? Schlie�t Antworten nicht mit ein.
 					jQuery(body).addClass("form-group");
 					//Append content
-					jQuery(body).append(jQuery(element).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-body-html").children().clone());
+					//evtl '.contents().clone();' instead of 'clone()' in case of failures // do not use 'children()' as it ignores TextNodes!
+					jQuery(body).append(jQuery(element).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-body-html").clone()); 
 
 					generateAnswers.addStyledAnswers($(element), $(body));
 					$(form).append(body);
@@ -197,7 +198,7 @@ function omm_readSelected() {
 		jQuery(nav).addClass("navbar navbar-fixed-bottom");
 		var centerBlock = document.createElement("div");
 		jQuery(centerBlock).addClass("center-block omm_navbar");
-		jQuery(centerBlock).append("<a href='#'><i class='fa fa-fast-backward fa-2x pull-left omm_arrow-first-page'></i></a><a href='#'><i class='fa fa-arrow-left fa-2x pull-left omm_arrow-left'></i></a><a href='#'><i class='fa fa-fast-forward fa-2x pull-right omm_arrow-last-page'></i></a><a href='#'><i class='fa fa-arrow-right fa-2x pull-right omm_arrow-right'></i></a>");
+		jQuery(centerBlock).append("<span class='pull-left'><a href='#'><i class='fa fa-angle-double-left omm_arrow-first-page'></i></a><a href='#'><i class='fa fa-angle-left omm_arrow-left'></i></a></span><span class='pull-right'><a href='#'><i class='fa fa-angle-right omm_arrow-right'></i></a><a href='#'><i class='fa fa-angle-double-right omm_arrow-last-page'></i></a></span>");
 
 		jQuery(nav).append(centerBlock);
 		jQuery(footer).append(nav);
