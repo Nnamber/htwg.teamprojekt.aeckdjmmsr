@@ -553,3 +553,9 @@ Colors for dimension testing
 	margin-left: -21px;
 	font-size: x-large;
 }
+
+.omm_clozetext{
+	margin-top: 5px;
+	margin-left: 2px;
+	margin-right: 2px;
+}

@@ -155,7 +155,9 @@ function omm_validateQuestions() {
 	function commonValidation(currentquestion) {
 		var iscorrect = true;
 		$(currentquestion).find('input:text').each(function(index, element) {
-			if ($(element).val() == $(element).attr('pattern')) {
+			var pattern = $(element).attr('pattern');
+			// TODO bei mehreren möglichen Antworten schlägt Überprüfung fehl! (Antworten sind durch 'Pipe' getrennt)
+			if ($(element).val() == pattern) {
 				$(element).addClass(omm_class_calloutTextRight);
 			} else {
 				$(element).addClass(omm_class_calloutTextWrong);
