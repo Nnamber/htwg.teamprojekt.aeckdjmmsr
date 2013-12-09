@@ -21,7 +21,7 @@ function drop(ev) {
     //Dropable target is not a draggable object, is not a dropable targt with an answer already or is the big answer field
     if (!$(ev.target).hasClass("omm_draggable") && ($(ev.target).children().length === 0 || $(ev.target).hasClass('omm_answer-field-big'))) {
         if(!$(ev.target).hasClass('omm_answer-field-big')){
-            $(ev.target).css('border', 'none');
+            $(ev.target).css('border', '1px solid rgb(227, 227, 227)');
         }else{
             $(ev.target).css('border', '1px solid rgb(204, 204, 204)');
         }
