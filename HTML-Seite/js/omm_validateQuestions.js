@@ -156,8 +156,8 @@ function omm_validateQuestions() {
 		var iscorrect = true;
 		$(currentquestion).find('input:text').each(function(index, element) {
 			var pattern = $(element).attr('pattern');
-			// TODO bei mehreren möglichen Antworten schlägt Überprüfung fehl! (Antworten sind durch 'Pipe' getrennt)
-			if ($(element).val() == pattern) {
+
+			if ($(element).val().match(pattern)) {
 				$(element).addClass(omm_class_calloutTextRight);
 			} else {
 				$(element).addClass(omm_class_calloutTextWrong);
@@ -242,7 +242,7 @@ function omm_validateQuestions() {
 		} else {
 			$(form).append("<div class='alert alert-success omm_alert-success'>Herzlichen Glückwunsch, Sie haben alle Fragen richtig beantwortet. Weiter so! <i class='fa fa-thumbs-o-up'></i></div>");
 		}
-		var percentCorrect = Math.round((rightAnswers / totalQuestions)*100);
+		var percentCorrect = Math.round((rightAnswers / totalQuestions) * 100);
 		var progressbar = document.createElement("div");
 		$(progressbar).addClass('progress');
 		var progressbarCorrect = document.createElement("div");
@@ -250,14 +250,14 @@ function omm_validateQuestions() {
 		$(progressbarCorrect).addClass('progress-bar-success');
 		$(progressbarCorrect).attr("style", ("width:" + percentCorrect + "%"));
 		var captionCorrect = document.createElement("span");
-		$(captionCorrect).html(percentCorrect+ '% richtig');
+		$(captionCorrect).html(percentCorrect + '% richtig');
 		$(progressbarCorrect).append(captionCorrect);
 		var progressbarWrong = document.createElement("div");
 		$(progressbarWrong).addClass('progress-bar');
 		$(progressbarWrong).addClass('progress-bar-danger');
 		$(progressbarWrong).attr("style", ("width:" + (100 - percentCorrect) + "%"));
 		var captionWrong = document.createElement("span");
-		$(captionWrong).html((100 - percentCorrect)+ '% falsch');
+		$(captionWrong).html((100 - percentCorrect) + '% falsch');
 		$(progressbarWrong).append(captionWrong);
 		$(progressbar).append(progressbarCorrect);
 		$(progressbar).append(progressbarWrong);
