@@ -197,7 +197,7 @@ function omm_readSelected() {
 		jQuery(nav).addClass("navbar navbar-fixed-bottom");
 		var centerBlock = document.createElement("div");
 		jQuery(centerBlock).addClass("center-block omm_navbar");
-		jQuery(centerBlock).append("<a href='#'><i class='fa fa-fast-backward fa-2x pull-left omm_arrow-first-page'></i></a><a href='#'><i class='fa fa-arrow-left fa-2x pull-left omm_arrow-left'></i></a><a href='#'><i class='fa fa-fast-forward fa-2x pull-right omm_arrow-last-page'></i></a><a href='#'><i class='fa fa-arrow-right fa-2x pull-right omm_arrow-right'></i></a>");
+		jQuery(centerBlock).append("<span class='pull-left'><a href='#'><i class='fa fa-angle-double-left omm_arrow-first-page'></i></a><a href='#'><i class='fa fa-angle-left omm_arrow-left'></i></a></span><span class='pull-right'><a href='#'><i class='fa fa-angle-right omm_arrow-right'></i></a><a href='#'><i class='fa fa-angle-double-right omm_arrow-last-page'></i></a></span>");
 
 		jQuery(nav).append(centerBlock);
 		jQuery(footer).append(nav);
