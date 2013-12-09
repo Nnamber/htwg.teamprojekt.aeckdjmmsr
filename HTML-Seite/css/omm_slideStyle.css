@@ -110,19 +110,12 @@
     margin-right: 0.5%;
 }
 
-
 .omm_droppable > .omm_draggable{
     float: right;
     padding: 1.5% !important;
     margin: 1.8% !important;
 }
-
-
-.omm_droppable-answer{
-    display:inline-block;
-    width: 50%;
-    height: 100%;
- }
+*/
 
 .omm_droppable-answer > span , .omm_droppable > span{
     text-align: left;
@@ -138,7 +131,7 @@
 	color: #35B929;
 	font-weight: 700;
 }
-*/
+
 .well {
 	padding: 15px;
 }
@@ -152,7 +145,6 @@
 		margin-bottom: 6px;
 }
 .omm_droppable{
-
 	min-height: 76px;
     border: dashed 1px midnightblue;
     margin-bottom: 0px;
@@ -160,25 +152,18 @@
 
 
 .omm_droppable > .omm_draggable{
-	   float: right;
-	    margin: 0px;
+	float: right;
+	margin: 0px;
     padding: 10px;
     width: 50%;
 }
 
-
 .omm_droppable-answer{
 	min-height: 76px;
-	padding: 19px;
-
-	    margin-bottom: 0px;
+    padding: 24px 0px 0px 25px;
+	margin-bottom: 0px;
 	font-size: 20px;
-
  }
-
-
-
-
 
 .omm_draggable{
     background-color: rgb(245, 245, 245);
@@ -516,7 +501,7 @@ Colors for dimension testing
 }
 
 .omm_callout-answer-wrong{
-  background-color: #F38A93;
+  background-color: #F38A93 !important;
   border-color: #FC0A0A;
 }
 
