@@ -77,11 +77,11 @@ body {
 	padding: 40px 160px;
 }
 
-.slides > article:not(.nobackground):not(.biglogo) {
+/*.slides > article:not(.nobackground):not(.biglogo) {
 	background: url(images/colorbar.png) 0 600px repeat-x, url(images/googleio-logo.png) 640px 625px no-repeat;
 	background-size: 100%, 225px;
 	background-color: white;
-}
+}*/
 .slides.layout-widescreen > article:not(.nobackground):not(.biglogo), .slides.layout-faux-widescreen > article:not(.nobackground):not(.biglogo) {
 	background-position-x: 0, 840px;
 }

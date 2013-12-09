@@ -9,6 +9,10 @@
 
 .slides > article {
     padding: 0px 0px !important;
+    background-image: url(../images/mindmailer_logo1.png);
+    background-repeat:no-repeat;
+    background-position: 90% 60%;
+    background-size: 30%;
  }
 
 .slides > article > .container {
