@@ -177,7 +177,7 @@ function omm_readSelected() {
 		var link = document.createElement("link");
 		link.rel = 'shortcut icon';
 		link.type = 'image/x-icon';
-		link.href = 'images/favicon.ico';
+		link.href = 'favicon.ico';
 		head.append(link);
 	}
 
