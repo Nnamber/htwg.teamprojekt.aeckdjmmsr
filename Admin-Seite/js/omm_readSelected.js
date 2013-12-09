@@ -34,6 +34,7 @@ function omm_readSelected() {
 		//Add scripts and stylesheets
 		addStylesheetLinks(head, stylesheets);
 		addScriptSources(head, scriptSources);
+		addFavicon(head);
 
 		var body = jQuery(htmlPageContent).find("body");
 
@@ -170,6 +171,14 @@ function omm_readSelected() {
 			link.href = stylesheets[index];
 			head.append(link);
 		});
+	}
+	
+	function addFavicon(head){
+		var link = document.createElement("link");
+		link.rel = 'shortcut icon';
+		link.type = 'image/x-icon';
+		link.href = 'images/favicon.ico';
+		head.append(link);
 	}
 
 	function addScriptSources(head, sources) {
