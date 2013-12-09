@@ -142,6 +142,10 @@
 .well {
 	padding: 15px;
 }
+.row{
+	margin-left: 0px !important;
+	margin-right: 0px !important;
+}
 .omm_answer-field{
 	    border: 1px solid rgb(204, 204, 204);
 		border-radius: 4px;
@@ -149,22 +153,23 @@
 }
 .omm_droppable{
 
-min-height: 74px;
+	min-height: 76px;
     border: dashed 1px midnightblue;
     margin-bottom: 0px;
 }
 
 
 .omm_droppable > .omm_draggable{
-	   
+	   float: right;
 	    margin: 0px;
     padding: 10px;
+    width: 50%;
 }
 
 
 .omm_droppable-answer{
-	min-height: 74px;
-
+	min-height: 76px;
+	padding: 19px;
 
 	    margin-bottom: 0px;
 	font-size: 20px;
