@@ -323,7 +323,7 @@ Colors for dimension testing
     .omm_droppable > .omm_draggable{
         padding: 10px;
         float: 0;
-        min-width: 100%;
+        min-width: 50%;
     }
 }
 /* Validation Style */
