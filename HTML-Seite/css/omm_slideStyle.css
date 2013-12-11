@@ -152,6 +152,7 @@
     border: dashed 1px midnightblue;
     margin-top: 0px;
     margin-bottom: 0px;
+    padding: 0px;
     padding-left: 17px;
 }
 
@@ -173,7 +174,6 @@
 
 .omm_draggable{
     background-color: rgb(245, 245, 245);
-    display:inline-block;
     float: left;
     border: solid lightblue 2px;
     cursor: move;
