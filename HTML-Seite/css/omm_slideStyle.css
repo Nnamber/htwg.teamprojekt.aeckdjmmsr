@@ -128,7 +128,7 @@
 }
 
 .omm_droppable > span{
-        margin: 3.0%;
+        margin: 4% 2%;
         color: #35B929;
         font-weight: 700;
 }
@@ -416,3 +416,4 @@ Colors for dimension testing
 span.omm_callout-answer-wrong{
     font-size: 15px;
 }
+
