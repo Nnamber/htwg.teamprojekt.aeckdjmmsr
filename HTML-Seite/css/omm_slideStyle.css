@@ -380,3 +380,7 @@ Colors for dimension testing
     margin-left: 2px;
     margin-right: 2px;
 }
+
+span.omm_callout-answer-wrong{
+	font-size: 15px;
+}

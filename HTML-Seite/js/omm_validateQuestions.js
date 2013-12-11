@@ -156,11 +156,11 @@ function omm_validateQuestions() {
 		var iscorrect = true;
 		$(currentquestion).find('input:text').each(function(index, element) {
 			var pattern = $(element).attr('pattern');
-
 			if ($(element).val().match(pattern)) {
 				$(element).addClass(omm_class_calloutTextRight);
 			} else {
 				$(element).addClass(omm_class_calloutTextWrong);
+				$(element).after("<span class='omm_callout-answer omm_callout-answer-wrong'>&nbsp;"+pattern+"&nbsp;</span>");
 				iscorrect = false;
 			}
 		});
