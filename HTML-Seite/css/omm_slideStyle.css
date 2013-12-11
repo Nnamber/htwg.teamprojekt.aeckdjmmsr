@@ -152,7 +152,7 @@
     border: dashed 1px midnightblue;
     margin-top: 0px;
     margin-bottom: 0px;
-    padding: 0px;
+    padding-left: 17px;
 }
 
 
@@ -319,6 +319,13 @@ Colors for dimension testing
     }
 }
 
+@media (max-width: 767px){
+    .omm_droppable > .omm_draggable{
+        padding: 10px;
+        float: 0;
+        min-width: 100%;
+    }
+}
 /* Validation Style */
 .omm_callout {
     padding: 2%;
