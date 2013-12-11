@@ -129,7 +129,6 @@ function omm_answerGenerator() {
 	    for(var i = 0; i < answerArray.length-1;){
 		var randomNumber = getRandomInt(0, answerArray.length);
 		randomNumber -= 1;
-		alert(randomNumber);
 		if($.inArray(randomNumber, generatedNumbers) === -1){
 		    generatedNumbers.push(randomNumber);
 		    allAnswersString += answerArray[randomNumber];
