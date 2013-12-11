@@ -83,8 +83,8 @@ function omm_answerGenerator() {
 		$(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
 			var nameVariable = $(element)[0].childNodes[0].nodeValue.trim();
                         var nameVariableId = nameVariable.replace(/\s/g, "");
-			x += '<div class="omm_answer-field row"><div class="omm_droppable-answer col-md-5" ><p>' + nameVariable + '</p></div>';
-			x += '<div id="' + index + nameVariableId + '" class="omm_droppable col-md-7 well row" name="' + nameVariable + '" ondrop="drop(event)" ondragover="allowDrop(event)" title="Richtige Antwort hier her ziehen."></div></div>';
+			x += '<div class="omm_answer-field row"><div class="omm_droppable-answer col-md-5 col-sm-5 col-xs-5" ><p>' + nameVariable + '</p></div>';
+			x += '<div id="' + index + nameVariableId + '" class="omm_droppable col-md-7 well col-sm-7 col-xs-7 row" name="' + nameVariable + '" ondrop="drop(event)" ondragover="allowDrop(event)" title="Richtige Antwort hier her ziehen."></div></div>';
 		});
 
 		x += '<div ondrop="drop(event)" id="answerField'+questionTitle+'" ondragover="allowDrop(event)" class="omm_answer-field-big  row well well-lg">';
@@ -93,7 +93,7 @@ function omm_answerGenerator() {
 			var nameVariable = $(element)[0].childNodes[0].nodeValue.trim();
 			var dragNDropAnswer = $(element).find('.omm_answer-notice-html').text();
 
-			x += '<div class="omm_draggable btn-default col-md-3 " id="' + answerName + '" draggable="true" ondragstart="drag(event)"name="' + nameVariable + '" title="Antwort ins richtige Feld ziehen.">';
+			x += '<div class="omm_draggable btn-default col-md-3 col-sm-3 col-xs-4" id="' + answerName + '" draggable="true" ondragstart="drag(event)"name="' + nameVariable + '" title="Antwort ins richtige Feld ziehen.">';
 			x += dragNDropAnswer;
 			x += '</div>';
 		});
