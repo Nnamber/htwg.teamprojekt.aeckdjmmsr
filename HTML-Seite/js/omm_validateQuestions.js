@@ -156,11 +156,12 @@ function omm_validateQuestions() {
 		var iscorrect = true;
 		$(currentquestion).find('input:text').each(function(index, element) {
 			var pattern = $(element).attr('pattern');
+
 			if ($(element).val().match(pattern)) {
 				$(element).addClass(omm_class_calloutTextRight);
 			} else {
 				$(element).addClass(omm_class_calloutTextWrong);
-				$(element).after("<span class='omm_callout-answer omm_callout-answer-wrong'>&nbsp;"+pattern+"&nbsp;</span>");
+				$(element).after("<span class='omm_callout-answer omm_callout-answer-wrong'>&nbsp;"+extractPattern(pattern)+"&nbsp;</span>");
 				iscorrect = false;
 			}
 		});
@@ -262,6 +263,23 @@ function omm_validateQuestions() {
 		$(progressbar).append(progressbarCorrect);
 		$(progressbar).append(progressbarWrong);
 		$(form).append(progressbar);
+	}
+	
+	
+	function extractPattern(pattern) {
+		var answer = pattern.split('|');
+		if (answer.length > 1) {
+		    var answerTemp;
+		    for (var i = 0; i < answer.length; i++) {
+				answerTemp = answer[i];
+			var positionStar = answer[i].indexOf('*');
+			if (positionStar === -1) {
+			    return answerTemp;
+			}
+		    };
+		} else {
+		    return answer[0];
+		}
 	}
 
 }
