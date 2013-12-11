@@ -12,6 +12,7 @@ function omm_display() {
 		initCheckAllEventHandler();
 		initCheckThemaEventHandler();
 		initGeneratehtmlFromCheckedEventHandler();
+		initIndeterminateCheckboxesEventHandler();
 	};
 
 	this.showMessage = function(message, isError) {
@@ -57,6 +58,36 @@ function omm_display() {
 
 	function initGeneratehtmlFromCheckedEventHandler() {
 		jQuery(omm_cssSelector_saveHTML).click(omm_save.saveHtml);
+	}
+
+	function initIndeterminateCheckboxesEventHandler() {
+
+		jQuery(".omm_panel-body").find('input[type="checkbox"]').change(function(element) {
+			var isChecked = $(this).prop('checked');
+			// var parentBox = $(this).parent().parent(".omm_thema-row").find("div.panel-title > :input");
+			var container = $(this).parent("td").parent("tr").parent("tbody");
+
+			function checkSiblings(container) {
+				var parentCheckBox = $(container).parent("table").parent(".omm_panel-body").parent(".panel-collapse").parent(".omm_thema-row").find("div.panel-title > :input");
+				var allChecked = true;
+				
+				container.children().each(function() {
+				  return allChecked = ($(this).find('input[type="checkbox"]').prop('checked') === isChecked);
+				});
+				
+				if(allChecked && isChecked){
+					$(parentCheckBox).prop({indeterminate: false, checked: true});
+				}else if(allChecked && !isChecked){
+					$(parentCheckBox).prop({checked: isChecked, indeterminate: false});
+					// $(parentCheckBox).prop("indeterminate", false);//(parent.find('.panel-title input[type="checkbox"]').length > 0));
+				}else{
+					$(parentCheckBox).prop({indeterminate: true, checked: false});
+				}
+			}
+
+			checkSiblings(container);
+		});
+
 	}
 
 };;
