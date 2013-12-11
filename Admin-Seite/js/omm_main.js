@@ -15,7 +15,8 @@ var omm_cssSelector_hiddenQuestion = ".omm_question";
 var omm_cssSelector_questionTitle = ".omm_question-title";
 var omm_cssSelector_clozeTextInput = ".omm_cloze-text-input";
 var omm_cssSelector_ommClozeTextHiddenAnswer = ".omm-cloze-text-hidden-answer";
-
+var omm_cssSelector_saveDialog = "#omm_xml-save-dialog";
+var omm_cssSelector_readDialog = "#omm_xml-read-dialog";
 
 jQuery(document).ready(function() {
     initPopovers();

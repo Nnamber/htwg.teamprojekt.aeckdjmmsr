@@ -13,6 +13,7 @@ function omm_display() {
 		initCheckThemaEventHandler();
 		initGeneratehtmlFromCheckedEventHandler();
 		initIndeterminateCheckboxesEventHandler();
+		initCloseModalEventHandler();
 	};
 
 	this.showMessage = function(message, isError) {
@@ -89,5 +90,47 @@ function omm_display() {
 		});
 
 	}
+	
+	function initCloseModalEventHandler() {
+		jQuery(omm_cssSelector_saveDialog).on('hidden.bs.modal', function(eventObject) {
+			clearModalButtons(eventObject.target);
+			clearModalFormInputValues(eventObject.target);
+		});
+		jQuery(omm_cssSelector_readDialog).on('hidden.bs.modal', function(eventObject) {
+			clearModalButtons(eventObject.target);
+			clearModalFormInputValues(eventObject.target);
+		});
+	}
 
-};;
+	function clearModalFormInputValues(modal) {
+		jQuery(modal).find(":input").each(function(index, element) {
+			switch (element.type) {
+				case 'password':
+				case 'select-multiple':
+				case 'select-one':
+				case 'text':
+				case 'textarea':
+					jQuery(element).val('');
+					break;
+				case 'checkbox':
+				case 'radio':
+					this.checked = false;
+					break;
+				case 'file':
+					resetFileInputField(element);
+			}
+		});
+
+		//inner funktion
+		function resetFileInputField(element){
+			jQuery(element).wrap(document.createElement("form"));
+			jQuery(element).parent().get(0).reset();
+			jQuery(element).unwrap();
+		}
+	}
+
+	function clearModalButtons(modal) {
+		jQuery(modal).find(".omm_modal-enabled").prop("disabled", false);
+		jQuery(modal).find(".omm_modal-disabled").prop("disabled", true);
+	}
+}
