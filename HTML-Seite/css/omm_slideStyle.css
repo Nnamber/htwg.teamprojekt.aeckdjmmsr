@@ -128,9 +128,9 @@
 }
 
 .omm_droppable > span{
-    margin: 3.5%;
-    color: #35B929;
-    font-weight: 700;
+        margin: 3.0%;
+        color: #35B929;
+        font-weight: 700;
 }
 
 .well {
@@ -144,28 +144,32 @@
     border: 1px solid rgb(204, 204, 204);
     border-radius: 4px;
     margin-bottom: 6px;
+    min-height: 60px;
 }
 .omm_droppable{
-
-    min-height: 76px;
+    background-color: transparent;
+    min-height: 60px;
     border: dashed 1px midnightblue;
+    margin-top: 0px;
     margin-bottom: 0px;
+    padding: 0px;
 }
 
 
 .omm_droppable > .omm_draggable{
     float: right;
-    margin: 0px;
     padding: 10px;
-    width: 50%;
+    min-width: 50%;
+    margin: 8px;
 }
 
 .omm_droppable-answer{
-    min-height: 76px;
-    padding: 24px 0px 0px 25px;
-    margin-bottom: 0px;
-    font-size: 20px;
-}
+        background-color: transparent;
+	height: 60px;
+        padding: 15px 0px 0px 15px;
+	margin-bottom: 0px;
+	font-size: 20px;
+ }
 
 .omm_draggable{
     background-color: rgb(245, 245, 245);
@@ -186,6 +190,12 @@
 .radio.omm_callout-answer {
     margin-left: -5px;
     padding-left: 22px;
+}
+
+.omm_answer-field-big{
+    margin-top: 20px;
+   min-height: 80px;
+   background-color: transparent;
 }
 
 .omm_answer-field-big >.omm_draggable{
@@ -351,7 +361,7 @@ Colors for dimension testing
 }
 
 .omm_callout-text-right{
-    border-color: #1c5005;
+    border-color: rgb(162, 250, 153);
 }
 
 .validationSlide {

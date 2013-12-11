@@ -586,7 +586,7 @@ function setSlideSize(direction) {
         if(direction === "next"){
             if(nextItem.hasClass('next')){
                 var containerHeight = $(nextItem).children('.container').height();
-                if (containerHeight > $(nextItem).height()) {
+                if (containerHeight+80 > $(nextItem).height()) {
                         $(nextItem).css('min-height', containerHeight + 105);
                         $(nextItem).css('margin-bottom', "20px !important");
                 }
@@ -595,7 +595,7 @@ function setSlideSize(direction) {
         }else if (direction === "back"){
             if(prevItem.hasClass('past')){
                var containerHeight = $(prevItem).children('.container').height();
-               if (containerHeight > $(prevItem).height()) {
+               if (containerHeight+80 > $(prevItem).height()) {
                        $(prevItem).css('min-height', containerHeight + 105);
                        $(prevItem).css('margin-bottom', "20px !important");
                }
@@ -603,7 +603,7 @@ function setSlideSize(direction) {
             }
         } else if(direction === null){
              var containerHeight = $(curItem).children('.container').height();
-             if (containerHeight > $(curItem).height()) {
+             if (containerHeight+80 > $(curItem).height()) {
                         $(curItem).css('min-height', containerHeight + 105);
                         $(curItem).css('margin-bottom', "20px !important");
              }
