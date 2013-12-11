@@ -128,9 +128,9 @@
 }
 
 .omm_droppable > span{
-    margin: 4% 2%;
-    color: #35B929;
-    font-weight: 700;
+        margin: 4% 2%;
+        color: #35B929;
+        font-weight: 700;
 }
 
 .well {
@@ -248,6 +248,24 @@ Colors for dimension testing
 }*/
 @media (max-width: 900px){
 
+    .omm_navbar {
+        width: 100%;
+        height: 50px;
+        -webkit-border-top-left-radius: 0px;
+        -webkit-border-top-right-radius: 0px;
+        -moz-border-radius-topleft: 0px;
+        -moz-border-radius-topright: 0px;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+
+    .omm_navbar i{
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 5px;
+        font-size: xx-large;
+    }
+
     .slides > article.next {
         visibility: hidden !important;
     }
@@ -268,6 +286,7 @@ Colors for dimension testing
         margin-left: 0px !important;
         margin-top: 0px !important;
         padding: 40px 60px;
+        border: none;
         box-sizing: border-box;
         -o-box-sizing: border-box;
         -moz-box-sizing: border-box;
@@ -276,6 +295,9 @@ Colors for dimension testing
         -o-border-radius: 0px !important;
         -moz-border-radius: 0px !important;
         -webkit-border-radius: 0px !important;
+    }
+    .slides > article > .container {
+        margin-bottom: 50px;
     }
 }
 
@@ -320,8 +342,8 @@ Colors for dimension testing
 }
 
 .omm_callout-answer-wrong{
-  background-color: #F38A93 !important;
-  border-color: #FC0A0A;
+    background-color: #F38A93 !important;
+    border-color: #FC0A0A;
 }
 
 .omm_callout-answer-right{
@@ -392,5 +414,6 @@ Colors for dimension testing
 }
 
 span.omm_callout-answer-wrong{
-	font-size: 15px;
+    font-size: 15px;
 }
+
