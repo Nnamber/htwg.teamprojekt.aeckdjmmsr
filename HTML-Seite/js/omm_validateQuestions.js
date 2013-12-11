@@ -156,10 +156,14 @@ function omm_validateQuestions() {
 		var iscorrect = true;
 		$(currentquestion).find('input:text').each(function(index, element) {
 			var pattern = $(element).attr('pattern');
-
-			if ($(element).val().match(pattern)) {
+			//pattern could contain a regEx, seperated by |  --> construct of pattern=(RexEx*|Lösung)
+			var regEx = pattern.split("|").length > 1 ? true : false;
+			// regEx = true --> so kick ~ ([~] is not a valid Javascript regex)
+			if (regEx && $(element).val().match(pattern.replace("~", ""))) {
 				$(element).addClass(omm_class_calloutTextRight);
-			} else {
+			} else if($(element).val() == pattern){
+				$(element).addClass(omm_class_calloutTextRight);
+			}else {
 				$(element).addClass(omm_class_calloutTextWrong);
 				$(element).after("<span class='omm_callout-answer omm_callout-answer-wrong'>&nbsp;"+extractPattern(pattern)+"&nbsp;</span>");
 				iscorrect = false;
