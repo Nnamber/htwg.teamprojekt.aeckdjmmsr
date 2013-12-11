@@ -438,24 +438,33 @@ function updateHash() {
 
 function handleBodyKeyDown(event) {
         var slideHeight=$(getSlideEl(curSlide)).height();
-        
 	switch (event.keyCode) {
+	    	case 32:
+		// space
 		case 39:
+			if(event.target.tagName !== "INPUT"){
+			    console.log("meh");
+			    nextSlide();
+			    event.preventDefault();
+			}
+			break;
 		// right arrow
 		case 13:
 		// Enter
-		case 32:
-		// space
 		case 34:
 			// PgDn
 			nextSlide();
 			event.preventDefault();
 			break;
-
-		case 37:
-		// left arrow
-		//case 8:
+		case 8:
 		// Backspace
+		case 37:
+			if(event.target.tagName !== "INPUT"){
+			    prevSlide();
+			    event.preventDefault();
+			}
+			break;
+		// left arrow
 		case 33:
 			// PgUp
 			prevSlide();
@@ -554,11 +563,10 @@ function addGeneralStyle() {
 	//	el.href = PERMANENT_URL_PREFIX + './css/styles.css';
 	//	document.body.appendChild(el);
 
-	//Set Viewport in html
-//	var el = document.createElement('meta');
-//	el.name = 'viewport';
-//	el.content = 'width=1100,height=750';
-//	document.querySelector('head').appendChild(el);
+	var el = document.createElement('meta');
+	el.name = 'viewport';
+	el.content = 'width=1100,height=750';
+	document.querySelector('head').appendChild(el);
 
 	var el = document.createElement('meta');
 	el.name = 'apple-mobile-web-app-capable';
