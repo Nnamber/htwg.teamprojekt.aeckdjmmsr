@@ -29,8 +29,15 @@ function omm_readSelected() {
 		//Set meta
 		var charsetMeta = document.createElement("meta");
 		jQuery(charsetMeta).attr("charset", "utf-8");
-		head.append(charsetMeta);
-
+		
+		var viewportMeta = document.createElement("meta");
+		jQuery(viewportMeta).attr({
+			name: "viewport",
+			content: "width=device-width, initial-scale=1.0, user-scalable=no"
+			
+		});
+		head.append(charsetMeta, viewportMeta);
+		
 		//Add scripts and stylesheets
 		addStylesheetLinks(head, stylesheets);
 		addScriptSources(head, scriptSources);
@@ -147,8 +154,10 @@ function omm_readSelected() {
 				//Create form
 				//necessary for 'novalidate' attr.
 				var form = document.createElement("form");
-				jQuery(form).attr("role", "form");
-				jQuery(form).attr("class", "validationSlide");
+				jQuery(form).attr({
+					role: "form",
+					class: "validationSlide",
+				});
 				jQuery(container).append(form);
 				jQuery(form).append("<button type='button' class='btn btn-primary btn-lg' id='checkAnswer'>Auswertung starten</button>");
 
