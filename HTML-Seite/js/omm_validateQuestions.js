@@ -267,6 +267,18 @@ function omm_validateQuestions() {
 		$(progressbar).append(progressbarCorrect);
 		$(progressbar).append(progressbarWrong);
 		$(form).append(progressbar);
+		//add reset button
+		var btn=document.createElement("BUTTON");
+		var t=document.createTextNode("Nochmal!");
+		btn.appendChild(t);
+		$(btn).addClass("btn btn-primary btn-lg");
+		$(form).append(btn);
+		$(btn).click(function(){
+		    $("body").find("input").each(function(index, element){
+			$(element).not(':button').val('').prop('checked', false) .prop('selected', 'off');
+		    });
+		    document.location.reload();
+		});
 	}
 	
 	
