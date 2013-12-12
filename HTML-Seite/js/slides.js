@@ -497,22 +497,22 @@ function handleBodyKeyDown(event) {
 };
 
 function handleBodyScrollWheel(event) {
-        var documentScrollPosition = (document.body.scrollHeight - document.body.clientHeight);
-        /*var slideHeight = $(getSlideEl(curSlide)).height();
-        //test the height of the parent, if below 700, event.target is outside a slide or reached bottom of page scrolling to next slide is ok
+        //var documentScrollPosition = (document.body.scrollHeight - document.body.clientHeight);
+        var slideHeight = $(getSlideEl(curSlide)).height();
+        /*test the height of the parent, if below 700, event.target is outside a slide or reached bottom of page scrolling to next slide is ok
 	if (slideHeight <= $(window).height() || $(event.target).parents('.container').length === 0 ||  document.body.scrollTop === documentScrollPosition) {
         */
         var delta = event.originalEvent.detail < 0 || event.originalEvent.wheelDelta > 0 ? 1 : -1;
         //if bottom of page was reached, scroll next
         //if (delta < 0 && document.body.scrollTop === documentScrollPosition ) {
-	if (slideHeight <= $(window).height() || $(event.target).parents('.container').length === 0 ||  document.body.scrollTop === documentScrollPosition) {
+	if (delta < 0 && (slideHeight <= $(window).height() || $(event.target).parents('.container').length === 0)) {
                 //jump to the top of the page in case the previous page was scrollable
                 $('html,body').scrollTop(0);
                 // scroll down
                 nextSlide();
                 event.preventDefault();
         //if top of page was reached, scroll next
-        } else if (delta > 0 && $('body').scrollTop() === 0){
+        } else if (delta > 0 && (slideHeight <= $(window).height() || $(event.target).parents('.container').length === 0)){
                 $('html,body').scrollTop(0);
                 // scroll up
                 prevSlide();
