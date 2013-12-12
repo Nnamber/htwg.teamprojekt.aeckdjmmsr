@@ -155,6 +155,7 @@ function omm_answerGenerator() {
 			attributes.pattern = pattern;
 			jQuery(inputField).attr(attributes);
 			jQuery(inputField).addClass('omm_clozetext');
+			jQuery(inputField).addClass('form-control');
 			jQuery(element).after(inputField);
 			jQuery(element).remove();
 		});
