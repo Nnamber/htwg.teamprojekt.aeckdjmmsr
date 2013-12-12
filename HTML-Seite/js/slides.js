@@ -439,18 +439,18 @@ function updateHash() {
 function handleBodyKeyDown(event) {
         var slideHeight=$(getSlideEl(curSlide)).height();
 	switch (event.keyCode) {
-	    	case 32:
+	    	case 13:
+		// Enter
+		case 32:
 		// space
 		case 39:
 			if(event.target.tagName !== "INPUT"){
-			    console.log("meh");
 			    nextSlide();
 			    event.preventDefault();
 			}
 			break;
 		// right arrow
-		case 13:
-		// Enter
+		
 		case 34:
 			// PgDn
 			nextSlide();
@@ -504,7 +504,8 @@ function handleBodyScrollWheel(event) {
         */
         var delta = event.originalEvent.detail < 0 || event.originalEvent.wheelDelta > 0 ? 1 : -1;
         //if bottom of page was reached, scroll next
-        if (delta < 0 && document.body.scrollTop === documentScrollPosition ) {
+        //if (delta < 0 && document.body.scrollTop === documentScrollPosition ) {
+	if (slideHeight <= $(window).height() || $(event.target).parents('.container').length === 0 ||  document.body.scrollTop === documentScrollPosition) {
                 //jump to the top of the page in case the previous page was scrollable
                 $('html,body').scrollTop(0);
                 // scroll down

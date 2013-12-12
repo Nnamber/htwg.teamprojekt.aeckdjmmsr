@@ -19,6 +19,7 @@ var omm_cssSelector_saveDialog = "#omm_xml-save-dialog";
 var omm_cssSelector_readDialog = "#omm_xml-read-dialog";
 
 jQuery(document).ready(function() {
+    $(':checkbox:checked').prop('checked',false);
     initPopovers();
     omm_display.init();
     $(omm_cssSelector_fileInput).change(omm_parser.validateXml);

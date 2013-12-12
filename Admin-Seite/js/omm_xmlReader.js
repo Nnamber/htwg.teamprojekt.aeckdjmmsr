@@ -37,7 +37,7 @@ function omm_xmlParser() {
 
             var wellFormedQuestionBody;
             var questionAnswers = new Array();
-            if ($(this).attr("type") != 'ClozeText') {
+            if ($(this).attr("type") !== 'ClozeText') {
                 wellFormedQuestionBody = styler.getWellFormedQuestionBody($(this));
                 x += htmlQuestionBody(wellFormedQuestionBody);
                 //div fuer Antworten erzeugen
@@ -85,8 +85,7 @@ function omm_xmlParser() {
             clozeString = clozeString.replace(patternF, "<div class='omm_cloze-text-input'><div class='omm-cloze-text-hidden-answer'>" + a + "</div></div>");
         }
         body += clozeString;
-        body += '</div>';
-
+	body += '</div>';
         return body;
     }
 
