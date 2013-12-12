@@ -418,6 +418,8 @@ Colors for dimension testing
     margin-top: 5px;
     margin-left: 2px;
     margin-right: 2px;
+    width: 25%;
+    display: inline;
 }
 
 span.omm_callout-answer-wrong{
