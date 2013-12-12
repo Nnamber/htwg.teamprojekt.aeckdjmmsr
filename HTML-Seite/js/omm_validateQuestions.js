@@ -271,7 +271,7 @@ function omm_validateQuestions() {
 		var btn=document.createElement("BUTTON");
 		var t=document.createTextNode("Nochmal!");
 		btn.appendChild(t);
-		$(btn).addClass("btn btn-primary btn-lg");
+		$(btn).addClass("btn btn-primary btn-lg omm_reset-button");
 		$(form).append(btn);
 		$(btn).click(function(){
 		    $("body").find("input").each(function(index, element){
