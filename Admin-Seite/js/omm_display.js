@@ -49,6 +49,7 @@ function omm_display() {
 	function initCheckAllEventHandler() {
 		jQuery(omm_cssSelector_selectAll + " :checkbox").change(function(eventObject) {
 			var allCheckboxes = jQuery(themaTable).find(":checkbox");
+			allCheckboxes.prop("indeterminate", false);
 			if (jQuery(this).prop('checked') === true) {
 				allCheckboxes.prop("checked", true);
 			} else {
