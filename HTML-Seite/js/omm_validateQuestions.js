@@ -274,8 +274,8 @@ function omm_validateQuestions() {
 		$(btn).addClass("btn btn-primary btn-lg omm_reset-button");
 		$(form).append(btn);
 		$(btn).click(function(){
-		    $("body").find("input").each(function(index, element){
-			$(element).not(':button').val('').prop('checked', false) .prop('selected', 'off');
+		    $("body").find("form").each(function(index, element){
+			$(element)[0].reset();
 		    });
 		    document.location.reload();
 		});
