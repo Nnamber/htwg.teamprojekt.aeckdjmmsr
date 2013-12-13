@@ -278,7 +278,7 @@ function omm_validateQuestions() {
 			$(element)[0].reset();
 		    });
                     history.pushState("", document.title, window.location.pathname + window.location.search);
-		});
+                    });
 	}
 	
 	

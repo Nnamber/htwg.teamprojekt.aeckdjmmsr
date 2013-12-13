@@ -4,19 +4,19 @@ function allowDrop(ev) {
 
 function drag(ev) {
     //set the id of the parent of the event who triggered the "drag" event
-    ev.dataTransfer.setData("parentId", $(ev.target).parent().attr('id'));
+   // ev.dataTransfer.setData("parentId", $(ev.target).parent().attr('id'));
         
     //set the id of the element who triggered the event
-    ev.dataTransfer.setData("dragId", ev.target.id);
+    ev.dataTransfer.setData("text", ev.target.id+"/"+$(ev.target).parent().attr('id'));
 }
 
 function drop(ev) {
     ev.preventDefault();
-
+    var dataAll = ev.dataTransfer.getData("text").split("/");
     //get the id of the element who triggered the event
-    var data = ev.dataTransfer.getData("dragId");
+    var data = dataAll[0];
      //get the answer field in which the dragable answer is located
-     var dragParent = ev.dataTransfer.getData("parentId");
+     var dragParent = dataAll[1];
 
     //Dropable target is not a draggable object, is not a dropable targt with an answer already or is the big answer field
     if (!$(ev.target).hasClass("omm_draggable") && ($(ev.target).children().length === 0 || $(ev.target).hasClass('omm_answer-field-big'))) {
