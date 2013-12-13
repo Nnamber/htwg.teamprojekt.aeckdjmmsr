@@ -444,7 +444,7 @@ function handleBodyKeyDown(event) {
 		case 32:
 		// space
 		case 39:
-			if(event.target.tagName !== "INPUT"){
+			if(event.target.type !== "text"){
 			    nextSlide();
 			    event.preventDefault();
 			}
@@ -459,7 +459,7 @@ function handleBodyKeyDown(event) {
 		case 8:
 		// Backspace
 		case 37:
-			if(event.target.tagName !== "INPUT"){
+			if(event.target.type !== "text"){
 			    prevSlide();
 			    event.preventDefault();
 			}
