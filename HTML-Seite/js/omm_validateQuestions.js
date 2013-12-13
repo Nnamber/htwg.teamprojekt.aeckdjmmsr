@@ -277,7 +277,7 @@ function omm_validateQuestions() {
 		    $("body").find("form").each(function(index, element){
 			$(element)[0].reset();
 		    });
-		    document.location.reload(false);
+                    history.pushState("", document.title, window.location.pathname + window.location.search);
 		});
 	}
 	
