@@ -4,6 +4,7 @@ var omm_save = new omm_saveHtml();
 var omm_applicationTitle = "Mindmailer";
 var omm_DefaultPath = "./xmlFiles/Mindmailer.xml";
 var omm_cssSelector_htmlFileName = "#omm_file-name";
+var omm_cssSelector_sourcePath = "#omm_source-path";
 var omm_cssSelector_themaRow = ".omm_thema-row";
 var omm_cssSelector_panelBody = ".omm_panel-body";
 var omm_cssSelector_noticePanel = "#omm_notice-panel";
