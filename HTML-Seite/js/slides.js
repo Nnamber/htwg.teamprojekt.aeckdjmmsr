@@ -596,6 +596,9 @@ function setSlideSize(direction) {
         if(direction === "next"){
             if(nextItem.hasClass('next')){
                 var containerHeight = $(nextItem).children('.container').height();
+               if(containerHeight == 0){
+               	 	containerHeight = 700;
+               }
                 if (containerHeight+80 > $(nextItem).height()) {
                         $(nextItem).css('min-height', containerHeight + 105);
                         $(nextItem).css('margin-bottom', "20px !important");
@@ -605,6 +608,9 @@ function setSlideSize(direction) {
         }else if (direction === "back"){
             if(prevItem.hasClass('past')){
                var containerHeight = $(prevItem).children('.container').height();
+               if(containerHeight == 0){
+               	 	containerHeight = 700;
+               }
                if (containerHeight+80 > $(prevItem).height()) {
                        $(prevItem).css('min-height', containerHeight + 105);
                        $(prevItem).css('margin-bottom', "20px !important");

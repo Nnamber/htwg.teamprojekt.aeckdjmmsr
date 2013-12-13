@@ -247,6 +247,11 @@ Colors for dimension testing
     }
 }*/
 @media (max-width: 900px){
+	
+	.slide-area{
+		display: none !important;
+	}
+
 
     .omm_navbar {
         width: 100%;
@@ -267,10 +272,10 @@ Colors for dimension testing
     }
 
     .slides > article.next {
-        visibility: hidden !important;
+        display: none !important;
     }
     .slides > article.past {
-        visibility: hidden !important;
+        display: none !important;
     }
     .slides > article.far-next {
         display: none !important;

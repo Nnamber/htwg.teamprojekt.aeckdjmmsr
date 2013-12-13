@@ -33,4 +33,15 @@ function omm_navigation() {
 		}
 
 	};
+	
+	this.initTouchEventHandler = function(){
+		jQuery(window).on("swipeleft", function(event){
+			event.preventDefault();
+			nextSlide();
+		});
+		jQuery(window).on("swiperight", function(event){
+			event.preventDefault();
+			prevSlide();
+		});
+	};
 }
