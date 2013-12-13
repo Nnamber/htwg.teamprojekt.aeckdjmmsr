@@ -564,10 +564,11 @@ function addGeneralStyle() {
 	//	el.href = PERMANENT_URL_PREFIX + './css/styles.css';
 	//	document.body.appendChild(el);
 
-	var el = document.createElement('meta');
-	el.name = 'viewport';
-	el.content = 'width=1100,height=750';
-	document.querySelector('head').appendChild(el);
+	//Set viewport in readSelected.js
+	// var el = document.createElement('meta');
+	// el.name = 'viewport';
+	// el.content = 'width=1100,height=750';
+	// document.querySelector('head').appendChild(el);
 
 	var el = document.createElement('meta');
 	el.name = 'apple-mobile-web-app-capable';
