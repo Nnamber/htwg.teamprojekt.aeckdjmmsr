@@ -34,20 +34,21 @@ function omm_navigation() {
 
 	};
 
-	this.initScrolling = function(element) {
+	this.initSlideEnterEventHandler = function(element) {
 
-		if (omm_scroller != null) {
-			omm_scroller.destroy();
-			omm_scroller = null;
-		}
-
-		omm_scroller = new iScroll(element.get(0), {
-			hScroll : false,
-			vScroll : true,
-			hScrollbar : false,
-			vScrollbar : false
-		}); 
-
+		jQuery(".slides > article").on("slideenter", function(event) {
+			var wrapper = jQuery(event.target).children('.wrapper');
+			
+			if (jQuery(event.target).width() <= 900) {
+				//Set wrapper heigth on article height minus toolbar height
+				jQuery(wrapper).height(jQuery(event.target).height() - 50);
+				initScrolling(wrapper);
+				jQuery(event.target).find(omm_selector_questionNumberArea).css({
+					"z-index": 100,
+					"position": "absolute"
+				});
+			}
+		});
 	};
 
 	this.initTouchEventHandler = function() {
@@ -62,4 +63,18 @@ function omm_navigation() {
 			prevSlide();
 		});
 	};
+	
+	function initScrolling(element) {
+		if (omm_scroller !== null) {
+			omm_scroller.destroy();
+			omm_scroller = null;
+		}
+
+		omm_scroller = new iScroll(element.get(0), {
+			hScroll: false,
+			vScroll: true,
+			hScrollbar: false,
+			vScrollbar: false
+		});
+	}
 }

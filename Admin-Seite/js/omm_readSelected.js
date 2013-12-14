@@ -70,9 +70,7 @@ function omm_readSelected() {
 				//Append Content
 				jQuery(article).append(function() {
 					
-					//Create wrapper for iScroll
-					var wrapper = document.createElement("div");
-					jQuery(wrapper).addClass("wrapper");
+					var wrapper = createWrapper();
 
 					//Create container
 					var container = document.createElement("div");
@@ -125,6 +123,15 @@ function omm_readSelected() {
 		return totalQuestionNumber;
 	}
 	
+	
+	function createWrapper() {
+		//Create wrapper for iScroll
+		var wrapper = document.createElement("div");
+		jQuery(wrapper).addClass("wrapper");
+		return wrapper;
+	}
+
+	
 	function appendQuerstionNumberArea (index, element, totalQuestionNumber){
 		var questionTitel = jQuery(element).parent().parent().find(omm_cssSelector_questionTitle).text();
 
@@ -156,6 +163,8 @@ function omm_readSelected() {
 			});
 
 			jQuery(article).append(function() {
+				
+				var wrapper = createWrapper();
 
 				//Create container
 				var container = document.createElement("div");
@@ -170,8 +179,10 @@ function omm_readSelected() {
 				});
 				jQuery(container).append(form);
 				jQuery(form).append("<button type='button' class='btn btn-primary btn-lg' id='checkAnswer'>Auswertung starten</button>");
-
-				return container;
+				
+				jQuery(wrapper).append(container);
+				
+				return wrapper;
 			});
 
 			return article;

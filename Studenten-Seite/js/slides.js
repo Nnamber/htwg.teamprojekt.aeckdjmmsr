@@ -598,41 +598,39 @@ function setSlideSize(direction) {
 		if (nextItem.hasClass('next')) {
 			var wrapper = $(nextItem).children('.wrapper');
 			var containerHeight = $(nextItem).find('.wrapper > .container').height();
-			if (containerHeight == 0) {
-				omm_navigation.initScrolling(wrapper);
-			} else {
-				if (containerHeight + 80 > $(nextItem).height()) {
-					$(nextItem).css('min-height', containerHeight + 105);
-					$(nextItem).css('margin-bottom', "20px !important");
-					wrapper.css('height', containerHeight + 105);
-				}
+			//Dont extend slides on small screens
+			if (containerHeight + 80 > $(nextItem).height() && $(nextItem).width() > 900) {
+				$(nextItem).css('min-height', containerHeight + 105);
+				$(nextItem).css('margin-bottom', "20px !important");
+				wrapper.css('height', containerHeight + 105);
 			}
+
 			$(curItem).removeAttr("style");
 		}
 	} else if (direction === "back") {
 		if (prevItem.hasClass('past')) {
 			var wrapper = $(prevItem).children('.wrapper');
 			var containerHeight = $(prevItem).find('.wrapper > .container').height();
-			if (containerHeight == 0) {
-				omm_navigation.initScrolling(wrapper);
-			} else {
-				if (containerHeight + 80 > $(prevItem).height()) {
-					$(prevItem).css('min-height', containerHeight + 105);
-					$(prevItem).css('margin-bottom', "20px !important");
-					wrapper.css('height', containerHeight + 105);
-				}
+			//Dont extend slides on small screens
+			if (containerHeight + 80 > $(prevItem).height() && $(prevItem).width() > 900) {
+				$(prevItem).css('min-height', containerHeight + 105);
+				$(prevItem).css('margin-bottom', "20px !important");
+				wrapper.css('height', containerHeight + 105);
 			}
+
 			$(curItem).removeAttr("style");
 		}
 	} else if (direction === null) {
 		var wrapper = $(curItem).children('.wrapper');
-		omm_navigation.initScrolling(wrapper);
 		var containerHeight = $(curItem).find('.container').height();
-		if (containerHeight + 80 > $(curItem).height()) {
+		//Dont extend slides on small screens
+		if (containerHeight + 80 > $(curItem).height() && $(curItem).width() > 900) {
 			$(curItem).css('min-height', containerHeight + 105);
 			$(curItem).css('margin-bottom', "20px !important");
 			wrapper.css('height', containerHeight + 105);
 		}
+
+
 	}
 
 
