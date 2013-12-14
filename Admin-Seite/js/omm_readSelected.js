@@ -38,10 +38,12 @@ function omm_readSelected() {
 		});
 		head.append(charsetMeta, viewportMeta);
 		
+		//Path to Sources like JS/CSS..
+		var path = getSourcePath();
 		//Add scripts and stylesheets
-		addStylesheetLinks(head, stylesheets);
-		addScriptSources(head, scriptSources);
-		addFavicon(head);
+		addStylesheetLinks(head, stylesheets, path);
+		addScriptSources(head, scriptSources, path);
+		addFavicon(head, path);
 
 		var body = jQuery(htmlPageContent).find("body");
 
@@ -182,27 +184,27 @@ function omm_readSelected() {
 		return section;
 	}
 
-	function addStylesheetLinks(head, stylesheets) {
+	function addStylesheetLinks(head, stylesheets, path) {
 		jQuery(stylesheets).each(function(index) {
 			var link = document.createElement("link");
 			link.rel = 'stylesheet';
-			link.href = stylesheets[index];
+			link.href = path + stylesheets[index];
 			head.append(link);
 		});
 	}
 	
-	function addFavicon(head){
+	function addFavicon(head, path){
 		var link = document.createElement("link");
 		link.rel = 'shortcut icon';
 		link.type = 'image/x-icon';
-		link.href = 'favicon.ico';
+		link.href = path + 'favicon.ico';
 		head.append(link);
 	}
 
-	function addScriptSources(head, sources) {
+	function addScriptSources(head, sources, path) {
 		jQuery(sources).each(function(index) {
 			var script = document.createElement("script");
-			script.src = sources[index];
+			script.src = path + sources[index];
 			head.append(script);
 		});
 	}
@@ -221,5 +223,14 @@ function omm_readSelected() {
 		jQuery(footer).append(nav);
 		body.append(footer);
 	}
-
+	
+	function getSourcePath(){
+		var sourcePath = $(omm_cssSelector_sourcePath).val();
+		if (sourcePath == (" " | "" | null)) {
+			sourcePath = "";
+		}else{
+			sourcePath += "/"; 
+		}
+		return sourcePath;
+	}	
 }
