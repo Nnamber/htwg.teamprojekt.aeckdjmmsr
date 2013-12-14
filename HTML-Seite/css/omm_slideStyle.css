@@ -1,4 +1,6 @@
 .omm_question-number-area {
+	position: absolute;
+	z-index: 100;
     background-color: rgb(151, 159, 163) ;
     float: left;
     padding-top: 5px;
@@ -16,8 +18,12 @@
     min-height: 700px;
 }
 
-.slides > article > .container {
+.slides > article > .wrapper > .container {
     margin-top: 80px;
+}
+
+.slides > article > .wrapper {
+    height: 700px;
 }
 
 #next-slide-area {
@@ -251,8 +257,7 @@ Colors for dimension testing
 	.slide-area{
 		display: none !important;
 	}
-
-
+	
     .omm_navbar {
         width: 100%;
         height: 50px;
@@ -272,10 +277,10 @@ Colors for dimension testing
     }
 
     .slides > article.next {
-        display: none !important;
+        visibility: hidden !important;
     }
     .slides > article.past {
-        display: none !important;
+        visibility: hidden !important;
     }
     .slides > article.far-next {
         display: none !important;
@@ -286,6 +291,7 @@ Colors for dimension testing
         overflow: hidden;
         width: 100% !important;
         height: 100% !important;
+        min-height:100% !important;
         left: 0% !important;
         top: 0% !important;
         margin-left: 0px !important;
@@ -301,7 +307,7 @@ Colors for dimension testing
         -moz-border-radius: 0px !important;
         -webkit-border-radius: 0px !important;
     }
-    .slides > article > .container {
+    .slides > article > .wrapper {
         margin-bottom: 50px;
     }
 }

@@ -5,7 +5,7 @@ function omm_readSelected() {
 
 	var htmlPage;
 	var stylesheets = ['css/bootstrap.css', 'css/font-awesome.min.css', 'css/omm_slideStyle.css', 'css/styles.css'];
-	var scriptSources = ['js/jquery-2.0.3.js', 'js/jquery.mobile.custom.js', 'js/bootstrap.min.js', 'js/slides.js', 'js/omm_validateQuestions.js', 'js/omm_dragAndDrop.js', 'js/omm_navigation.js', 'js/omm_main.js'];
+	var scriptSources = ['js/jquery-2.0.3.js', 'js/jquery.mobile.custom.js', 'js/iscroll-lite.js', 'js/bootstrap.min.js', 'js/slides.js', 'js/omm_validateQuestions.js', 'js/omm_dragAndDrop.js', 'js/omm_navigation.js', 'js/omm_main.js'];
 
 	this.readSelectedQuestions = function() {
 		generateHtmlPageScaffold();
@@ -46,7 +46,7 @@ function omm_readSelected() {
 		var body = jQuery(htmlPageContent).find("body");
 
 		//hide body until goolge script.js is loaded
-		body.attr("style", "display: none");
+		body.attr("style", "visibility: hidden");
 		body.append(createSection);
 
 		//Add bottom fixed navbar
@@ -61,23 +61,16 @@ function omm_readSelected() {
 				var article = document.createElement("article");
 				//Append Question Number Area and Question titel
 				jQuery(article).append(function() {
-
-					var questionTitel = jQuery(element).parent().parent().find(omm_cssSelector_questionTitle).text();
-
-					var questionNumberArea = document.createElement("div");
-					jQuery(questionNumberArea).addClass(student_questionNumberArea);
-					var p = document.createElement("p");
-					jQuery(p).append("Frage #<span class='omm_current-question-number'></span>/<span class='omm_total-question-number'></span>: ");
-					jQuery(p).append("<span class='omm_current-question-name'>" + questionTitel + "</span>");
-					jQuery(questionNumberArea).append(p);
-					jQuery(questionNumberArea).find(".omm_current-question-number").append(index + 1);
-					jQuery(questionNumberArea).find(".omm_total-question-number").append(totalQuestionNumber);
-
-					return questionNumberArea;
+					
+					return appendQuerstionNumberArea(index, element, totalQuestionNumber);
 				});
 
 				//Append Content
 				jQuery(article).append(function() {
+					
+					//Create wrapper for iScroll
+					var wrapper = document.createElement("div");
+					jQuery(wrapper).addClass("wrapper");
 
 					//Create container
 					var container = document.createElement("div");
@@ -114,20 +107,35 @@ function omm_readSelected() {
 					jQuery(container).append(form);
 
 					var body = document.createElement("div");
-					//TODO: css Klasse auf richtigem Element? Schlie�t Antworten nicht mit ein.
 					jQuery(body).addClass("form-group");
 					//Append content
-					//evtl '.contents().clone();' instead of 'clone()' in case of failures // do not use 'children()' as it ignores TextNodes!
+					//Check '.contents().clone();' instead of 'clone()' in case of failures // do not use 'children()' as it ignores TextNodes!
 					jQuery(body).append(jQuery(element).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-body-html").clone()); 
 
 					generateAnswers.addStyledAnswers($(element), $(body));
 					$(form).append(body);
-					return container;
+					jQuery(wrapper).append(container)
+					return wrapper;
 				});
 				return article;
 			});
 		});
 		return totalQuestionNumber;
+	}
+	
+	function appendQuerstionNumberArea (index, element, totalQuestionNumber){
+		var questionTitel = jQuery(element).parent().parent().find(omm_cssSelector_questionTitle).text();
+
+		var questionNumberArea = document.createElement("div");
+		jQuery(questionNumberArea).addClass(student_questionNumberArea);
+		var p = document.createElement("p");
+		jQuery(p).append("Frage #<span class='omm_current-question-number'></span>/<span class='omm_total-question-number'></span>: ");
+		jQuery(p).append("<span class='omm_current-question-name'>" + questionTitel + "</span>");
+		jQuery(questionNumberArea).append(p);
+		jQuery(questionNumberArea).find(".omm_current-question-number").append(index + 1);
+		jQuery(questionNumberArea).find(".omm_total-question-number").append(totalQuestionNumber);
+
+		return questionNumberArea;
 	}
 
 	function insertValidationSlide(totalQuestionNumber) {

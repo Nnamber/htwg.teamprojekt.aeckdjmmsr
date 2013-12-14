@@ -1,6 +1,6 @@
 function omm_navigation() {
 	var that = this;
-	
+
 	this.initNavbarEventHandler = function() {
 		jQuery(omm_selector_navbarArrowLeft).click(function() {
 			prevSlide();
@@ -33,14 +33,32 @@ function omm_navigation() {
 		}
 
 	};
-	
-	this.initTouchEventHandler = function(){
-		jQuery(window).on("swipeleft", function(event){
+
+	this.initScrolling = function(element) {
+
+		if (omm_scroller != null) {
+			omm_scroller.destroy();
+			omm_scroller = null;
+		}
+
+		omm_scroller = new iScroll(element.get(0), {
+			hScroll : false,
+			vScroll : true,
+			hScrollbar : false,
+			vScrollbar : false
+		}); 
+
+	};
+
+	this.initTouchEventHandler = function() {
+		jQuery(document).on("touchmove", function(event) {
 			event.preventDefault();
+		});
+
+		jQuery(window).on("swipeleft", function(event) {
 			nextSlide();
 		});
-		jQuery(window).on("swiperight", function(event){
-			event.preventDefault();
+		jQuery(window).on("swiperight", function(event) {
 			prevSlide();
 		});
 	};
