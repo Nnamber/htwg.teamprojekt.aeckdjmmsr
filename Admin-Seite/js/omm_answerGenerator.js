@@ -94,8 +94,13 @@ function omm_answerGenerator() {
 		//name for the radio buttons has to be the same but should be unique site wise
 		//need to find a better solution
 		$(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
-			var nameVariable = $(element)[0].childNodes[0].nodeValue.trim();
-                        var nameVariableId = nameVariable.replace(/\s/g, "");
+			var nameVariable = $(element)[0].childNodes[0].nodeValue;
+			if(nameVariable == "" || nameVariable == null){
+				nameVariable = "-";
+			} else{
+				nameVariable = nameVariable.trim();
+			}
+            var nameVariableId = nameVariable.replace(/\s/g, "");
 			var tempMatchTaskSingleAnswer = "";
 
 			tempMatchTaskSingleAnswer += '<div class="omm_answer-field row"><div class="omm_droppable-answer col-md-5 col-sm-5" ><p>' + nameVariable + '</p></div>';
@@ -109,7 +114,12 @@ function omm_answerGenerator() {
 		var matchTaskAnswerArray = [];
 		$(question).parent().parent().find(omm_cssSelector_hiddenQuestion + " .omm_question-answers-html").children().each(function(index, element) {
 			var answerName = Math.random();
-			var nameVariable = $(element)[0].childNodes[0].nodeValue.trim();
+			var nameVariable = $(element)[0].childNodes[0].nodeValue;
+			if(nameVariable == "" || nameVariable == null){
+				nameVariable = "-";
+			} else{
+				nameVariable = nameVariable.trim();
+			}
 			var dragNDropAnswer = $(element).find('.omm_answer-notice-html').text();
 			var tempMatchTaskSingleAnswer = "";
 			tempMatchTaskSingleAnswer += '<div class="omm_draggable btn-default col-md-3 col-sm-3 col-xs-5" id="' + answerName + '" draggable="true" ondragstart="drag(event)"name="' + nameVariable + '" title="Antwort ins richtige Feld ziehen.">';
