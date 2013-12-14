@@ -63,5 +63,5 @@ function drop(ev) {
         $("#" + dragParent).css('border', 'dashed 1px midnightblue');
         //$("#" + dragParent).attr('data-content', 'Antwort hier her ziehen.');
     }
-
+    setSlideSize(null);
 }

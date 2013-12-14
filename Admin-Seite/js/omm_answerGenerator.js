@@ -103,7 +103,7 @@ function omm_answerGenerator() {
             var nameVariableId = nameVariable.replace(/\s/g, "");
 			var tempMatchTaskSingleAnswer = "";
 
-			tempMatchTaskSingleAnswer += '<div class="omm_answer-field row"><div class="omm_droppable-answer col-md-5 col-sm-5" ><p>' + nameVariable + '</p></div>';
+			tempMatchTaskSingleAnswer += '<div class="omm_answer-field row"><div class="omm_droppable-answer col-md-5 col-sm-5 well" >' + nameVariable + '</div>';
 			tempMatchTaskSingleAnswer += '<div id="' + index + nameVariableId + '" class="omm_droppable col-md-7 well col-sm-7 row" name="' + nameVariable + '" ondrop="drop(event)" ondragover="allowDrop(event)" title="Richtige Antwort hier her ziehen."></div></div>';
 			matchTaskAnswerArray.push(tempMatchTaskSingleAnswer);
 		});
