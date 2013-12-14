@@ -285,14 +285,7 @@ function omm_validateQuestions() {
 	function extractPattern(pattern) {
 		var answer = pattern.split('|');
 		if (answer.length > 1) {
-		    var answerTemp;
-		    for (var i = 0; i < answer.length; i++) {
-				answerTemp = answer[i];
-			var positionStar = answer[i].indexOf('*');
-			if (positionStar === -1) {
-			    return answerTemp;
-			}
-		    };
+			return answer[1];
 		} else {
 		    return answer[0];
 		}
