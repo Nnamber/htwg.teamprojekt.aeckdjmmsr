@@ -120,7 +120,6 @@
 
 .omm_droppable-answer > span , .omm_droppable > span{
     text-align: left;
-    display: inline-block;
 }
 
 .omm_droppable-answer > span {
@@ -166,10 +165,11 @@
 
 .omm_droppable-answer{
         background-color: transparent;
-	height: 60px;
-        padding: 15px 0px 0px 15px;
+	min-height: 60px;
+        padding: 15px 0px 15px 15px;
 	margin-bottom: 0px;
 	font-size: 20px;
+        border: none;
  }
 
 .omm_draggable{
