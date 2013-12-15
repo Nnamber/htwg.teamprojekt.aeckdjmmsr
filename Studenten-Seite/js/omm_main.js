@@ -13,7 +13,10 @@ var omm_scroller = null;
 
 jQuery(document).ready(function() {
 
-	$(omm_cssSelector_checkAnswer).click(omm_validateQuestions.validate);
+	$(omm_cssSelector_checkAnswer).click(function(event){
+		omm_validateQuestions.validate();
+		triggerEnterEvent(jQuery(".slides > article").length - 1);
+	});
 	omm_navigation.initNavbarEventHandler();
 	omm_navigation.initTouchEventHandler();
 	omm_navigation.initSlideEnterEventHandler();

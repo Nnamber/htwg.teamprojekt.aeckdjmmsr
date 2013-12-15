@@ -592,6 +592,7 @@ function setSlideSize(direction) {
         var nextItem = $(getSlideEl(curSlide + 1));
         var prevItem = $(getSlideEl(curSlide - 1));
         var curItem = $(getSlideEl(curSlide));
+        var sectionWith = $(curItem).parent().width();
 
 
 	if (direction === "next") {
@@ -599,7 +600,7 @@ function setSlideSize(direction) {
 			var wrapper = $(nextItem).children('.wrapper');
 			var containerHeight = $(nextItem).find('.wrapper > .container').height();
 			//Dont extend slides on small screens
-			if (containerHeight + 80 > $(nextItem).height() && $(nextItem).width() > 900) {
+			if (containerHeight + 80 > $(nextItem).height() && sectionWith > 900) {
 				$(nextItem).css('min-height', containerHeight + 105);
 				$(nextItem).css('margin-bottom', "20px !important");
 				wrapper.css('height', containerHeight + 105);
@@ -612,7 +613,7 @@ function setSlideSize(direction) {
 			var wrapper = $(prevItem).children('.wrapper');
 			var containerHeight = $(prevItem).find('.wrapper > .container').height();
 			//Dont extend slides on small screens
-			if (containerHeight + 80 > $(prevItem).height() && $(prevItem).width() > 900) {
+			if (containerHeight + 80 > $(prevItem).height() && sectionWith > 900) {
 				$(prevItem).css('min-height', containerHeight + 105);
 				$(prevItem).css('margin-bottom', "20px !important");
 				wrapper.css('height', containerHeight + 105);
@@ -624,7 +625,7 @@ function setSlideSize(direction) {
 		var wrapper = $(curItem).children('.wrapper');
 		var containerHeight = $(curItem).find('.container').height();
 		//Dont extend slides on small screens
-		if (containerHeight + 80 > $(curItem).height() && $(curItem).width() > 900) {
+		if (containerHeight + 80 > $(curItem).height() && sectionWith > 900) {
 			$(curItem).css('min-height', containerHeight + 105);
 			$(curItem).css('margin-bottom', "20px !important");
 			wrapper.css('height', containerHeight + 105);
