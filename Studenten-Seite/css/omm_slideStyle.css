@@ -1,6 +1,4 @@
 .omm_question-number-area {
-    position: absolute;
-    z-index: 50;
     background-color: rgb(151, 159, 163) ;
     float: left;
     padding-top: 5px;
@@ -254,9 +252,15 @@ Colors for dimension testing
 }*/
 @media (max-width: 900px){
 	
-	.slide-area{
-		display: none !important;
-	}
+    .omm_question-number-area {
+        float: none;
+        width: 100%;
+        padding-bottom: 1px;
+    }
+
+    .slide-area{
+        display: none !important;
+    }
 
 
     .omm_navbar {
@@ -310,8 +314,9 @@ Colors for dimension testing
     }
     
     .slides > article > .wrapper >.container {
-    	padding-bottom: 90px;
-	}
+        padding-bottom: 60px;
+        margin-top: 20px;
+    }
 }
 
 @media (max-height: 700px){

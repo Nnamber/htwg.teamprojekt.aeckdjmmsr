@@ -39,14 +39,11 @@ function omm_navigation() {
 		jQuery(".slides > article").on("slideenter", function(event) {
 			var wrapper = jQuery(event.target).children('.wrapper');
 			
-			if (jQuery(event.target).width() <= 900) {
-				//Set wrapper heigth on article height minus toolbar height
-				jQuery(wrapper).height(jQuery(event.target).height() - 50);
+			if (jQuery(event.target).parent().width() <= 900) {
+				//Set wrapper heigth on article height minus navbar height and height header 
+				var headerAndNavbarHeight = 50 + jQuery(event.target).find(omm_selector_questionNumberArea).outerHeight(true);
+				jQuery(wrapper).height(jQuery(event.target).height() - headerAndNavbarHeight);
 				initScrolling(wrapper);
-				jQuery(event.target).find(omm_selector_questionNumberArea).css({
-					"z-index": 100,
-					"position": "absolute"
-				});
 			}
 		});
 	};
