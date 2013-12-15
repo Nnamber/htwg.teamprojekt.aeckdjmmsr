@@ -48,7 +48,7 @@ function omm_readSelected() {
 		var body = jQuery(htmlPageContent).find("body");
 
 		//hide body until goolge script.js is loaded
-		body.attr("style", "visibility: hidden");
+		body.attr("style", "display: none");
 		body.append(createSection);
 
 		//Add bottom fixed navbar
