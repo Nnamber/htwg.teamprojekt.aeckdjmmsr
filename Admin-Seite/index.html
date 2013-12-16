@@ -120,6 +120,11 @@
 							Sourcen:
 							<input type="text" placeholder="Kontextknoten" id='omm_source-path' titel='Pfad festlegen oder default'/>
 						</p>
+						<p>
+							<br/>
+							<p><label><input type="radio" id='omm_radio-download' name="saveAs" checked/> Downloaden</label></p>
+							<p><label><input type="radio" id='omm_radio-server' name="saveAs" /> Auf Server ablegen</label></p>
+						</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default omm_modal-enabled" data-dismiss="modal">
@@ -143,8 +148,7 @@
 					</div>
 					<form action="php/fileupload.php" method="post" enctype="multipart/form-data">
 						<div class="modal-body">
-							<p>
-								 <input type="file" name="uploadedFile" id="uploadedFile">
+							<input type="file" name="uploadedFile" id="uploadedFile">
 						</div>
 						<div class="modal-footer">
 							<input type="submit" name="submit" value="Upload starten">
