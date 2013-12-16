@@ -33,17 +33,25 @@ function omm_display() {
 		noticePanel.removeClass();
 	};
 	
+	this.insertXMLFileList = function(fileNameList) {
+		var tableBody = jQuery(omm_cssSelector_modalXMLFileListTabel);
+		//Remove all child elements of the table
+		jQuery(tableBody).empty();
+		jQuery(fileNameList).each(function(index, element) {
+			var tr = document.createElement("tr");
+			jQuery(tr).append(
+					"<td><input type='radio' name='" + omm_serverFileRadioButtonName + "'></td>",
+					"<td>" + element + "</td>"
+					);
+			jQuery(tableBody).append(tr);
+		});
+	};
+	
 	function initShowReadXMLModalEventHandler (){
 		jQuery(omm_cssSelector_readDialog).on("show.bs.modal", function(event){
-			var response = omm_connector.getXMLFileListAjax();
-			
+			omm_connector.getXMLFileListAjax();
 		});
 	}
-	
-	function appendXMLFileList(){
-		
-	}
-
 	
 	function initCheckThemaEventHandler() {
 		var themaCheckboxes = jQuery(themaTable).find(omm_cssSelector_themaRow + " .panel-heading :checkbox");

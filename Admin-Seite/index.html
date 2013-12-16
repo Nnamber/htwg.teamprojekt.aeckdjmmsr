@@ -89,6 +89,19 @@
 					<div class="modal-body">
 						<input type="file"  accept="application/xml" id='omm_fileinput'/>
 						<!-- accept="application/xml,text/xml"/> -->
+                                                <br>
+                                                <table id="xml-file-list" class="table hidden">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Dateiname</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        
+                                                    </tbody>
+                                                    
+                                                </table>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default omm_modal-enabled" data-dismiss="modal">
@@ -118,13 +131,11 @@
 						<br>
 						<p>
 							Sourcen:
-							<input type="text" placeholder="Kontextknoten" id='omm_source-path' titel='Pfad festlegen oder default'/>
+                                                        <input type="text" placeholder="Kontextknoten" id='omm_source-path'/>
 						</p>
-						<p>
-							<br/>
-							<p><label><input type="radio" id='omm_radio-download' name="saveAs" checked/> Downloaden</label></p>
-							<p><label><input type="radio" id='omm_radio-server' name="saveAs" /> Auf Server ablegen</label></p>
-						</p>
+                                                <br/>
+                                                <p><label><input type="radio" id='omm_radio-download' name="saveAs" checked/> Downloaden</label></p>
+                                                <p><label><input type="radio" id='omm_radio-server' name="saveAs" /> Auf Server ablegen</label></p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default omm_modal-enabled" data-dismiss="modal">
