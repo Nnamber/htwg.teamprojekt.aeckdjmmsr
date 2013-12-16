@@ -175,7 +175,6 @@ function omm_xmlParser() {
 
     this.readXml = function(path) {
         $.ajax({
-            //TODO: Pfad ueberarbeiten, z.b. mit relativem Pfad, evt Johner fragen
             url: path, // name of file you want to parse
             dataType: "xml",
             success: parse,
