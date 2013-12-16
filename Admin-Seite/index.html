@@ -131,11 +131,19 @@
 						<br>
 						<p>
 							Sourcen:
-                                                        <input type="text" placeholder="Kontextknoten" id='omm_source-path'/>
+                                    <input type="text" placeholder="Kontextknoten" id='omm_source-path'/>
 						</p>
-                                                <br/>
-                                                <p><label><input type="radio" id='omm_radio-download' name="saveAs" checked/> Downloaden</label></p>
-                                                <p><label><input type="radio" id='omm_radio-server' name="saveAs" /> Auf Server ablegen</label></p>
+						<br/>
+						<p>
+							<label>
+								<input type="radio" id='omm_radio-download' name="saveAs" checked/>
+								Downloaden</label>
+						</p>
+						<p>
+							<label>
+								<input type="radio" id='omm_radio-server' name="saveAs" />
+								Auf Server ablegen</label>
+						</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default omm_modal-enabled" data-dismiss="modal">
@@ -157,12 +165,17 @@
 						</button>
 						<h4 class="modal-title" id="myModalLabel">Generierte Datei auswählen und hochladen</h4>
 					</div>
-					<form action="php/fileupload.php" method="post" enctype="multipart/form-data">
+					<form action="" enctype="multipart/form-data" id="omm_upload-form">
 						<div class="modal-body">
-							<input type="file" name="uploadedFile" id="uploadedFile">
+							<input type="file" name="uploadedFile" id="omm_uploaded-file">
 						</div>
 						<div class="modal-footer">
-							<input type="submit" name="submit" value="Upload starten">
+							<button type="button" class="btn btn-default omm_modal-enabled" data-dismiss="modal">
+								Abbrechen
+							</button>
+							<button type="button" class="btn btn-default omm_modal-enabled" data-dismiss="modal" id="omm_upload-html">
+								Übernehmen & speichern
+							</button>
 						</div>
 					</form>
 				</div><!-- /.modal-content -->

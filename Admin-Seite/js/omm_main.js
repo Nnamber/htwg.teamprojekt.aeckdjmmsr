@@ -9,6 +9,9 @@ var omm_DefaultPath = "./xmlFiles/Mindmailer.xml";
 var omm_serverFileRadioButtonName = "serverFileName";
 
 //Selectors
+var omm_cssSelector_uploadHTML = "#omm_upload-html";
+var omm_cssSelector_uploadFormHTML = "#omm_upload-form";
+var omm_cssSelector_uploadedFile = "#omm_uploaded-file";
 var omm_cssSelector_saveAsDownload = "#omm_radio-download";
 var omm_cssSelector_htmlFileName = "#omm_file-name";
 var omm_cssSelector_sourcePath = "#omm_source-path";
@@ -34,25 +37,7 @@ jQuery(document).ready(function() {
 	omm_display.init();
 	$(omm_cssSelector_fileInput).change(omm_parser.validateXml);
 	omm_parser.readXml();
-	readGetParametrs();
 });
-
-function readGetParametrs(){
-	
-	var uri = window.location.href;
-	var param = uri.split('?')[1];
-	if(param){
-		var alertType = param.split('=')[0];
-		var alertMessage = param.split('=')[1];
-		if(alertType == 'success' || alertType == 'fail'){
-             if(alertType == 'success'){
-             	alert("Die Datei wurde erfolgreich hochgeladen: ~"+alertMessage);
-             }else{
-                alert("Fehler beim Upload, bitte nochmals versuchen");
-             }
-		}
-	}
-}
 
 function initPopovers() {
 	jQuery("body").popover({
