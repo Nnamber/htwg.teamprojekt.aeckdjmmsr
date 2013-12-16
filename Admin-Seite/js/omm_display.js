@@ -14,6 +14,7 @@ function omm_display() {
 		initGeneratehtmlFromCheckedEventHandler();
 		initIndeterminateCheckboxesEventHandler();
 		initCloseModalEventHandler();
+		initUploadHTMLEventHandler();
 	};
 
 	this.showMessage = function(message, isError) {
@@ -46,6 +47,27 @@ function omm_display() {
 		});
 	}
 
+	function initUploadHTMLEventHandler(){
+		$(omm_cssSelector_uploadHTML).click(function() {
+			var formData = new FormData($(omm_cssSelector_uploadFormHTML)[0]);
+			$.ajax({
+			      url: "php/fileupload.php",
+			      type: "post",
+			      data: formData,
+			      cache: false,
+    			  contentType: false,
+  				  processData: false,
+			      success: function(data){
+			      	var message = $.parseJSON(data).message;
+          			omm_display.showMessage("Datei erfolgreich hochgeladen: " + message, false);
+			      },
+			      error:function(){
+          			  omm_display.showMessage("Fehler beim Upload, nochmals versuchen!", true);
+			      }   
+			    }); 
+		});
+	}
+
 	function initCheckAllEventHandler() {
 		jQuery(omm_cssSelector_selectAll + " :checkbox").change(function(eventObject) {
 			var allCheckboxes = jQuery(themaTable).find(":checkbox");
@@ -73,7 +95,8 @@ function omm_display() {
 				      type: "post",
 				      data: filenameAndHtmlString,
 				      success: function(data){
-              			  omm_display.showMessage("Datei erfolgreich hochgeladen! Dateipfad: ~" + data, false);
+				      	var message = $.parseJSON(data).message;
+	          			omm_display.showMessage("Datei erfolgreich hochgeladen: " + message, false);
 				      },
 				      error:function(){
               			  omm_display.showMessage("Fehler beim Upload, nochmals versuchen!", true);
@@ -135,9 +158,6 @@ function omm_display() {
 					jQuery(element).val('');
 					break;
 				case 'checkbox':
-				case 'radio':
-					this.checked = false;
-					break;
 				case 'file':
 					resetFileInputField(element);
 			}

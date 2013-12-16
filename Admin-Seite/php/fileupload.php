@@ -2,12 +2,13 @@
 $target_path = "../uploads/";
 
 $target_path = $target_path . basename( $_FILES['uploadedFile']['name']); 
+$message = array();
 
 if(move_uploaded_file($_FILES['uploadedFile']['tmp_name'], $target_path)) {
-	$headerSuccess = "Location: ../index.html?success=uploads/".  basename( $_FILES['uploadedFile']['name']);
-	header( $headerSuccess );
+	$message[error] = false;
+	$message[message] = $_FILES['uploadedFile']['name'];
 } else{
-	$headerFail = "Location: ../index.html?fail=uploads/".  basename( $_FILES['uploadedFile']['name']);
-	header( $headerFail );
+	$message[error] = true;
 }
+echo json_encode($message);
 ?> 
