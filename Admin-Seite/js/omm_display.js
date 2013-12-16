@@ -14,6 +14,7 @@ function omm_display() {
 		initGeneratehtmlFromCheckedEventHandler();
 		initIndeterminateCheckboxesEventHandler();
 		initCloseModalEventHandler();
+		initShowReadXMLModalEventHandler();
 	};
 
 	this.showMessage = function(message, isError) {
@@ -31,8 +32,19 @@ function omm_display() {
 		jQuery(noticePanel).html(" ");
 		noticePanel.removeClass();
 	};
+	
+	function initShowReadXMLModalEventHandler (){
+		jQuery(omm_cssSelector_readDialog).on("show.bs.modal", function(event){
+			var response = omm_connector.getXMLFileListAjax();
+			
+		});
+	}
+	
+	function appendXMLFileList(){
+		
+	}
 
-	//private
+	
 	function initCheckThemaEventHandler() {
 		var themaCheckboxes = jQuery(themaTable).find(omm_cssSelector_themaRow + " .panel-heading :checkbox");
 		jQuery(themaCheckboxes).change(function(eventObject) {

@@ -1,6 +1,7 @@
 var omm_parser = new omm_xmlParser();
 var omm_display = new omm_display();
 var omm_save = new omm_saveHtml();
+var omm_connector = new omm_connector();
 var omm_applicationTitle = "Mindmailer";
 var omm_DefaultPath = "./xmlFiles/Mindmailer.xml";
 var omm_cssSelector_htmlFileName = "#omm_file-name";
