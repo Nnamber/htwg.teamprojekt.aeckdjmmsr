@@ -59,7 +59,28 @@ function omm_display() {
 	}
 
 	function initGeneratehtmlFromCheckedEventHandler() {
-		jQuery(omm_cssSelector_saveHTML).click(omm_save.saveHtml);
+		jQuery(omm_cssSelector_saveHTML).click(function(){
+			if($(omm_cssSelector_saveAsDownload).is(':checked')){
+				omm_save.saveHtml();
+			}else{
+				var fileName = $(omm_cssSelector_htmlFileName).val();
+				if (fileName == (" " | "" | null)) {
+					fileName = "Mindmailer";
+				}
+				var filenameAndHtmlString = {htmlString: omm_readSelected.readSelectedQuestions(), filename: fileName };
+				$.ajax({
+				      url: "php/savemodel.php",
+				      type: "post",
+				      data: filenameAndHtmlString,
+				      success: function(data){
+              			  omm_display.showMessage("Datei erfolgreich hochgeladen! Dateipfad: ~" + data, false);
+				      },
+				      error:function(){
+              			  omm_display.showMessage("Fehler beim Upload, nochmals versuchen!", true);
+				      }   
+				    }); 
+			}
+		});
 	}
 
 	function initIndeterminateCheckboxesEventHandler() {
