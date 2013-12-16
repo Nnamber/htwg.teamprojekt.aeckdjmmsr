@@ -87,27 +87,37 @@
 						<h4 class="modal-title" id="myModalLabel">XML einlesen</h4>
 					</div>
 					<div class="modal-body">
+                                            <div class="omm_modal-show omm_modal-hide">
 						<input type="file"  accept="application/xml" id='omm_fileinput'/>
 						<!-- accept="application/xml,text/xml"/> -->
-                                                <br>
-                                                <table id="xml-file-list" class="table hidden">
-                                                    <thead>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th>Dateiname</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        
-                                                    </tbody>
-                                                    
-                                                </table>
+                                                </div>
+                        <br>
+                        <label>
+                            <input type="checkbox" id="omm_choose-from-file-list" name="chooseFromFileList" />
+                            XML vom Server auswählen
+                        </label>
+                        <div class="omm_modal-hide omm_modal-hidden" style="display: none">
+                        <form id="omm_xml-read-dialog-table-form">
+						<table id="xml-file-list" class="table">
+							<thead>
+								<tr>
+									<th></th>
+									<th>Dateiname</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+
+						</table>
+                        </form>
+                            </div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default omm_modal-enabled" data-dismiss="modal">
 							Abbrechen
 						</button>
-						<button type="button" class="btn btn-default omm_modal-disabled" data-dismiss="modal" id="omm_xml-dialog-uebernehmen" disabled="disabled" onclick="omm_parser.parseXMLToVariable()">
+						<button type="button" class="btn btn-default omm_modal-disabled" data-dismiss="modal" id="omm_xml-dialog-uebernehmen" disabled="disabled">
 							Übernehmen
 						</button>
 					</div>

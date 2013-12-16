@@ -14,6 +14,24 @@ function omm_connector (){
 		});
 	};
 	
+	this.uploadFileAjax = function (formData){
+		$.ajax({
+			url: "php/fileupload.php",
+			type: "post",
+			data: formData,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(data) {
+				var message = $.parseJSON(data).message;
+				omm_display.showMessage("Datei erfolgreich hochgeladen: " + message, false);
+			},
+			error: function() {
+				omm_display.showMessage("Fehler beim Upload, nochmals versuchen!", true);
+			}
+		}); 
+	};
+	
 	
 	
 }

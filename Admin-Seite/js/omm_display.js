@@ -7,15 +7,17 @@ function omm_display() {
 	this.init = function() {
 		themaTable = jQuery(omm_cssSelector_themaTable);
 		noticePanel = jQuery(omm_cssSelector_noticePanel);
+		initCloseModalEventHandler();
+		initUploadHTMLEventHandler();
+		initGeneratehtmlFromCheckedEventHandler();
+		initReadXmlModalButtonEventHandler();
+		initReadXmlModalCheckboxEventHandler();
+		initShowReadXMLModalEventHandler();
 	};
 	this.initEventHanlder = function() {
 		initCheckAllEventHandler();
 		initCheckThemaEventHandler();
-		initGeneratehtmlFromCheckedEventHandler();
 		initIndeterminateCheckboxesEventHandler();
-		initCloseModalEventHandler();
-		initUploadHTMLEventHandler();
-		initShowReadXMLModalEventHandler();
 	};
 
 	this.showMessage = function(message, isError) {
@@ -35,18 +37,42 @@ function omm_display() {
 	};
 	
 	this.insertXMLFileList = function(fileNameList) {
-		var tableBody = jQuery(omm_cssSelector_modalXMLFileListTabel);
+		var tableBody = jQuery(omm_cssSelector_xmlDialogFileListTabel);
 		//Remove all child elements of the table
 		jQuery(tableBody).empty();
 		jQuery(fileNameList).each(function(index, element) {
 			var tr = document.createElement("tr");
 			jQuery(tr).append(
-					"<td><input type='radio' name='" + omm_serverFileRadioButtonName + "'></td>",
+					"<td><input type='radio' name='" + omm_serverFileRadioButtonName + "' value='"+ element +"'></td>",
 					"<td>" + element + "</td>"
 					);
 			jQuery(tableBody).append(tr);
 		});
 	};
+	
+	function initReadXmlModalButtonEventHandler (){
+		jQuery(omm_cssSelector_xmlDialogForwardButton).click(function(){
+			if (jQuery(omm_cssSelector_chooseFromFileListCheckbox).is(" :checked")) {
+				var form = jQuery(omm_cssSelector_xmlDialogTableForm).serializeArray();
+				omm_parser.readXml("./xmlFiles/" + form[0].value);
+			}else{
+				omm_parser.parseXMLToVariable();
+			}
+		});
+	}
+	
+	function initReadXmlModalCheckboxEventHandler (){
+		jQuery(omm_cssSelector_chooseFromFileListCheckbox).click(function(event){
+			if (jQuery(omm_cssSelector_chooseFromFileListCheckbox).is(" :checked")){
+				jQuery(omm_cssSelector_xmlDialogForwardButton).prop("disabled", false);
+				jQuery(omm_cssSelector_xmlDialogModalHide).slideToggle();
+				
+			}else{
+				jQuery(omm_cssSelector_xmlDialogForwardButton).prop("disabled", true);
+				jQuery(omm_cssSelector_xmlDialogModalHide).slideToggle();
+			}
+		});
+	}
 	
 	function initShowReadXMLModalEventHandler (){
 		jQuery(omm_cssSelector_readDialog).on("show.bs.modal", function(event){
@@ -70,21 +96,7 @@ function omm_display() {
 	function initUploadHTMLEventHandler(){
 		$(omm_cssSelector_uploadHTML).click(function() {
 			var formData = new FormData($(omm_cssSelector_uploadFormHTML)[0]);
-			$.ajax({
-			      url: "php/fileupload.php",
-			      type: "post",
-			      data: formData,
-			      cache: false,
-    			  contentType: false,
-  				  processData: false,
-			      success: function(data){
-			      	var message = $.parseJSON(data).message;
-          			omm_display.showMessage("Datei erfolgreich hochgeladen: " + message, false);
-			      },
-			      error:function(){
-          			  omm_display.showMessage("Fehler beim Upload, nochmals versuchen!", true);
-			      }   
-			    }); 
+			omm_connector.uploadFileAjax(formData);
 		});
 	}
 
@@ -164,6 +176,12 @@ function omm_display() {
 		jQuery(omm_cssSelector_readDialog).on('hidden.bs.modal', function(eventObject) {
 			clearModalButtons(eventObject.target);
 			clearModalFormInputValues(eventObject.target);
+			jQuery(omm_cssSelector_xmlDialogModalHidden).hide();
+			jQuery(omm_cssSelector_xmlDialogModalShown).show();
+		});
+		jQuery(omm_cssSelector_uploadDialog).on('hidden.bs.modal', function(eventObject) {
+			clearModalButtons(eventObject.target);
+			clearModalFormInputValues(eventObject.target);
 		});
 	}
 
@@ -178,6 +196,8 @@ function omm_display() {
 					jQuery(element).val('');
 					break;
 				case 'checkbox':
+					this.checked = false;
+					break;
 				case 'file':
 					resetFileInputField(element);
 			}

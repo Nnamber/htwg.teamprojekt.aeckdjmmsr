@@ -173,16 +173,16 @@ function omm_xmlParser() {
     }
 
 
-    this.readXml = function() {
+    this.readXml = function(path) {
         $.ajax({
             //TODO: Pfad ueberarbeiten, z.b. mit relativem Pfad, evt Johner fragen
-            url: omm_DefaultPath, // name of file you want to parse
+            url: path, // name of file you want to parse
             dataType: "xml",
             success: parse,
             error: function() {
                 //"Alles auswählen" Button ausblenden
                 $("#omm_select-all").addClass('hidden');
-                omm_display.showMessage("Es wurde keine XML-Datei unter dem Default-Pfad gefunden", true);
+                omm_display.showMessage("Die XML-Datei wurde nicht gefunden", true);
             }
         });
     };
@@ -192,10 +192,9 @@ function omm_xmlParser() {
         var res = val.name.substr(val.name.lastIndexOf('.')) == '.xml';
         console.log("validateXML");
         if (!res) {
-            //TODO: Fehlernachricht überarbeiten
-            omm_display.showMessage("Wrong Type", true);
+            omm_display.showMessage("Die ausgewählte Datei ist keine XML-Datei", true);
         } else {
-            $("#omm_xml-dialog-uebernehmen").removeAttr("disabled");
+            $(omm_cssSelector_xmlDialogForwardButton).removeAttr("disabled");
             xmlFile = val;
         }
     };

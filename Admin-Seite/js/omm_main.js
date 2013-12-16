@@ -28,15 +28,21 @@ var omm_cssSelector_clozeTextInput = ".omm_cloze-text-input";
 var omm_cssSelector_ommClozeTextHiddenAnswer = ".omm-cloze-text-hidden-answer";
 var omm_cssSelector_saveDialog = "#omm_xml-save-dialog";
 var omm_cssSelector_readDialog = "#omm_xml-read-dialog";
-var omm_cssSelector_modalXMLFileListTabel = "#xml-file-list tbody";
-
+var omm_cssSelector_uploadDialog = "#omm_upload-dialog";
+var omm_cssSelector_xmlDialogFileListTabel = "#xml-file-list > tbody";
+var omm_cssSelector_chooseFromFileListCheckbox="#omm_choose-from-file-list";
+var omm_cssSelector_xmlDialogForwardButton = "#omm_xml-dialog-uebernehmen";
+var omm_cssSelector_xmlDialogTableForm = "#omm_xml-read-dialog-table-form";
+var omm_cssSelector_xmlDialogModalHide = ".omm_modal-hide";
+var omm_cssSelector_xmlDialogModalHidden = ".omm_modal-hidden";
+var omm_cssSelector_xmlDialogModalShown = ".omm_modal-show";
 
 jQuery(document).ready(function() {
 	$(':checkbox:checked').prop('checked', false);
 	initPopovers();
 	omm_display.init();
 	$(omm_cssSelector_fileInput).change(omm_parser.validateXml);
-	omm_parser.readXml();
+	omm_parser.readXml(omm_DefaultPath);
 });
 
 function initPopovers() {
